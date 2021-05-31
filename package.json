@@ -1,0 +1,72 @@
+{
+  "private": true,
+  "name": "uinix-docs",
+  "version": "1.0.0",
+  "description": "Docs for uinix ecosystem",
+  "license": "MIT",
+  "keywords": [
+    "uinix",
+    "docs",
+    "ui",
+    "ui-system"
+  ],
+  "repository": "uinix-js/uinix-docs",
+  "bugs": "https://github.com/uinix-js/uinix-docs/issues",
+  "author": "Chris Zhou <chrisrzhou@pm.me> (https://chrisrzhou.io)",
+  "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "gatsby": "^3.4.1",
+    "gatsby-plugin-mdx": "^2.6.0",
+    "gatsby-source-filesystem": "^3.6.0",
+    "palx": "^1.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "uinix-ui": "github:uinix-js/uinix-ui"
+  },
+  "devDependencies": {
+    "eslint-config-xo-react": "^0.25.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "xo": "^0.40.1"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "clean": "gatsby clean",
+    "lint": "xo --fix",
+    "serve": "gatsby serve",
+    "start": "gatsby develop"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
+  },
+  "xo": {
+    "esnext": false,
+    "extends": [
+      "xo-react"
+    ],
+    "prettier": true,
+    "rules": {
+      "react/prop-types": "off",
+      "unicorn/no-array-callback-reference": "off",
+      "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-reduce": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "gatsby-*.js"
+        ],
+        "rules": {
+          "unicorn/prefer-module": "off"
+        }
+      }
+    ]
+  }
+}
