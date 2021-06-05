@@ -1,6 +1,7 @@
 import React from 'react';
 import {Layout} from 'uinix-ui';
 
+import {ScrollTop} from '../system/components/index.js';
 import Breadcrumbs from './breadcrumbs.js';
 import Footer from './footer.js';
 import Header from './header.js';
@@ -11,8 +12,9 @@ const PageLayout = ({children}) => {
       direction="column"
       h="100vh"
       mx="auto"
-      p="m"
-      spacing="m"
+      px="l"
+      py="m"
+      spacing="l"
       w={['100%', '100%', 'widths.container']}
     >
       <Header />
@@ -21,6 +23,7 @@ const PageLayout = ({children}) => {
         {children}
       </Layout>
       <Footer />
+      <ScrollTop />
     </Layout>
   );
 };

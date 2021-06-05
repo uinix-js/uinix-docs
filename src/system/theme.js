@@ -13,13 +13,16 @@ const colors = {
   brand: {
     primary: palette.base,
     secondary: palette.gray[8],
-    tertiary: palette.gray[5],
+    light: palette.gray[6],
+  },
+  icon: {
+    default: palette.gray[6],
   },
   text: {
     link: palette.base,
     primary: palette.gray[9],
     secondary: palette.gray[8],
-    light: palette.gray[5],
+    light: palette.gray[6],
     tones: {
       error: palette.red[5],
       light: palette.gray[1],
@@ -53,7 +56,9 @@ const radii = {
 
 const sizes = {
   icon: {
+    s: '16px',
     m: '24px',
+    l: '32px',
   },
   widths: {
     container: '768px',

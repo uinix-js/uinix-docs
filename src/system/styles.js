@@ -1,5 +1,14 @@
 const breakpoints = ['480px', '768px'];
 
+const rules = {
+  interactive: ({onClick}) => ({
+    cursor: onClick ? 'pointer' : undefined,
+    ':hover': {
+      opacity: onClick ? 'interactive' : undefined,
+    },
+  }),
+};
+
 const global = {
   '*': {
     boxSizing: 'border-box',
@@ -63,6 +72,7 @@ const variants = {
 };
 
 const styles = {
+  ...rules,
   breakpoints,
   global,
   typography,

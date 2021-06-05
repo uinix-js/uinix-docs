@@ -14,7 +14,7 @@ const BrandText = ({text = ''}) => {
     <>
       <Text color="brand.primary">{ui}</Text>
       <Text color="brand.secondary">{nix}</Text>
-      <Text color="brand.tertiary">{rest}</Text>
+      <Text color="brand.light">{rest}</Text>
     </>
   );
 };

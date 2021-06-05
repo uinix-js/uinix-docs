@@ -2,8 +2,6 @@ import React from 'react';
 import {Link} from 'gatsby';
 import {Element, Icon, Layout} from 'uinix-ui';
 
-import {ResponsiveShow} from '../system/components/index.js';
-
 import {getGithubRepoLink} from '../utils/link.js';
 
 const links = [
@@ -37,13 +35,13 @@ const Nav = () => {
           </Element>
         ))}
       </Layout>
-        <Layout as="ol" spacing="m" variant="nav.list">
-          <Element as="li" variant="nav.list.item">
-            <a href={getGithubRepoLink()}>
-              <Icon aria-label="Github" icon="github" size="icon.m" />
-            </a>
-          </Element>
-        </Layout>
+      <Layout as="ol" spacing="m" variant="nav.list">
+        <Element as="li" variant="nav.list.item">
+          <a href={getGithubRepoLink()}>
+            <Icon icon="github" size="icon.m" title="Github" />
+          </a>
+        </Element>
+      </Layout>
     </Layout>
   );
 };
