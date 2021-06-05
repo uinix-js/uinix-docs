@@ -2,7 +2,7 @@ import React from 'react';
 
 import PageLayout from '../layouts/page-layout.js';
 
-const NotFoundPage = () => {
+const Page = () => {
   return (
     <PageLayout>
       <h2>Page not found</h2>
@@ -10,4 +10,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
+export default Page;

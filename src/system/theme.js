@@ -13,12 +13,13 @@ const colors = {
   brand: {
     primary: palette.base,
     secondary: palette.gray[8],
-    tertiary: palette.gray[6],
+    tertiary: palette.gray[5],
   },
   text: {
     link: palette.base,
     primary: palette.gray[9],
-    secondary: palette.gray[6],
+    secondary: palette.gray[8],
+    light: palette.gray[5],
     tones: {
       error: palette.red[5],
       light: palette.gray[1],

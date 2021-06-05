@@ -2,8 +2,8 @@ import React from 'react';
 
 import PageLayout from '../../layouts/page-layout.js';
 
-const Learn = () => {
+const Page = () => {
   return <PageLayout>Learn</PageLayout>;
 };
 
-export default Learn;
+export default Page;

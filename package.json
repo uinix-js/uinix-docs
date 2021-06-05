@@ -48,6 +48,9 @@
   },
   "xo": {
     "esnext": false,
+    "env": [
+      "browser"
+    ],
     "extends": [
       "xo-react"
     ],

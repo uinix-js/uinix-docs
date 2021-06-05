@@ -11,11 +11,6 @@ const global = {
     margin: 0,
     padding: 0,
   },
-  'ol, ul': {
-    listStyleType: 'none',
-    margin: 0,
-    padding: 0,
-  },
 };
 
 const typography = {
@@ -50,12 +45,19 @@ const typography = {
       fontSize: 'l',
       fontWeight: 'bold',
       margin: 0,
-      paddingBottom: 's',
-      paddingTop: 's',
     },
-    nav: {
-      fontSize: 'm',
-      fontWeight: 'bold',
+  },
+};
+
+const variants = {
+  nav: {
+    list: {
+      margin: 0,
+      padding: 0,
+      item: {
+        fontSize: 'm',
+        listStyleType: 'none',
+      },
     },
   },
 };
@@ -64,6 +66,7 @@ const styles = {
   breakpoints,
   global,
   typography,
+  variants,
 };
 
 export default styles;

@@ -16,7 +16,17 @@ const elementShorthandPropsMapping = {
 
 const elementStyles = [];
 
-const responsiveCssProperties = ['display', 'flexDirection', 'width'];
+const responsiveCssProperties = [
+  'display',
+  'flexDirection',
+  'margin',
+  'marginBottom',
+  'marginLeft',
+  'marginRight',
+  'marginTop',
+  'padding',
+  'width',
+];
 
 const config = {
   elementShorthandPropsMapping,

@@ -2,8 +2,8 @@ import React from 'react';
 
 import PageLayout from '../../layouts/page-layout.js';
 
-const SystemsPage = () => {
+const Page = () => {
   return <PageLayout>Systems</PageLayout>;
 };
 
-export default SystemsPage;
+export default Page;

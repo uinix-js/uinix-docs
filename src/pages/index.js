@@ -2,8 +2,8 @@ import React from 'react';
 
 import PageLayout from '../layouts/page-layout.js';
 
-const IndexPage = () => {
+const Page = () => {
   return <PageLayout>Index page</PageLayout>;
 };
 
-export default IndexPage;
+export default Page;

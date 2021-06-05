@@ -1,14 +1,25 @@
 import React from 'react';
 import {Link} from 'gatsby';
-import {Icon, Layout, Text} from 'uinix-ui';
+import {Element, Icon, Layout} from 'uinix-ui';
 
-import {ResponsiveShow} from '../system/ui/index.js';
+import {ResponsiveShow} from '../system/components/index.js';
 
-import {
-  getGithubRepoLink,
-  getLearnLink,
-  getPackageLink,
-} from '../utils/link.js';
+import {getGithubRepoLink} from '../utils/link.js';
+
+const links = [
+  {
+    label: 'Packages',
+    to: '/packages',
+  },
+  {
+    label: 'Systems',
+    to: '/systems',
+  },
+  {
+    label: 'Learn',
+    to: '/learn',
+  },
+];
 
 const Nav = () => {
   return (
@@ -19,23 +30,20 @@ const Nav = () => {
       justify="space-between"
       spacing="m"
     >
-      <Layout as="ol" spacing="m">
-        <Text as="li" variant="nav">
-          <Link to={getPackageLink()}>Packages</Link>
-        </Text>
-        <Text as="li" variant="nav">
-          <Link to={getLearnLink()}>Learn</Link>
-        </Text>
+      <Layout as="ol" spacing="m" variant="nav.list">
+        {links.map(({label, to}) => (
+          <Element key={to} as="li" variant="nav.list.item">
+            <Link to={to}>{label}</Link>
+          </Element>
+        ))}
       </Layout>
-      <ResponsiveShow>
-        <Layout as="ol" spacing="m">
-          <li>
+        <Layout as="ol" spacing="m" variant="nav.list">
+          <Element as="li" variant="nav.list.item">
             <a href={getGithubRepoLink()}>
               <Icon aria-label="Github" icon="github" size="icon.m" />
             </a>
-          </li>
+          </Element>
         </Layout>
-      </ResponsiveShow>
     </Layout>
   );
 };
