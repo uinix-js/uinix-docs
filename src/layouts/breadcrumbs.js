@@ -13,11 +13,15 @@ const Breadcrumbs = () => {
     <Text as="h2" m={0}>
       <nav>
         <Layout as="ol" variant="nav.list">
-          {crumbs.map(({label, to}) => (
+          {crumbs.map(({label, to}, i, array) => (
             <Element key={to} as="li" variant="nav.list.item">
-              <Link to={to}>
+              {i < array.length - 1 ? (
+                <Link to={to}>
+                  <BrandText text={label} />
+                </Link>
+              ) : (
                 <BrandText text={label} />
-              </Link>
+              )}
             </Element>
           ))}
         </Layout>
