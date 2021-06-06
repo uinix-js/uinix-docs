@@ -5,7 +5,7 @@ export const useReady = ({predicate, ms = 100}) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    let interval;
+    let interval = null;
 
     const cleanup = () => {
       if (interval) {
