@@ -13,8 +13,7 @@ const PageLayout = ({children}) => {
       h="100vh"
       mx="auto"
       px="l"
-      py="m"
-      spacing="l"
+      spacing="m"
       w={['100%', '100%', 'widths.container']}
     >
       <Header />

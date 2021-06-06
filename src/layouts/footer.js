@@ -5,7 +5,7 @@ import {BrandLink} from '../system/components/index.js';
 
 const Footer = () => {
   return (
-    <Layout align="center" as="footer" spacing="s">
+    <Layout align="center" as="footer" py="m" spacing="s">
       <small>© {new Date().getFullYear()}</small>
       <BrandLink />
     </Layout>

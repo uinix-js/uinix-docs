@@ -1,30 +1,37 @@
 import {Link} from 'gatsby';
 import React from 'react';
 import {i} from 'uinix-fp';
-import {Element, Layout, Text} from 'uinix-ui';
+import {Element, Text, useStyles} from 'uinix-ui';
 
 import {BrandText} from '../system/components/index.js';
 import {capitalize} from '../utils/capitalize.js';
 
 const Breadcrumbs = () => {
+  const styles = useStyles();
+
   const crumbs = getCrumbs(window.location.pathname);
 
   return (
-    <Text as="h2" m={0}>
+    <Text as="h2" styles={styles.unset}>
       <nav>
-        <Layout as="ol" variant="nav.list">
-          {crumbs.map(({label, to}, i, array) => (
-            <Element key={to} as="li" variant="nav.list.item">
-              {i < array.length - 1 ? (
-                <Link to={to}>
-                  <BrandText text={label} />
-                </Link>
-              ) : (
-                <BrandText text={label} />
-              )}
-            </Element>
-          ))}
-        </Layout>
+        <Element as="ol" variant="nav.list">
+          {crumbs.map(({label, to}, i, array) => {
+            const isLastCrumb = i === array.length - 1;
+            const isOnlyCrumb = array.length === 1;
+
+            const color = isOnlyCrumb ? 'text.primary' : 'text.light';
+            const fontWeight = isOnlyCrumb || !isLastCrumb ? 'bold' : undefined;
+            const crumb = <BrandText text={label} />;
+
+            return (
+              <Element key={to} as="li" variant="nav.list.item">
+                <Text color={color} fontWeight={fontWeight}>
+                  {isLastCrumb ? crumb : <Link to={to}>{crumb}</Link>}
+                </Text>
+              </Element>
+            );
+          })}
+        </Element>
       </nav>
     </Text>
   );

@@ -10,9 +10,10 @@ const Header = () => {
       as="header"
       align="baseline"
       direction={['column', 'column', 'row']}
+      py="m"
       spacing="m"
     >
-      <Text as="h1" py="s" variant="brand">
+      <Text as="h1" variant="brand">
         <BrandLink />
       </Text>
       <Nav />
