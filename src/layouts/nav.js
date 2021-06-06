@@ -10,8 +10,8 @@ const links = [
     to: '/packages',
   },
   {
-    label: 'Systems',
-    to: '/systems',
+    label: 'Demos',
+    to: '/demos',
   },
   {
     label: 'Learn',
