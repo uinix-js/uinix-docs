@@ -9,7 +9,7 @@ const tags = {
 
 const description = (
   <>
-    Guides, tutorials, whitepapers on building UIs easily with <BrandLink />.
+    Guides, tutorials, and writings on building UIs easily with <BrandLink />.
   </>
 );
 
