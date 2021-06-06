@@ -118,6 +118,21 @@ const typography = {
       fontSize: 'l',
       fontWeight: 'bold',
       margin: 0,
+      paddingBottom: 's',
+      paddingTop: 's',
+    },
+    chip: {
+      backgroundColor: 'background.tones.faded',
+      border: 'default',
+      borderRadius: 'm',
+      color: 'text.secondary',
+      paddingLeft: 'xs',
+      paddingRight: 'xs',
+      fontSize: 's',
+    },
+    description: {
+      color: 'text.secondary',
+      fontSize: 's',
     },
   },
 };

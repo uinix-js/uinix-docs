@@ -1,7 +1,8 @@
 import {Link} from 'gatsby';
 import React from 'react';
-import {Layout} from 'uinix-ui';
+import {Layout, Text} from 'uinix-ui';
 
+import {BrandText, Chips} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
 
 const NavPageLayout = ({description, links}) => {
@@ -10,9 +11,17 @@ const NavPageLayout = ({description, links}) => {
       <p>{description}</p>
       <nav>
         <Layout as="ul" direction="column">
-          {links.map(({label, to}) => (
+          {links.map(({description, label, tags, to}) => (
             <li key={to}>
-              <Link to={to}>{label}</Link>
+              <Layout direction="column" spacing="xs">
+                <Link to={to}>
+                  <BrandText text={label} />
+                </Link>
+                {description && (
+                  <Text variant="description">{description}</Text>
+                )}
+                {tags && <Chips chips={tags} />}
+              </Layout>
             </li>
           ))}
         </Layout>

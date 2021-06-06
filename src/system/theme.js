@@ -26,7 +26,7 @@ const colors = {
   },
   brand: {
     primary: palette.base,
-    secondary: palette.gray[8],
+    secondary: palette.gray[7],
     light: palette.gray[5],
   },
   icon: {
@@ -35,7 +35,7 @@ const colors = {
   text: {
     link: palette.base,
     primary: palette.black,
-    secondary: palette.gray[8],
+    secondary: palette.gray[7],
     light: palette.gray[5],
     tones: {
       error: palette.red[7],

@@ -1,26 +1,33 @@
 import React from 'react';
 
+import fp from 'uinix-fp/package.json';
+import theme from 'uinix-theme/package.json';
+import ui from 'uinix-ui/package.json';
+
 import NavPageLayout from '../../layouts/nav-page-layout.js';
 import {BrandLink} from '../../system/components/index.js';
 
 const description = (
   <>
-    Packages in the <BrandLink /> ecosystem:
+    Packages in the <BrandLink /> ecosystem.
   </>
 );
 
 const links = [
   {
-    label: 'uinix-fp',
-    to: 'uinix-fp',
+    description: fp.description,
+    label: fp.name,
+    to: fp.name,
   },
   {
-    label: 'uinix-theme',
-    to: 'uinix-theme',
+    description: theme.description,
+    label: theme.name,
+    to: theme.name,
   },
   {
-    label: 'uinix-ui',
-    to: 'uinix-ui',
+    description: ui.description,
+    label: ui.name,
+    to: ui.name,
   },
 ];
 
