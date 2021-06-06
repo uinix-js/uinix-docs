@@ -2,44 +2,63 @@ import palx from 'palx';
 
 const palette = palx('#0366d6');
 
+const borderColors = {
+  default: palette.gray[2],
+};
+
+const borderWidths = {
+  s: '1px',
+  m: '2px',
+  l: '4px',
+};
+
+const borders = {
+  default: `${borderWidths.s} solid ${borderColors.default}`,
+};
+
 const colors = {
   background: {
-    base: '#fff',
+    primary: '#fff',
     tones: {
       error: palette.red[1],
-      light: palette.gray[0],
+      faded: palette.gray[0],
     },
   },
   brand: {
     primary: palette.base,
     secondary: palette.gray[8],
-    light: palette.gray[6],
+    light: palette.gray[5],
   },
   icon: {
     default: palette.gray[6],
   },
   text: {
     link: palette.base,
-    primary: palette.gray[9],
+    primary: palette.black,
     secondary: palette.gray[8],
-    light: palette.gray[6],
+    light: palette.gray[5],
     tones: {
-      error: palette.red[5],
-      light: palette.gray[1],
+      error: palette.red[7],
+      faded: palette.gray[2],
     },
   },
 };
 
 const fontFamilies = {
-  body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol',
+  body: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
+  monospace: 'menlo, consolas, monospace',
 };
 
 const fontSizes = {
-  s: '12px',
-  m: '16px',
-  l: '20px',
-  xl: '28px',
-  xxl: '32px',
+  s: '0.5rem',
+  m: '1rem',
+  l: '1.25rem',
+  xl: '1.5rem',
+  xxl: '2rem',
+};
+
+const lineHeights = {
+  body: '1.5',
 };
 
 const opacities = {
@@ -50,8 +69,13 @@ const opacities = {
 };
 
 const radii = {
+  s: '2px',
   m: '4px',
   round: '100%',
+};
+
+const shadows = {
+  card: '0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)',
 };
 
 const sizes = {
@@ -66,11 +90,14 @@ const sizes = {
 };
 
 const spacings = {
-  xs: 4,
-  s: 8,
-  m: 16,
-  l: 32,
-  xl: 64,
+  xs: '0.25rem',
+  s: '0.5rem',
+  m: '1rem',
+  l: '2rem',
+  xl: '4rem',
+  offsets: {
+    anchor: 20,
+  },
 };
 
 const transitions = {
@@ -82,11 +109,16 @@ const zIndices = {
 };
 
 const theme = {
+  borders,
+  borderColors,
+  borderWidths,
   colors,
   fontFamilies,
   fontSizes,
+  lineHeights,
   opacities,
   radii,
+  shadows,
   sizes,
   spacings,
   transitions,

@@ -1,6 +1,15 @@
 import styles from './styles.js';
 
 const elementShorthandPropsMapping = {
+  // Visual,
+  backgroundColor: ['bg'],
+  borderRadius: ['borderRadius'],
+  border: ['b'],
+  borderBottom: ['bb', 'by', 'b'],
+  borderLeft: ['bl', 'bx', 'b'],
+  borderRight: ['br', 'bx', 'b'],
+  borderTop: ['bt', 'by', 'b'],
+  boxShadow: ['boxShadow'],
   color: ['color'],
   // Margin
   margin: ['m'],
@@ -14,10 +23,15 @@ const elementShorthandPropsMapping = {
   paddingLeft: ['pl', 'px', 'p'],
   paddingRight: ['pr', 'px', 'p'],
   paddingTop: ['pt', 'py', 'p'],
-  width: ['w'],
   // Size
   height: ['h'],
-  // Position
+  minHeight: ['minH'],
+  maxHeight: ['maxH'],
+  width: ['w'],
+  minWidth: ['minW'],
+  maxWidth: ['maxW'],
+  // Position, overflow
+  overflow: ['overflow'],
   position: ['position'],
   bottom: ['bottom'],
   left: ['left'],
