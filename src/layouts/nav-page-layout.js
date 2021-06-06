@@ -11,11 +11,11 @@ const NavPageLayout = ({description, links}) => {
       <p>{description}</p>
       <nav>
         <Layout as="ul" align="flex-start" direction="column">
-          {links.map(({description, label, tags, to}) => (
+          {links.map(({description, name, tags, to}) => (
             <li key={to}>
               <Layout align="flex-start" direction="column" spacing="xs">
                 <Link to={to}>
-                  <BrandText text={label} />
+                  <BrandText text={name} />
                 </Link>
                 {description && (
                   <Text variant="description">{description}</Text>

@@ -2,22 +2,11 @@ import React from 'react';
 import {Link} from 'gatsby';
 import {Element, Icon, Layout} from 'uinix-ui';
 
+import {routes} from '../../routes.js';
 import {getGithubRepoLink} from '../utils/link.js';
+import {slugify} from '../utils/slugify.js';
 
-const links = [
-  {
-    label: 'Packages',
-    to: '/packages',
-  },
-  {
-    label: 'Demos',
-    to: '/demos',
-  },
-  {
-    label: 'Learn',
-    to: '/learn',
-  },
-];
+const links = routes.map(({name}) => ({name, to: `/${slugify(name)}`}));
 
 const Nav = () => {
   return (
@@ -29,9 +18,9 @@ const Nav = () => {
       spacing="m"
     >
       <Layout as="ol" spacing="m" variant="nav.list">
-        {links.map(({label, to}) => (
+        {links.map(({name, to}) => (
           <Element key={to} as="li" variant="nav.list.item">
-            <Link to={to}>{label}</Link>
+            <Link to={to}>{name}</Link>
           </Element>
         ))}
       </Layout>

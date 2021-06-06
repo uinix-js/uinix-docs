@@ -16,6 +16,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "esm": "^3.2.25",
     "gatsby": "^3.4.1",
     "gatsby-plugin-mdx": "^2.6.0",
     "gatsby-remark-autolink-headers": "^4.3.0",
@@ -72,7 +73,8 @@
           "gatsby-*.js"
         ],
         "rules": {
-          "unicorn/prefer-module": "off"
+          "unicorn/prefer-module": "off",
+          "unicorn/prefer-node-protocol": "off"
         }
       }
     ]
