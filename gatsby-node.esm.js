@@ -5,19 +5,19 @@ import {routes, RouteType} from './routes.js';
 import {slugify} from './src/utils/slugify.js';
 
 const templateMapping = {
-  [RouteType.Default]: 'default',
-  [RouteType.Document]: 'document',
-  [RouteType.Nav]: 'nav',
-  [RouteType.Package]: 'default',
-  [RouteType.Packages]: 'nav',
-  [RouteType.System]: 'system',
-  [RouteType.Systems]: 'nav',
+  [RouteType.Default]: 'default.js',
+  [RouteType.Document]: 'document.js',
+  [RouteType.Nav]: 'nav.js',
+  [RouteType.Package]: 'package.js',
+  [RouteType.Packages]: 'nav.js',
+  [RouteType.System]: 'system.js',
+  [RouteType.Systems]: 'nav.js',
 };
 
 const createPage = (route, create, parentPath = '') => {
   const {children, description, name, type} = route;
 
-  const template = `./src/templates/${templateMapping[type]}.js`;
+  const template = `./src/templates/${templateMapping[type]}`;
   const component = path.resolve(template);
   const context = {description, name};
   const currentPath = `${parentPath}/${slugify(name)}`;
