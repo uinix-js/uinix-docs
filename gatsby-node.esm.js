@@ -37,7 +37,6 @@ const createPage = (route, create, parentPath = '') => {
       break;
     }
 
-    case RouteType.Package:
     case RouteType.System:
     case RouteType.Default:
     default: {
