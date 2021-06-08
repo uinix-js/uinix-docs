@@ -1,7 +1,7 @@
 import React from 'react';
 import {Element, Icon, Layout, Text} from 'uinix-ui';
+import readme from 'uinix-ui/readme.md';
 
-import readme from '../../../../readme.md';
 import Container from './container.js';
 
 const Readme = () => {

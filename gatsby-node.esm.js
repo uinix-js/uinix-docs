@@ -1,13 +1,24 @@
 import path from 'path';
 import {createFilePath} from 'gatsby-source-filesystem';
 
-import {slugify} from './src/utils/slugify.js';
 import {routes, RouteType} from './routes.js';
+import {slugify} from './src/utils/slugify.js';
+
+const templateMapping = {
+  [RouteType.Default]: 'default',
+  [RouteType.Document]: 'document',
+  [RouteType.Nav]: 'nav',
+  [RouteType.Package]: 'default',
+  [RouteType.Packages]: 'nav',
+  [RouteType.System]: 'system',
+  [RouteType.Systems]: 'nav',
+};
 
 const createPage = (route, create, parentPath = '') => {
   const {children, description, name, type} = route;
 
-  let template;
+  const template = `./src/templates/${templateMapping[type]}.js`;
+  const component = path.resolve(template);
   const context = {description, name};
   const currentPath = `${parentPath}/${slugify(name)}`;
 
@@ -26,27 +37,20 @@ const createPage = (route, create, parentPath = '') => {
         });
         createPage(child, create, currentPath);
       });
-
-      template = './src/templates/nav.js';
       context.links = links;
       break;
     }
 
-    case RouteType.Document: {
-      template = './src/templates/document.js';
-      break;
-    }
-
     case RouteType.System:
+    case RouteType.Document:
     case RouteType.Default:
     default: {
-      template = './src/templates/default.js';
       break;
     }
   }
 
   create({
-    component: path.resolve(template),
+    component,
     context,
     path: currentPath,
   });
