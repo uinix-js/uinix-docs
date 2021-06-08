@@ -49,10 +49,8 @@ const LiveCode = ({code, language, live}) => {
       {({tokens, getLineProps, getTokenProps}) => (
         <Element as="pre">
           {tokens.map((line, i) => (
-            // eslint-disable-next-line react/no-array-index-key
             <div key={i} {...getLineProps({line, key: i})}>
               {line.map((token, key) => (
-                // eslint-disable-next-line react/no-array-index-key
                 <span key={key} {...getTokenProps({token, key})} />
               ))}
             </div>

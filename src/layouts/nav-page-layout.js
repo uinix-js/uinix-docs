@@ -2,13 +2,13 @@ import {Link} from 'gatsby';
 import React from 'react';
 import {Layout, Text} from 'uinix-ui';
 
-import {BrandText, Chips} from '../system/components/index.js';
+import {BrandText, Chips, Markdown} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
 
 const NavPageLayout = ({description, links}) => {
   return (
     <PageLayout>
-      <p>{description}</p>
+      <Markdown content={description} />
       <nav>
         <Layout as="ul" align="flex-start" direction="column">
           {links.map(({description, name, tags, to}) => (
@@ -18,7 +18,9 @@ const NavPageLayout = ({description, links}) => {
                   <BrandText text={name} />
                 </Link>
                 {description && (
-                  <Text variant="description">{description}</Text>
+                  <Text variant="description">
+                    <Markdown content={description} />
+                  </Text>
                 )}
                 {tags && <Chips chips={tags} />}
               </Layout>
