@@ -16,12 +16,14 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
+    "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "gatsby": "^3.4.1",
     "gatsby-plugin-mdx": "^2.6.0",
     "gatsby-remark-autolink-headers": "^4.3.0",
     "gatsby-remark-table-of-contents": "^1.0.0",
     "gatsby-source-filesystem": "^3.6.0",
+    "gatsby-source-github-api": "^1.0.0",
     "github-markdown-css": "^4.0.0",
     "palx": "^1.0.3",
     "prism-react-renderer": "^1.2.1",
@@ -30,6 +32,7 @@
     "react-dom": "^17.0.1",
     "react-live": "^2.2.3",
     "remark": "^13.0.0",
+    "remark-highlight.js": "^6.0.0",
     "remark-react": "^8.0.0",
     "uinix-ui": "github:uinix-js/uinix-ui"
   },
