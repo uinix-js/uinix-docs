@@ -3,6 +3,7 @@ import {createFilePath} from 'gatsby-source-filesystem';
 
 import {routes, RouteType} from './routes.js';
 import {slugify} from './src/utils/slugify.js';
+import {queryAllRepos} from './src/utils/queries/query-all-repos.js';
 
 const templateMapping = {
   [RouteType.Default]: 'default.js',
@@ -14,30 +15,56 @@ const templateMapping = {
   [RouteType.Systems]: 'nav.js',
 };
 
-const createPage = (route, create, parentPath = '') => {
-  const {children, description, name, type} = route;
+const createPage = ({create, data, parentPath = ''}) => {
+  const {allRepos, children, description, name, type} = data;
 
-  const template = `./src/templates/${templateMapping[type]}`;
-  const component = path.resolve(template);
-  const context = {description, name};
   const currentPath = `${parentPath}/${slugify(name)}`;
+  const pageContext = {description, name};
 
   switch (type) {
     case RouteType.Nav:
-    case RouteType.Systems:
-    case RouteType.Packages: {
-      const links = [];
-      children.forEach((child) => {
-        const {name, description, tags} = child;
-        links.push({
+    case RouteType.Systems: {
+      pageContext.links = children.map((child) => {
+        const {description, name, tags} = child;
+        createPage({
+          create,
+          data: {...child, allRepos},
+          parentPath: currentPath,
+        });
+        return {
           name,
           description,
           tags,
           to: slugify(name),
-        });
-        createPage(child, create, currentPath);
+        };
       });
-      context.links = links;
+      break;
+    }
+
+    case RouteType.Packages: {
+      pageContext.links = Object.values(allRepos).map((repo) => {
+        const {description, name, tags} = repo;
+        createPage({
+          create,
+          data: {
+            ...repo,
+            type: RouteType.Package,
+            allRepos,
+          },
+          parentPath: currentPath,
+        });
+        return {
+          name,
+          description,
+          tags,
+          to: slugify(name),
+        };
+      });
+      break;
+    }
+
+    case RouteType.Package: {
+      pageContext.data = allRepos[name];
       break;
     }
 
@@ -50,26 +77,32 @@ const createPage = (route, create, parentPath = '') => {
   }
 
   create({
-    component,
-    context,
+    component: path.resolve(`./src/templates/${templateMapping[type]}`),
+    context: pageContext,
     path: currentPath,
   });
 };
 
-export const createPages = ({actions}) => {
+export const createPages = async ({actions, graphql}) => {
+  const allRepos = await queryAllRepos(graphql);
   routes.forEach((route) => {
-    createPage(route, actions.createPage);
+    const data = {...route, allRepos};
+    createPage({create: actions.createPage, data});
   });
 };
 
 export const onCreateNode = ({node, actions, getNode}) => {
-  // Create mdx pages under the /learn route
-  // https://www.gatsbyjs.com/docs/mdx/programmatically-creating-pages/
-  if (node.internal.type === 'Mdx') {
-    actions.createNodeField({
-      name: 'slugify',
-      node,
-      value: `/learn${createFilePath({node, getNode})}`,
-    });
+  switch (node.internal.type) {
+    // Create mdx pages under the /learn route
+    // https://www.gatsbyjs.com/docs/mdx/programmatically-creating-pages/
+    case 'Mdx':
+      actions.createNodeField({
+        name: 'slugify',
+        node,
+        value: `/learn${createFilePath({node, getNode})}`,
+      });
+      break;
+    default:
+      break;
   }
 };

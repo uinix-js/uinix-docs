@@ -1,10 +1,4 @@
-import fp from 'uinix-fp/package.json';
-import theme from 'uinix-theme/package.json';
-import ui from 'uinix-ui/package.json';
-
 import {TagType} from './tags.js';
-
-const packages = [fp, theme, ui];
 
 export const RouteType = {
   Default: 'default',
@@ -21,12 +15,7 @@ export const routes = [
     name: 'Packages',
     description: 'Packages in the uinix-js ecosystem.',
     type: RouteType.Packages,
-    children: packages.map(({name, description, keywords}) => ({
-      name,
-      description,
-      tags: keywords,
-      type: RouteType.Package,
-    })),
+    children: [],
   },
   {
     name: 'Demos',
