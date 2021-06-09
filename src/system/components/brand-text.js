@@ -15,7 +15,7 @@ const textColors = {
 };
 
 const BrandText = ({text = ''}) => {
-  const parts = text.split(/(ui)(nix)(-?\w*)/);
+  const parts = text.split(/(ui)(nix)(-?[\w-]*)/);
   if (parts.length === 1) {
     return text;
   }

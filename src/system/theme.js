@@ -13,7 +13,7 @@ const borderWidths = {
 };
 
 const borders = {
-  default: `${borderWidths.s} solid ${borderColors.default}`,
+  bordered: `${borderWidths.s} solid ${borderColors.default}`,
 };
 
 const colors = {
@@ -27,7 +27,7 @@ const colors = {
   brand: {
     primary: palette.base,
     secondary: palette.gray[7],
-    light: palette.gray[5],
+    light: palette.gray[6],
   },
   icon: {
     default: palette.gray[6],
@@ -36,7 +36,7 @@ const colors = {
     link: palette.base,
     primary: palette.black,
     secondary: palette.gray[7],
-    light: palette.gray[5],
+    light: palette.gray[6],
     tones: {
       error: palette.red[7],
       faded: palette.gray[2],
@@ -50,7 +50,7 @@ const fontFamilies = {
 };
 
 const fontSizes = {
-  s: '0.75rem',
+  s: '0.8rem',
   m: '1rem',
   l: '1.25rem',
   xl: '1.5rem',
@@ -75,7 +75,7 @@ const radii = {
 };
 
 const shadows = {
-  card: '0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)',
+  m: '0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)',
 };
 
 const sizes = {

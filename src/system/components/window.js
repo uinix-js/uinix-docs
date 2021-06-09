@@ -11,8 +11,8 @@ const MAXIMIZE_ACTION_COLOR = '#3ec544';
 
 const Window = ({children}) => {
   return (
-    <Element b="bordered" borderRadius="m" boxShadow="card">
-      <Layout align="center" bb="default" p="m" spacing="s">
+    <Element b="bordered" borderRadius="m" boxShadow="m">
+      <Layout align="center" bb="bordered" p="m" spacing="s">
         <Dot color={CLOSE_ACTION_COLOR} size={ACTION_SIZE} />
         <Dot color={MINIMIZE_ACTION_COLOR} size={ACTION_SIZE} />
         <Dot color={MAXIMIZE_ACTION_COLOR} size={ACTION_SIZE} />

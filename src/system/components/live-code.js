@@ -23,7 +23,7 @@ const LiveCode = ({code, language, live}) => {
       <LiveProvider code={code} scope={scope} theme={theme}>
         <Window>
           <Layout direction="column">
-            <Layout align="flex-start" bb="default" direction="column" p="m">
+            <Layout align="flex-start" direction="column" p="m">
               <LivePreview />
             </Layout>
             <Text

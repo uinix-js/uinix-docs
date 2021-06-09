@@ -13,7 +13,7 @@ const NavPageLayout = ({description, links}) => {
         <Layout as="ul" align="flex-start" direction="column">
           {links.map(({description, name, tags, to}) => (
             <li key={to}>
-              <Layout align="flex-start" direction="column" spacing="xs">
+              <Layout align="flex-start" direction="column">
                 <Link to={to}>
                   <BrandText text={name} />
                 </Link>

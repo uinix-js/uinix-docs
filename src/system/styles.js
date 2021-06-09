@@ -37,6 +37,10 @@ const global = {
     margin: 0,
     padding: 0,
   },
+  hr: {
+    border: 'bordered',
+    width: '100%',
+  },
   ...classes,
 };
 
@@ -57,10 +61,13 @@ const typography = {
       opacity: 'interactive',
     },
     blockquote: {
-      borderLeft: 'default',
+      borderLeft: 'bordered',
       borderWidth: 'l',
       fontStyle: 'italic',
-      margin: 0,
+      marginLeft: 0,
+      marginBottom: 'm',
+      marginRight: 0,
+      marginTop: 'm',
       paddingLeft: 'm',
     },
     code: {
@@ -94,8 +101,7 @@ const typography = {
     },
     pre: {
       backgroundColor: 'background.tones.faded',
-      border: 'default',
-      borderRadius: 'm',
+      border: 'bordered',
       fontFamily: 'monospace',
       fontSize: 's',
       margin: 0,
@@ -123,7 +129,7 @@ const typography = {
     },
     chip: {
       backgroundColor: 'background.tones.faded',
-      border: 'default',
+      border: 'bordered',
       borderRadius: 'm',
       color: 'text.secondary',
       paddingLeft: 'xs',
@@ -134,6 +140,7 @@ const typography = {
       color: 'text.secondary',
       fontSize: 's',
     },
+    unset: rules.unset,
   },
 };
 

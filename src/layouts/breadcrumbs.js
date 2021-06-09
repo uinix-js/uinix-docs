@@ -1,20 +1,18 @@
 import {Link} from 'gatsby';
 import React from 'react';
 import {i} from 'uinix-fp';
-import {Element, Text, useStyles} from 'uinix-ui';
+import {Element, Text} from 'uinix-ui';
 
 import {BrandText} from '../system/components/index.js';
 import {capitalize} from '../utils/capitalize.js';
 import {coerceWindowValue} from '../utils/coerce-window-value.js';
 
 const Breadcrumbs = () => {
-  const styles = useStyles();
-
   const pathname = coerceWindowValue('location.pathname', '');
   const crumbs = getCrumbs(pathname);
 
   return (
-    <Text as="h2" styles={styles.unset}>
+    <Text as="h2" variant="unset">
       <nav>
         <Element as="ol" variant="nav.list">
           {crumbs.map(({label, to}, i, array) => {
