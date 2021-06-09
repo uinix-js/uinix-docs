@@ -1,33 +1,82 @@
-import React, {useEffect, useReducer, useRef} from 'react';
+import React from 'react';
+import {Layout, Text} from 'uinix-ui';
 
 import PageLayout from '../layouts/page-layout.js';
-import {slugify} from '../utils/slugify.js';
+import {
+  Actions,
+  BrandText,
+  Card,
+  Chips,
+  Markdown,
+} from '../system/components/index.js';
 
 const Package = ({pageContext}) => {
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
-  const readmeRef = useRef();
+  const {
+    name,
+    package: pkg,
+    pushedAt,
+    readme,
+    stars,
+    tags,
+    url,
+  } = pageContext.data;
+  const {license, version} = pkg;
 
-  const Readme = readmeRef.current;
-  const name = slugify(pageContext.name);
+  const actions = [
+    {
+      href: `https://opensource.org/licenses/${license}`,
+      icon: 'license',
+      text: license,
+    },
+    {
+      href: `${url}/stargazers`,
+      icon: 'star',
+      text: stars,
+    },
+    {
+      href: `${url}/commits`,
+      icon: 'commit',
+      text: new Date(pushedAt).toLocaleDateString(),
+    },
+  ];
 
-  // TODO: refactor and share code with system template in async-template.js
-  useEffect(() => {
-    const load = async () => {
-      const {default: readme} = await import(`uinix-ui/readme.md`);
-      readmeRef.current = readme;
-      forceUpdate();
-    };
-
-    load();
-  }, [name]);
-
-  if (!Readme) {
-    return null;
-  }
+  const stats = (
+    <Card>
+      <Layout direction="column" spacing="s">
+        <Layout
+          wrap
+          align="center"
+          justify="space-between"
+          spacing="l"
+          wrapSpacing="xs"
+        >
+          <Text as="h3" fontWeight="bold" variant="unset">
+            <Text as="a" href={url}>
+              <BrandText text={name} />
+            </Text>
+            <Text
+              as="a"
+              color="text.light"
+              href={`https://www.npmjs.com/package/${name}/v/${version}`}
+            >
+              @{version}
+            </Text>
+          </Text>
+          <Actions actions={actions} />
+        </Layout>
+        <Chips chips={tags} />
+      </Layout>
+    </Card>
+  );
 
   return (
     <PageLayout>
-      <Readme />
+      <Layout direction="column" spacing="l">
+        {stats}
+        <section>
+          <Markdown content={readme} />
+        </section>
+      </Layout>
     </PageLayout>
   );
 };
