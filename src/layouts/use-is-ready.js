@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react';
 
+let cachedIsReady = false;
+
 // TODO: hacky way to workaround FOUC in fela
 export const useIsReady = ({ms = 100, ready}) => {
-  const [isReady, setIsReady] = useState(ready());
+  const [isReady, setIsReady] = useState(cachedIsReady);
 
   useEffect(() => {
     let interval = null;
@@ -16,6 +18,7 @@ export const useIsReady = ({ms = 100, ready}) => {
     const readyCheck = () => {
       if (ready()) {
         setIsReady(true);
+        cachedIsReady = true;
         cleanup();
       }
     };

@@ -10,7 +10,7 @@ import {useIsReady} from './use-is-ready.js';
 const PageLayout = ({children}) => {
   const ready = () => {
     if (typeof document !== 'undefined') {
-      document.querySelector('style[data-fela-type]');
+      return document.querySelector('style[data-fela-type]');
     }
   };
 
