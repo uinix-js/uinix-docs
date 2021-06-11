@@ -3,7 +3,7 @@ import {Element, Layout} from 'uinix-ui';
 
 import Dot from './dot.js';
 
-// Non-system Mac window action styles
+// Non-system styles (Mac window styles)
 const ACTION_SIZE = '12px';
 const CLOSE_ACTION_COLOR = '#fa625c';
 const MINIMIZE_ACTION_COLOR = '#fbb43a';

@@ -2,11 +2,7 @@ import React from 'react';
 import {Link} from 'gatsby';
 import {Element, Icon, Layout} from 'uinix-ui';
 
-import {routes} from '../../routes.js';
-import {getGithubRepoLink} from '../utils/link.js';
-import {slugify} from '../utils/slugify.js';
-
-const links = routes.map(({name}) => ({name, to: `/${slugify(name)}`}));
+import {coerceLinks, getRepoLink} from '../utils/index.js';
 
 const Nav = () => {
   return (
@@ -18,15 +14,17 @@ const Nav = () => {
       spacing="m"
     >
       <Layout as="ol" spacing="m" variant="nav.list">
-        {links.map(({name, to}) => (
+        {coerceLinks(['Packages', 'Demos', 'Learn'], {
+          hasLeadingSlash: true,
+        }).map(({text, to}) => (
           <Element key={to} as="li" variant="nav.list.item">
-            <Link to={to}>{name}</Link>
+            <Link to={to}>{text}</Link>
           </Element>
         ))}
       </Layout>
       <Layout as="ol" spacing="m" variant="nav.list">
         <Element as="li" variant="nav.list.item">
-          <a href={getGithubRepoLink()}>
+          <a href={getRepoLink()}>
             <Icon icon="github" size="icon.m" title="Github" />
           </a>
         </Element>

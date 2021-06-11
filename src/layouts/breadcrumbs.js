@@ -4,24 +4,34 @@ import {i} from 'uinix-fp';
 import {Element, Text} from 'uinix-ui';
 
 import {BrandText} from '../system/components/index.js';
-import {capitalize} from '../utils/capitalize.js';
-import {coerceWindowValue} from '../utils/coerce-window-value.js';
+import {capitalize, coerceWindowValue} from '../utils/index.js';
 
 const Breadcrumbs = () => {
   const pathname = coerceWindowValue('location.pathname', '');
-  const crumbs = getCrumbs(pathname);
+
+  let to = '/';
+  const crumbs = pathname
+    .split('/')
+    .filter(i)
+    .map((subpath, i, array) => {
+      const slash = i < array.length - 1 ? '/' : '';
+      const path = `${subpath}${slash}`;
+      to += path;
+      const text = i === 0 ? capitalize(path) : path;
+      return {text, to};
+    });
 
   return (
-    <Text as="h2" variant="unset">
+    <Text as="h2" variant="headingLink">
       <nav>
         <Element as="ol" variant="nav.list">
-          {crumbs.map(({label, to}, i, array) => {
+          {crumbs.map(({text, to}, i, array) => {
             const isLastCrumb = i === array.length - 1;
             const isOnlyCrumb = array.length === 1;
 
             const color = isOnlyCrumb ? 'text.primary' : 'text.light';
-            const fontWeight = isOnlyCrumb || !isLastCrumb ? 'bold' : undefined;
-            const crumb = <BrandText text={label} />;
+            const fontWeight = isOnlyCrumb || !isLastCrumb ? 'bold' : 'regular';
+            const crumb = <BrandText text={text} />;
 
             return (
               <Element key={to} as="li" variant="nav.list.item">
@@ -35,20 +45,6 @@ const Breadcrumbs = () => {
       </nav>
     </Text>
   );
-};
-
-const getCrumbs = (pathname) => {
-  let to = '/';
-  return pathname
-    .split('/')
-    .filter(i)
-    .map((part, i, array) => {
-      const slash = i < array.length - 1 ? '/' : '';
-      const path = `${part}${slash}`;
-      to += path;
-      const label = i === 0 ? capitalize(path) : path;
-      return {label, to};
-    });
 };
 
 export default Breadcrumbs;

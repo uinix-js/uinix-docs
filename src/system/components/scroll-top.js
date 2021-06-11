@@ -14,9 +14,9 @@ const ScrollTop = () => {
     <Icon
       color="icon.default"
       icon="up"
-      size="icon.l"
       position="fixed"
       right="m"
+      size="icon.l"
       title="Back to top"
       top="m"
       onClick={scrollTop}

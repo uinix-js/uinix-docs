@@ -8,9 +8,6 @@ const rules = {
       opacity: onClick ? 'interactive' : undefined,
     },
   }),
-  unset: {
-    all: 'unset',
-  },
 };
 
 const classes = {
@@ -140,11 +137,24 @@ const typography = {
       color: 'text.secondary',
       fontSize: 's',
     },
-    unset: rules.unset,
+    headingLink: {
+      all: 'unset',
+      fontSize: 'm',
+      fontWeight: 'bold',
+    },
   },
 };
 
 const variants = {
+  layout: {
+    container: {
+      height: '100vh',
+      margin: '0 auto',
+      paddingLeft: 'l',
+      paddingRight: 'l',
+      width: ['100%', '100%', 'widths.container'],
+    },
+  },
   nav: {
     list: {
       margin: 0,

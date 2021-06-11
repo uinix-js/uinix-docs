@@ -27,16 +27,17 @@ const colors = {
   brand: {
     primary: palette.base,
     secondary: palette.gray[7],
-    light: palette.gray[6],
+    light: palette.gray[5],
   },
   icon: {
     default: palette.gray[6],
+    light: palette.gray[5],
   },
   text: {
     link: palette.base,
     primary: palette.black,
     secondary: palette.gray[7],
-    light: palette.gray[6],
+    light: palette.gray[5],
     tones: {
       error: palette.red[7],
       faded: palette.gray[2],

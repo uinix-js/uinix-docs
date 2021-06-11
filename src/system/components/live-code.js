@@ -9,6 +9,7 @@ import Window from './window.js';
 
 const {Element, Layout, Text} = ui;
 
+// TODO: check and formalize this
 const scope = {
   ...fp,
   ...ui,
@@ -26,13 +27,7 @@ const LiveCode = ({code, language, live}) => {
             <Layout align="flex-start" direction="column" p="m">
               <LivePreview />
             </Layout>
-            <Text
-              bg="background.tones.faded"
-              fontSize="s"
-              maxH={EDITOR_MAX_HEIGHT}
-              overflow="auto"
-              p="m"
-            >
+            <Text fontSize="s" maxH={EDITOR_MAX_HEIGHT} overflow="auto">
               <LiveEditor />
             </Text>
           </Layout>
