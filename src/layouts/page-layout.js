@@ -8,9 +8,13 @@ import Header from './header.js';
 import {useIsReady} from './use-is-ready.js';
 
 const PageLayout = ({children}) => {
-  const isReady = useIsReady({
-    ready: () => document.querySelector('style[data-fela-type]'),
-  });
+  const ready = () => {
+    if (typeof document !== 'undefined') {
+      document.querySelector('style[data-fela-type]');
+    }
+  };
+
+  const isReady = useIsReady({ready});
 
   if (!isReady) {
     return <LoadingPage />;
