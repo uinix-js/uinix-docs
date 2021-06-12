@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './styles.js';
 
 const config = {
@@ -34,6 +36,7 @@ const config = {
     ({disabled}) => (disabled ? styles.disabled : null),
     styles.interactive,
   ],
+  h: React.createElement,
 };
 
 export default config;

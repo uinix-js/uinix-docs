@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {SystemProvider, merge} from 'uinix-ui';
+import {load, merge} from 'uinix-ui';
 
 import defaultSystem from '../system/index.js';
 import {LoadingPage, Window} from '../system/components/index.js';
@@ -14,8 +14,8 @@ const SystemPageLayout = ({name}) => {
         `../demos/systems/${name}/index.js`
       );
       setSystem(loadedSystem);
+      load(merge(defaultSystem)(loadedSystem));
     };
-
     loadSystem();
   }, [name]);
 
@@ -27,11 +27,9 @@ const SystemPageLayout = ({name}) => {
 
   return (
     <PageLayout>
-      <SystemProvider system={merge(defaultSystem)(system)}>
         <Window>
           <Demo />
         </Window>
-      </SystemProvider>
     </PageLayout>
   );
 };
