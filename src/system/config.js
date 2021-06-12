@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './styles.js';
 
 const elementShorthandPropsMapping = {
@@ -56,6 +58,7 @@ const responsiveCssProperties = [
 const config = {
   elementShorthandPropsMapping,
   elementStyles,
+  h: React.createElement,
   isAtomicCss: false,
   responsiveCssProperties,
 };
