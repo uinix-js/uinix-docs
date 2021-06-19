@@ -14,8 +14,9 @@ const SystemPageLayout = ({name}) => {
         `../demos/systems/${name}/index.js`
       );
       setSystem(loadedSystem);
-      load(merge(defaultSystem)(loadedSystem));
+      load(React.createElement, merge(defaultSystem)(loadedSystem));
     };
+
     loadSystem();
   }, [name]);
 
@@ -27,9 +28,9 @@ const SystemPageLayout = ({name}) => {
 
   return (
     <PageLayout>
-        <Window>
-          <Demo />
-        </Window>
+      <Window>
+        <Demo />
+      </Window>
     </PageLayout>
   );
 };

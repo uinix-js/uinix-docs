@@ -6,10 +6,8 @@ import {LiveCode} from './components/index.js';
 import system from './index.js';
 
 const Provider = ({children}) => {
-  load(system);
-  return (
-    <MDXProvider components={components}>{children}</MDXProvider>
-  );
+  load(React.createElement, system);
+  return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 
 const pre = (props) => {
