@@ -10,7 +10,7 @@ const PackagePageLayout = ({links = [], pkg}) => {
 
   const stats = (
     <Card>
-      <Layout direction="column" spacing="s">
+      <Layout direction="column" spacing="m">
         <Text as="h3" variant="headingLink">
           <Text as="a" href={getRepoLink(name)}>
             <BrandText text={name} />

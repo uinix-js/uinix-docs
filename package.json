@@ -32,7 +32,7 @@
     "remark-highlight.js": "^6.0.0",
     "remark-react": "^8.0.0",
     "remark-slug": "^6.0.0",
-    "uinix-ui": "^0.1.5-beta.1"
+    "uinix-ui": "^0.1.6-beta.1"
   },
   "devDependencies": {
     "eslint-config-xo-react": "^0.25.0",
