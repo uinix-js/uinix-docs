@@ -39,7 +39,7 @@ const elementShorthandPropsMapping = {
   top: ['top'],
 };
 
-const elementStyles = [styles.interactive];
+const elementStyles = [styles.interactive, styles.truncate];
 
 const responsiveCssProperties = [
   'display',

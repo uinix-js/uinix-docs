@@ -6,8 +6,9 @@ import {LiveCode} from './components/index.js';
 import config from './config.js';
 import system from './index.js';
 
+load(h, system, config);
+
 const Provider = ({children}) => {
-  load(h, system, config);
   return <MDXProvider components={components}>{children}</MDXProvider>;
 };
 

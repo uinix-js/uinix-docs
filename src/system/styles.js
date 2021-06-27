@@ -8,6 +8,14 @@ const rules = {
       opacity: onClick ? 'interactive' : undefined,
     },
   }),
+  truncate: ({truncate}) =>
+    truncate
+      ? {
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }
+      : null,
 };
 
 const classes = {

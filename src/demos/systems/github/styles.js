@@ -25,11 +25,6 @@ const rules = {
       backgroundColor: 'background.tertiary',
     },
   },
-  truncate: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
 };
 
 const global = {

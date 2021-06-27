@@ -6,6 +6,15 @@ import defaultSystem from '../system/index.js';
 import {LoadingPage, Window} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
 
+/**
+ * Uinix-ui system is meant to be immutable when loaded.
+ *
+ * This page merges the default system with the loaded system and keeps
+ * a few default system configuration to ensure the site's UI integrity.
+ *
+ * This page is refreshed when unmounted to cleanly reset and load the default
+ * system when navigating out of the page.
+ **/
 const SystemPageLayout = ({name}) => {
   const [system, setSystem] = useState();
 
@@ -14,18 +23,24 @@ const SystemPageLayout = ({name}) => {
       const {default: loadedSystem} = await import(
         `../demos/systems/${name}/index.js`
       );
+
+      const mergedSystem = merge(defaultSystem)(loadedSystem);
+      mergedSystem.styles.breakpoints = defaultSystem.styles.breakpoints;
+
+      load(h, mergedSystem, defaultConfig);
       setSystem(loadedSystem);
-      load(h, merge(defaultSystem)(loadedSystem), defaultConfig);
     };
 
     loadSystem();
+
+    return () => window.location.reload();
   }, [name]);
 
   if (!system) {
     return <LoadingPage />;
   }
 
-  const {Demo} = system;
+  const {Demo} = system.meta;
 
   return (
     <PageLayout>
