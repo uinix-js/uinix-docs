@@ -56,7 +56,7 @@ const responsiveCssProperties = [
 const config = {
   elementShorthandPropsMapping,
   elementStyles,
-  isAtomicCss: false,
+  enableAtomicCss: false,
   responsiveCssProperties,
 };
 

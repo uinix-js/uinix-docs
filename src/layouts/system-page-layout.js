@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {createElement as h, useEffect, useState} from 'react';
 import {load, merge} from 'uinix-ui';
 
+import defaultConfig from '../system/config.js';
 import defaultSystem from '../system/index.js';
 import {LoadingPage, Window} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
@@ -14,7 +15,7 @@ const SystemPageLayout = ({name}) => {
         `../demos/systems/${name}/index.js`
       );
       setSystem(loadedSystem);
-      load(React.createElement, merge(defaultSystem)(loadedSystem));
+      load(h, merge(defaultSystem)(loadedSystem), defaultConfig);
     };
 
     loadSystem();
