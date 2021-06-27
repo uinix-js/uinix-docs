@@ -5,7 +5,7 @@ const Tabs = () => {
   const [selectedTab, setSelectedTab] = useState('code');
 
   return (
-    <Layout as="ul" spacing="l">
+    <Layout as="ul" variant="nav.unset">
       {Object.entries(tabsData).map(([tab, {icon, label}]) => {
         const isSelected = selectedTab === tab;
         return (
@@ -14,7 +14,8 @@ const Tabs = () => {
             as="li"
             align="center"
             flex="none"
-            p="s"
+            px="m"
+            py="s"
             spacing="s"
             styleProps={{isSelected}}
             styles={styles.tab}

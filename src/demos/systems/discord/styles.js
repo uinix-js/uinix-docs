@@ -12,12 +12,6 @@ const rules = {
       backgroundColor: 'background.modifier.hover',
     },
   },
-  interactive: ({onClick}) => ({
-    cursor: onClick ? 'pointer' : undefined,
-    ':hover': {
-      color: onClick ? 'interactive.hover' : undefined,
-    },
-  }),
   scrollable: ({scrollbarWidth = 'thin'}) => ({
     height: 'height.viewport',
     overflowX: 'hidden',
@@ -29,11 +23,6 @@ const rules = {
     position: 'sticky',
     top: 0,
     zIndex: 'forward',
-  },
-  truncate: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
 };
 

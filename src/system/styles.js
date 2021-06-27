@@ -113,16 +113,6 @@ const typography = {
       overflow: 'auto',
       padding: 'm',
     },
-    'ol, ul': {
-      margin: 0,
-      marginBottom: 'm',
-      marginTop: 'm',
-      marginLeft: 'l',
-      padding: 0,
-    },
-    li: {
-      marginBottom: 'm',
-    },
   },
   variants: {
     brand: {
@@ -139,7 +129,7 @@ const typography = {
       color: 'text.secondary',
       paddingLeft: 'xs',
       paddingRight: 'xs',
-      fontSize: 's',
+      fontSize: 'xs',
     },
     description: {
       color: 'text.secondary',
@@ -156,10 +146,7 @@ const typography = {
 const variants = {
   layout: {
     container: {
-      height: '100vh',
       margin: '0 auto',
-      paddingLeft: 'l',
-      paddingRight: 'l',
       width: ['100%', '100%', 'widths.container'],
     },
   },

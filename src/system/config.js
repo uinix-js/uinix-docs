@@ -37,6 +37,9 @@ const elementShorthandPropsMapping = {
   left: ['left'],
   right: ['right'],
   top: ['top'],
+  // Display
+  display: ['display'],
+  flex: ['flex'],
 };
 
 const elementStyles = [styles.interactive, styles.truncate];

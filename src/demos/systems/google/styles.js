@@ -3,9 +3,6 @@ import {createStyles} from 'uinix-ui';
 import typography from './typography.js';
 
 const rules = {
-  interactive: ({onClick}) => ({
-    cursor: onClick ? 'pointer' : undefined,
-  }),
   selectedTab: ({isSelected}) => ({
     color: isSelected ? 'brand.primary' : undefined,
     borderBottom: 'tab',

@@ -18,9 +18,6 @@ const rules = {
       transform: 'iconScale',
     },
   }),
-  interactive: ({onClick}) => ({
-    cursor: onClick ? 'pointer' : undefined,
-  }),
   iconBadge: {
     ':after': {
       backgroundColor: 'currentColor',
@@ -34,11 +31,6 @@ const rules = {
       transform: 'translateXHalf',
       width: 'badge',
     },
-  },
-  truncate: {
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
 };
 

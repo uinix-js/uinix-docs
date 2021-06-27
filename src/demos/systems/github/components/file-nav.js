@@ -7,7 +7,13 @@ import IconText from './icon-text.js';
 
 const FileNav = () => {
   return (
-    <Layout align="center" justify="space-between" spacing="l">
+    <Layout
+      wrap
+      align="center"
+      justify="space-between"
+      spacing="l"
+      wrapSpacing="m"
+    >
       <Layout align="center" spacing="m">
         <Button icon="gitBranch" text="main" onExpand={noop} />
         <IconText icon="gitBranch" text="1 branch" textVariant="link" />

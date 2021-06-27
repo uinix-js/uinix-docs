@@ -42,7 +42,7 @@ const theme = createTheme({
   borderWidths,
   colors,
   fontFamilies: {
-    body: 'Montserrat, arial, sans-serif',
+    body: 'SpotifyCircular, arial, sans-serif',
   },
   fontWeights: {
     normal: 400,

@@ -43,7 +43,7 @@ const SystemPageLayout = ({name}) => {
   const {Demo} = system.meta;
 
   return (
-    <PageLayout>
+    <PageLayout isFullWidth>
       <Window>
         <Demo />
       </Window>

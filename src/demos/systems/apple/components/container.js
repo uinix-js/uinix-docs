@@ -3,7 +3,7 @@ import {Layout} from 'uinix-ui';
 
 const Container = ({children, ...rest}) => {
   return (
-    <Layout {...rest} mx="auto" w="width.container">
+    <Layout {...rest} mx="auto" px="x6" w="width.container">
       {children}
     </Layout>
   );

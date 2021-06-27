@@ -8,8 +8,8 @@ import Repo from './repo.js';
 
 const Main = () => {
   return (
-    <Layout as="main" mx="auto" px="l" spacing="l" styles={styles.main}>
-      <Layout direction="column" spacing="m">
+    <Layout justify="center" px="l" spacing="l" w="100%">
+      <Layout as="main" direction="column" spacing="m" variant="layout.main">
         <FileNav />
         <Repo />
         <Readme />
@@ -17,13 +17,6 @@ const Main = () => {
       <Aside />
     </Layout>
   );
-};
-
-const styles = {
-  main: {
-    maxWidth: 'width.main',
-    width: '100%',
-  },
 };
 
 export default Main;

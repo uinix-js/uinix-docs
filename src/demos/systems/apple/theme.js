@@ -50,7 +50,7 @@ const theme = createTheme({
   },
   colors,
   fontFamilies: {
-    body: 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif', // Note: 'SF Pro' is not openly licensed, using Roboto as a close replacement
+    body: 'SFPro, "Helvetica Neue", Helvetica, Arial, sans-serif',
   },
   fontSizes: {
     small: '12px',

@@ -1,4 +1,4 @@
-import openSansWoff from './assets/fonts/open-sans-all-400-normal.woff';
+import googleSans from './assets/fonts/google-sans-regular.ttf';
 
 const headingStyle = {
   fontWeight: 'normal',
@@ -9,8 +9,8 @@ const headingStyle = {
 
 const typography = {
   fontFaces: {
-    OpenSans: {
-      src: [openSansWoff],
+    GoogleSans: {
+      src: [googleSans],
     },
   },
   global: {

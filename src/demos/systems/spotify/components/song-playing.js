@@ -10,7 +10,7 @@ const SongPlaying = ({artist, song}) => {
   return (
     <Layout align="center" spacing="m" styles={styles.footerSection}>
       <Cover size="s" />
-      <Layout direction="column" styles={styles.truncate}>
+      <Layout truncate direction="column">
         <Text truncate as="a" href="#top" variant="s">
           {song}
         </Text>

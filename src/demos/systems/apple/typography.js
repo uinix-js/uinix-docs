@@ -1,9 +1,9 @@
-import robotoTtf from './assets/fonts/roboto.ttf';
+import sfPro from './assets/fonts/sf-pro-regular.ttf';
 
 const typography = {
   fontFaces: {
-    robotoTtf: {
-      src: [robotoTtf],
+    SFPro: {
+      src: [sfPro],
     },
   },
   global: {
@@ -16,16 +16,18 @@ const typography = {
       fontSize: 'body',
       letterSpacing: 'body',
       lineHeight: 'body',
+      '-mozFontFeatureSettings': 'kern',
+      '-mozOsxFontSmoothing': 'grayscale',
     },
     h1: {
       fontSize: 'h1',
-      fontWeight: 'bold',
+      fontWeight: 'bolder',
       letterSpacing: 'h1',
       lineHeight: 'h1',
     },
     h2: {
       fontSize: 'h2',
-      fontWeight: 'bold',
+      fontWeight: 'bolder',
       letterSpacing: 'h2',
       lineHeight: 'h2',
     },

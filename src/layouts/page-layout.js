@@ -7,21 +7,21 @@ import Footer from './footer.js';
 import Header from './header.js';
 import {useIsReady} from './use-is-ready.js';
 
-const PageLayout = ({children}) => {
-  const ready = () => {
-    if (typeof document !== 'undefined') {
-      return document.querySelector('style[data-fela-type]');
-    }
-  };
-
-  const isReady = useIsReady({ready});
+const PageLayout = ({children, isFullWidth}) => {
+  const isReady = useIsReady();
 
   if (!isReady) {
     return <LoadingPage />;
   }
 
   return (
-    <Layout direction="column" spacing="m" variant="layout.container">
+    <Layout
+      direction="column"
+      h="100vh"
+      px="l"
+      spacing="m"
+      variant={isFullWidth ? undefined : 'layout.container'}
+    >
       <Header />
       <Breadcrumbs />
       <Layout as="main" flex="auto" direction="column">

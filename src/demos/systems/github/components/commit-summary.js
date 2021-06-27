@@ -8,7 +8,13 @@ import User from './user.js';
 const CommitSummary = () => {
   const {at, hash, isVerified, message, user} = latest;
   return (
-    <Layout align="center" justify="space-between" spacing="s">
+    <Layout
+      wrap
+      align="center"
+      justify="space-between"
+      spacing="s"
+      wrapSpacing="s"
+    >
       <Layout align="center" spacing="m">
         <User user={user} />
         <Text
@@ -21,7 +27,7 @@ const CommitSummary = () => {
           {message}
         </Text>
       </Layout>
-      <Layout align="center" spacing="m">
+      <Layout align="center" flex="none" spacing="m">
         <IconText
           as="a"
           href="#top"

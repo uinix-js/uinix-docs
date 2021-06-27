@@ -4,7 +4,7 @@ module.exports = {
       resolve: 'gatsby-plugin-mdx',
       options: {
         defaultLayouts: {
-          default: require.resolve('./src/layouts/page-layout.js'),
+          pages: require.resolve('./src/layouts/page-layout.js'),
         },
         extensions: ['.md', '.mdx'],
         gatsbyRemarkPlugins: [
@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'mdx',
+        name: 'pages',
         path: 'src/pages',
       },
     },

@@ -1,4 +1,4 @@
-import montserratWoff from './assets/fonts/montserrat-all-400-normal.woff';
+import spotifyCircular from './assets/fonts/spotify-circular-regular.ttf';
 
 const headingStyle = {
   margin: 0,
@@ -6,8 +6,8 @@ const headingStyle = {
 
 const typography = {
   fontFaces: {
-    Montserrat: {
-      src: [montserratWoff],
+    SpotifyCircular: {
+      src: [spotifyCircular],
     },
   },
   global: {
@@ -15,6 +15,7 @@ const typography = {
       color: 'text.secondary',
       fontFamily: 'body',
       letterSpacing: 'normal',
+      '-mozOsxFontSmoothing': 'grayscale',
     },
     a: {
       color: 'text.primary',

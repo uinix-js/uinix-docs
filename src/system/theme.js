@@ -51,7 +51,8 @@ const fontFamilies = {
 };
 
 const fontSizes = {
-  s: '0.8rem',
+  xs: '0.75rem',
+  s: '0.85rem',
   m: '1rem',
   l: '1.25rem',
   xl: '1.5rem',
@@ -65,7 +66,7 @@ const lineHeights = {
 const opacities = {
   invisible: '0',
   disabled: '0.3',
-  interactive: '0.7',
+  interactive: '0.8',
   visible: '1',
 };
 

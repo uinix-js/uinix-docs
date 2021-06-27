@@ -31,7 +31,7 @@ const Pagination = () => {
       <Alphabet color="green" value="l" />
       <Alphabet color="red" value="e" />
       <a href="#top">
-        <Layout direction="column" p="x4" spacing="x5">
+        <Layout direction="column" px="x4" py="x3" spacing="x2">
           <Icon
             color="brand.blue"
             icon="chevronRight"

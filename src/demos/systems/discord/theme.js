@@ -85,7 +85,7 @@ const theme = createTheme({
   borderWidths,
   colors,
   fontFamilies: {
-    body: 'OpenSans, Helvetica Neue, Helvetica, Arial, sans-serif', // Note: 'Whitney' is not openly licensed, using OpenSans as a close replacement
+    body: 'Whitney, Helvetica Neue, Helvetica, Arial, sans-serif',
     monospace:
       'Consolas, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Monaco, Courier New, Courier, monospace',
   },

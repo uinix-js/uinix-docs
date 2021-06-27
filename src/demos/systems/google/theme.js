@@ -48,7 +48,7 @@ const theme = createTheme({
   borderWidths,
   fontFamilies: {
     body: 'arial, sans-serif',
-    google: 'OpenSans, arial, sans-serif', // Note: 'Google Sans' is not openly licensed, using OpenSans as a close replacement
+    google: 'GoogleSans, arial, sans-serif',
   },
   fontSizes: {
     small: '12px',

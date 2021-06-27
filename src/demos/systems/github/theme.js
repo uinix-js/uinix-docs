@@ -99,7 +99,7 @@ const theme = createTheme({
     },
     width: {
       aside: '280px',
-      main: '1280px',
+      main: '904px',
     },
   },
   spacings: {

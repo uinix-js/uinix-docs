@@ -19,20 +19,20 @@ const {
 
 const FooterLinkGroups = () => {
   return (
-    <Layout spacing="x8">
+    <Layout justify="space-between">
       <FooterLinkGroup group={shop} />
-      <Layout direction="column" spacing="x8">
+      <Layout direction="column" spacing="x4">
         <FooterLinkGroup group={services} />
         <FooterLinkGroup group={account} />
       </Layout>
       <FooterLinkGroup group={store} />
-      <Layout direction="column" spacing="x8">
+      <Layout direction="column" spacing="x4">
         <FooterLinkGroup group={business} />
         <FooterLinkGroup group={education} />
         <FooterLinkGroup group={healthcare} />
         <FooterLinkGroup group={government} />
       </Layout>
-      <Layout direction="column" spacing="x8">
+      <Layout direction="column" spacing="x4">
         <FooterLinkGroup group={values} />
         <FooterLinkGroup group={about} />
       </Layout>

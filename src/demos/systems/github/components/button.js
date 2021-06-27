@@ -16,9 +16,10 @@ const Button = ({
   return (
     <Layout
       as="button"
+      flex="none"
       px={hasCount ? 's' : 'm'}
       py="0"
-      variant={`Button.${variant}`}
+      variant={`button.${variant}`}
       onClick={onClick}
     >
       <Layout align="center" flex="none" spacing="s">

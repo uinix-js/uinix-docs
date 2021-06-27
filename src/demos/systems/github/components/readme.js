@@ -1,6 +1,7 @@
+import {MDXProvider} from '@mdx-js/react';
 import React from 'react';
 import {Element, Icon, Layout, Text} from 'uinix-ui';
-import readme from 'uinix-ui/readme.md';
+import ReadmeContents from 'uinix-ui/readme.md';
 
 import Container from './container.js';
 
@@ -14,14 +15,12 @@ const Readme = () => {
     </Layout>
   );
 
-  const readmeContents = (
-    <div dangerouslySetInnerHTML={{__html: readme.html}} /> // eslint-disable-line react/no-danger
-  );
-
   return (
     <Container header={header}>
-      <Element className="markdown-body" px="l">
-        {readmeContents}
+      <Element className="markdown-body" p="l">
+        <MDXProvider>
+          <ReadmeContents />
+        </MDXProvider>
       </Element>
     </Container>
   );

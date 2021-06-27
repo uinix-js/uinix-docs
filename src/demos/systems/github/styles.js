@@ -61,8 +61,9 @@ const global = {
 };
 
 const variants = {
-  Button: {
+  button: {
     default: {
+      backgroundColor: 'background.secondary',
       color: 'text.primary',
       ':hover': {
         backgroundColor: 'hover.gray',
@@ -74,6 +75,19 @@ const variants = {
       ':hover': {
         backgroundColor: 'hover.success',
       },
+    },
+  },
+  nav: {
+    unset: {
+      margin: 'unset',
+      padding: 'unset',
+    },
+  },
+  layout: {
+    main: {
+      minWidth: 0,
+      maxWidth: 'width.main',
+      width: '100%',
     },
   },
 };

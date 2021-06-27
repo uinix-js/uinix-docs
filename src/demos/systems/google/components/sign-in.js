@@ -5,6 +5,7 @@ const SignIn = () => {
   return (
     <Text
       as="a"
+      flex="none"
       href="https://accounts.google.com/signin"
       px="x6"
       py="x2"

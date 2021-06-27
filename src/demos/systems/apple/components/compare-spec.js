@@ -4,7 +4,7 @@ import {Layout} from 'uinix-ui';
 const CompareSpec = ({model, spec}) => {
   const specData = Object.values(model.specs[spec]);
   return (
-    <Layout direction="column" spacing="x6" w="33%">
+    <Layout direction="column" spacing="x10" w="33%">
       {specData.map((d) => {
         let details = [];
         let title = null;

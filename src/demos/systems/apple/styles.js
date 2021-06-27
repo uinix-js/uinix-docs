@@ -2,14 +2,7 @@ import {createStyles} from 'uinix-ui';
 
 import typography from './typography.js';
 
-const rules = {
-  interactive: ({onClick}) => ({
-    cursor: onClick ? 'pointer' : undefined,
-    ':hover': {
-      color: onClick ? 'interactive.hover' : undefined,
-    },
-  }),
-};
+const rules = {};
 
 const global = {
   'a:hover': {
@@ -18,6 +11,7 @@ const global = {
   button: {
     backgroundColor: 'interaction.button',
     borderRadius: 'pill',
+    border: 'none',
     color: 'text.inverse',
     cursor: 'pointer',
     fontSize: 'body',
@@ -46,6 +40,9 @@ const global = {
     paddingLeft: 'x4',
     paddingRight: 'x4',
     paddingTop: 'x3',
+  },
+  'select:hover': {
+    border: 'dark',
   },
   ul: {
     listStyleType: 'none',

@@ -1,13 +1,13 @@
-import consolasTtf from './assets/fonts/consolas.ttf';
-import openSansWoff from './assets/fonts/open-sans-all-400-normal.woff';
+import consolas from './assets/fonts/consolas-regular.ttf';
+import whitney from './assets/fonts/whitney-regular.woff';
 
 const typography = {
   fontFaces: {
-    OpenSans: {
-      src: [openSansWoff],
-    },
     Consolas: {
-      src: [consolasTtf],
+      src: [consolas],
+    },
+    Whitney: {
+      src: [whitney],
     },
   },
   global: {
@@ -24,6 +24,9 @@ const typography = {
       backgroundColor: 'background.secondary',
       fontFamily: 'monospace',
       color: 'header.secondary',
+    },
+    'h1, h2, h3, h4, h5, h6': {
+      margin: 0,
     },
     h1: {
       color: 'header.primary',
