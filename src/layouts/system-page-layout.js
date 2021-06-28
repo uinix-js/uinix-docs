@@ -3,12 +3,7 @@ import {Element, Layout, Text, load, merge} from 'uinix-ui';
 
 import defaultConfig from '../system/config.js';
 import defaultSystem from '../system/index.js';
-import {
-  Button,
-  LoadingPage,
-  SystemKnowledge,
-  Window,
-} from '../system/components/index.js';
+import {Button, SystemKnowledge, Window} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
 
 const views = {
@@ -49,7 +44,7 @@ const SystemPageLayout = ({name}) => {
   }, [name]);
 
   if (!system) {
-    return <LoadingPage />;
+    return null;
   }
 
   const handleSelectView = (view) => () => setSelectedView(view);
