@@ -18,7 +18,7 @@ const Search = () => {
         as="input"
         placeholder="Search"
         value={query}
-        variant="Input.search"
+        variant="input.search"
         onChange={(event) => setQuery(event.target.value)}
       />
       <Icon icon="search" size="icon.m" />

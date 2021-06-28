@@ -1,5 +1,6 @@
 export {default as BrandLink} from './brand-link.js';
 export {default as BrandText} from './brand-text.js';
+export {default as Button} from './button.js';
 export {default as Card} from './card.js';
 export {default as Chips} from './chips.js';
 export {default as Dot} from './dot.js';
@@ -8,4 +9,5 @@ export {default as LiveCode} from './live-code.js';
 export {default as LoadingPage} from './loading-page.js';
 export {default as Markdown} from './markdown.js';
 export {default as ScrollTop} from './scroll-top.js';
+export {default as SystemKnowledge} from './system-knowledge/index.js';
 export {default as Window} from './window.js';

@@ -10,6 +10,7 @@ const typography = {
       fontFamily: 'body',
       fontSize: 'body',
       lineHeight: 'body',
+      '-mozOsxFontSmoothing': 'unset',
     },
     a: {
       color: 'text.blue',

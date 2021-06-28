@@ -3,14 +3,7 @@ import {Text} from 'uinix-ui';
 
 const SignIn = () => {
   return (
-    <Text
-      as="a"
-      flex="none"
-      href="https://accounts.google.com/signin"
-      px="x6"
-      py="x2"
-      variant="buttonLink"
-    >
+    <Text as="a" href="https://accounts.google.com/signin" variant="button">
       Sign In
     </Text>
   );

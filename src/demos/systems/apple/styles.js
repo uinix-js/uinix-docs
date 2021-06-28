@@ -10,8 +10,8 @@ const global = {
   },
   button: {
     backgroundColor: 'interaction.button',
-    borderRadius: 'pill',
     border: 'none',
+    borderRadius: 'pill',
     color: 'text.inverse',
     cursor: 'pointer',
     fontSize: 'body',

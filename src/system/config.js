@@ -42,7 +42,7 @@ const elementShorthandPropsMapping = {
   flex: ['flex'],
 };
 
-const elementStyles = [styles.interactive, styles.truncate];
+const elementStyles = [styles.disabled, styles.interactive, styles.truncate];
 
 const responsiveCssProperties = [
   'display',

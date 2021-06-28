@@ -6,7 +6,7 @@ const Page = () => {
   const description = 'UI Demos built with uinix-js.';
   const links = [
     {
-      description: 'UI systems minimally built with uinix-js',
+      description: 'UI systems minimally built with uinix-js.',
       text: 'Systems',
       to: 'systems',
     },

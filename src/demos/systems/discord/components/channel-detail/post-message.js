@@ -18,7 +18,7 @@ const PostMessage = () => {
         <Element
           as="input"
           placeholder="Message #uinix-ui"
-          variant="Input.channelTextArea"
+          variant="input.channelTextArea"
         />
         <Layout align="center" spacing="m">
           <Icon icon="gift" size="icon.l" onClick={noop} />

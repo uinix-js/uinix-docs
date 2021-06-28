@@ -24,11 +24,11 @@ const Header = () => {
         spacing="m"
         onClick={noop}
       >
-        <Icon icon="user" size="icon.m" variant="Icon.interactive" />
+        <Icon icon="user" size="icon.m" variant="icon.interactive" />
         <Text color="text.primary" fontWeight="bold" variant="m">
           John Doe
         </Text>
-        <Icon icon="arrowDown" size="icon.m" variant="Icon.interactive" />
+        <Icon icon="arrowDown" size="icon.m" variant="icon.interactive" />
       </Layout>
     </Layout>
   );

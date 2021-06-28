@@ -12,9 +12,9 @@ const ExtraControls = () => {
       spacing="m"
       styles={styles.footerSection}
     >
-      <Icon icon="volume" size="icon.m" variant="Icon.interactive" />
+      <Icon icon="volume" size="icon.m" variant="icon.interactive" />
       <Progress max={10} value={4} width="width.volume" />
-      <Icon icon="fullscreen" size="icon.m" variant="Icon.interactive" />
+      <Icon icon="fullscreen" size="icon.m" variant="icon.interactive" />
     </Layout>
   );
 };

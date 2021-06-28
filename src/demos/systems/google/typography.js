@@ -33,12 +33,23 @@ const typography = {
     h6: headingStyle,
   },
   variants: {
-    buttonLink: {
-      borderRadius: 'm',
+    alphabet: {
+      fontFamily: 'google',
+      fontSize: 'xl',
+      fontWeight: 'bold',
+    },
+    button: {
       backgroundColor: 'brand.primary',
+      border: 'none',
+      borderRadius: 'm',
       color: 'white',
+      flex: 'none',
       fontFamily: 'google',
       fontSize: 'body',
+      paddingBottom: 'x2',
+      paddingLeft: 'x6',
+      paddingRight: 'x6',
+      paddingTop: 'x2',
       ':hover': {
         boxShadow: 'buttonLink.hovered',
       },
@@ -46,11 +57,6 @@ const typography = {
     input: {
       fontFamily: 'body',
       fontSize: 'm',
-    },
-    alphabet: {
-      fontFamily: 'google',
-      fontSize: 'xl',
-      fontWeight: 'bold',
     },
     gray: {
       color: 'text.gray1',

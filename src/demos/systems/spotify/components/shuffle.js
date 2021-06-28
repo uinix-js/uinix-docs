@@ -13,7 +13,7 @@ const Shuffle = () => {
       styleProps={{
         isActive: isShuffling,
       }}
-      variant="Icon.interactive"
+      variant="icon.interactive"
       onClick={() => setIsShuffling(!isShuffling)}
     />
   );

@@ -24,7 +24,7 @@ const SongPlaying = ({artist, song}) => {
         styleProps={{
           isActive: isLiked,
         }}
-        variant="Icon.interactive"
+        variant="icon.interactive"
         onClick={() => setIsLiked(!isLiked)}
       />
     </Layout>

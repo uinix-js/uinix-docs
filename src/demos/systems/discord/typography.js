@@ -19,6 +19,7 @@ const typography = {
       fontSize: 'body',
       lineHeight: 'l',
       textRendering: 'optimizeLegibility',
+      '-mozOsxFontSmoothing': 'unset',
     },
     code: {
       backgroundColor: 'background.secondary',

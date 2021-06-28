@@ -44,6 +44,7 @@ const global = {
   },
   button: {
     backgroundColor: 'brand.primary',
+    border: 'none',
     borderRadius: 'pill',
     fontSize: 'l',
     fontWeight: 'bold',
@@ -72,7 +73,7 @@ const global = {
 };
 
 const variants = {
-  Icon: {
+  icon: {
     interactive: ({color, isActive}) => ({
       color: isActive ? 'brand.primary' : color || 'icon.default',
       ':hover': {

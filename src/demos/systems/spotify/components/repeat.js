@@ -16,7 +16,7 @@ const Repeat = () => {
       styleProps={{
         isActive: isRepeating,
       }}
-      variant="Icon.interactive"
+      variant="icon.interactive"
       onClick={() => setRepeatMode((repeatMode + 1) % 3)}
     />
   );

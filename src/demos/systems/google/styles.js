@@ -18,11 +18,7 @@ const global = {
   '*': {
     boxSizing: 'border-box',
   },
-  button: {
-    ...typography.variants.buttonLink,
-    backgroundColor: 'inherit',
-    color: 'text.primary',
-  },
+  button: typography.variants.button,
   hover: {
     ':hover': {
       backgroundColor: 'background.light',

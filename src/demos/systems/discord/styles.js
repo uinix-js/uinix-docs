@@ -35,6 +35,7 @@ const global = {
   },
   button: {
     backgroundColor: 'brand.blurple',
+    border: 'none',
     borderRadius: 's',
     color: 'text.normal',
     fontSize: 'body',
@@ -71,7 +72,7 @@ const global = {
 };
 
 const variants = {
-  Button: {
+  button: {
     primary: global.button,
     secondary: {
       ...global.button,
@@ -83,7 +84,7 @@ const variants = {
       },
     },
   },
-  Input: {
+  input: {
     search: {
       backgroundColor: 'background.tertiary',
       border: 'none',

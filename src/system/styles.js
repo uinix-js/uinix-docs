@@ -1,6 +1,13 @@
 const breakpoints = ['480px', '768px'];
 
 const rules = {
+  disabled: ({disabled}) =>
+    disabled
+      ? {
+          opacity: 'disabled',
+          pointerEvents: 'none',
+        }
+      : null,
   interactive: ({onClick}) => ({
     cursor: onClick ? 'pointer' : undefined,
     transition: 'fade',
@@ -42,6 +49,18 @@ const global = {
     margin: 0,
     padding: 0,
   },
+  button: {
+    backgroundColor: 'transparent',
+    border: 'bordered',
+    borderRadius: 'm',
+    color: 'text.primary',
+    fontSize: 's',
+    fontWeight: 'bold',
+    paddingBottom: 's',
+    paddingLeft: 'm',
+    paddingRight: 'm',
+    paddingTop: 's',
+  },
   hr: {
     border: 'bordered',
     width: '100%',
@@ -56,6 +75,7 @@ const typography = {
       fontFamily: 'body',
       fontSize: 'm',
       lineHeight: 'body',
+      '-mozOsxFontSmoothing': 'grayscale',
     },
     a: {
       color: 'text.link',
