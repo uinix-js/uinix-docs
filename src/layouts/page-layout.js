@@ -5,12 +5,12 @@ import {LoadingPage, ScrollTop} from '../system/components/index.js';
 import Breadcrumbs from './breadcrumbs.js';
 import Footer from './footer.js';
 import Header from './header.js';
-import {useIsReady} from './use-is-ready.js';
+import {useLoadSystem} from './use-load-system.js';
 
 const PageLayout = ({children, isFullWidth}) => {
-  const isReady = useIsReady();
+  const isLoaded = useLoadSystem();
 
-  if (!isReady) {
+  if (!isLoaded) {
     return <LoadingPage />;
   }
 

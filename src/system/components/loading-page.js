@@ -3,8 +3,8 @@ import {Icon, Layout} from 'uinix-ui';
 
 const LoadingPage = () => {
   return (
-    <Layout align="center" justify="center" variant="layout.container">
-      <Icon color="icon.light" icon="spinner" size="icon.m" />
+    <Layout align="center" h="100vh" justify="center">
+      <Icon color="icon.light" icon="spinner" size="icon.l" />
     </Layout>
   );
 };

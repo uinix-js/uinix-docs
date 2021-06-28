@@ -15,10 +15,10 @@ const ScrollTop = () => {
       color="icon.default"
       icon="up"
       position="fixed"
-      right="m"
-      size="icon.l"
+      right="xs"
+      size="icon.m"
       title="Back to top"
-      top="m"
+      top="s"
       onClick={scrollTop}
     />
   );

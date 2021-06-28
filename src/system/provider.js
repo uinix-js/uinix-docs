@@ -1,12 +1,7 @@
 import {MDXProvider} from '@mdx-js/react';
-import React, {createElement as h} from 'react';
-import {load} from 'uinix-ui';
+import React from 'react';
 
 import {LiveCode} from './components/index.js';
-import config from './config.js';
-import system from './index.js';
-
-load(h, system, config);
 
 const Provider = ({children}) => {
   return <MDXProvider components={components}>{children}</MDXProvider>;

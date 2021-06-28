@@ -1,22 +1,15 @@
 import React, {useState} from 'react';
-import {Layout, useStyles} from 'uinix-ui';
+import {Layout} from 'uinix-ui';
 
 import Header from './header.js';
 import MembersSidebar from './members-sidebar.js';
 import Messages from './messages.js';
 
 const ChannelDetail = () => {
-  const styles = useStyles();
   const [shouldShowMembers, setShouldShowMembers] = useState(true);
 
   return (
-    <Layout
-      bg="background.primary"
-      direction="column"
-      flex="auto"
-      styleProps={{scrollbarWidth: 'none'}}
-      styles={styles.scrollable}
-    >
+    <Layout bg="background.primary" direction="column" flex="auto">
       <Header
         shouldShowMembers={shouldShowMembers}
         onToggleMembers={() => setShouldShowMembers(!shouldShowMembers)}
