@@ -23,16 +23,18 @@ export const useReadyState = () => {
       }
     };
 
-    const updateReadyState = () => {
-      if (typeof document !== 'undefined') {
-        if (document.querySelector('style[data-fela-type="STATIC"]')) {
-          cachedReadyState = ReadyStateType.Ready;
-          cleanup();
-        } else {
-          cachedReadyState = ReadyStateType.Pending;
-        }
+    if (cachedReadyState !== ReadyStateType.Ready) {
+      setReadyState(ReadyStateType.Pending);
+    }
 
-        setReadyState(cachedReadyState);
+    const updateReadyState = () => {
+      if (
+        typeof document !== 'undefined' &&
+        document.querySelector('style[data-fela-type="STATIC"]')
+      ) {
+        cachedReadyState = ReadyStateType.Ready;
+        setReadyState(ReadyStateType.Ready);
+        cleanup();
       }
     };
 
