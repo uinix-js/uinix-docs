@@ -31,9 +31,12 @@ const classes = {
     opacity: 'visible',
   },
   '.anchor': {
+    alignItems: 'center',
+    display: 'flex',
+    height: '100%',
+    left: '-offset.anchor',
     opacity: 'invisible',
     position: 'absolute',
-    left: '-offsets.anchor',
   },
   '.anchor:hover svg': {
     fill: 'text.link',
@@ -147,8 +150,8 @@ const typography = {
       border: 'bordered',
       borderRadius: 'm',
       color: 'text.secondary',
-      paddingLeft: 'xs',
-      paddingRight: 'xs',
+      paddingLeft: 'chip',
+      paddingRight: 'chip',
       fontSize: 'xs',
     },
     description: {
@@ -167,7 +170,7 @@ const variants = {
   layout: {
     container: {
       margin: '0 auto',
-      width: ['100%', '100%', 'widths.container'],
+      width: ['100%', '100%', 'width.container'],
     },
   },
   nav: {

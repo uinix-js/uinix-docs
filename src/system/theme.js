@@ -86,19 +86,21 @@ const sizes = {
     m: '24px',
     l: '32px',
   },
-  widths: {
+  width: {
     container: '768px',
+    spec: '100px',
   },
 };
 
 const spacings = {
+  chip: '6px',
   xs: '0.25rem',
   s: '0.5rem',
   m: '1rem',
   l: '2rem',
   xl: '4rem',
-  offsets: {
-    anchor: 20,
+  offset: {
+    anchor: '1rem',
   },
 };
 

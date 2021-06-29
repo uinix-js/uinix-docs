@@ -6,7 +6,7 @@ import defaultSystem from '../system/index.js';
 import {Button, SystemKnowledge, Window} from '../system/components/index.js';
 import PageLayout from './page-layout.js';
 
-const views = {
+const ViewType = {
   Demo: 'Demo',
   Snapshot: 'Snapshot',
   SystemKnowledge: 'System Knowledge',
@@ -23,7 +23,7 @@ const views = {
  **/
 const SystemPageLayout = ({name}) => {
   const [system, setSystem] = useState();
-  const [selectedView, setSelectedView] = useState(views.Demo);
+  const [selectedView, setSelectedView] = useState(ViewType.SystemKnowledge);
 
   useEffect(() => {
     const loadSystem = async () => {
@@ -53,30 +53,30 @@ const SystemPageLayout = ({name}) => {
 
   let Content;
   switch (selectedView) {
-    case views.Demo:
+    case ViewType.Demo:
       Content = <Demo />;
       break;
-    case views.Snapshot:
+    case ViewType.Snapshot:
       Content = (
         <Layout align="center" direction="column" p="m" spacing="m">
           <Text as="description">
             {snapshot ? (
               <>
-                The following snapshot image was{' '}
+                This demo{' '}
                 <Element as="a" href={url}>
-                  referenced
+                  references
                 </Element>{' '}
-                on {referenceDate}.
+                a snapshot dated on {referenceDate}.
               </>
             ) : (
-              'This system does not have a snapshot image.'
+              'This demo does not have a snapshot reference.'
             )}
           </Text>
           {snapshot && <Element as="img" src={snapshot} w="100%" />}
         </Layout>
       );
       break;
-    case views.SystemKnowledge:
+    case ViewType.SystemKnowledge:
       Content = <SystemKnowledge system={system} />;
       break;
     default:
@@ -84,10 +84,10 @@ const SystemPageLayout = ({name}) => {
   }
 
   return (
-    <PageLayout isFullWidth>
+    <PageLayout isFullWidth={selectedView!==ViewType.SystemKnowledge}>
       <Layout direction="column" mt="l" spacing="l">
         <Layout align="center" spacing="m">
-          {Object.values(views).map((view) => (
+          {Object.values(ViewType).map((view) => (
             <Button
               key={view}
               disabled={selectedView === view}
