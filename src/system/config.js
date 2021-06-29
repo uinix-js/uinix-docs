@@ -52,8 +52,7 @@ const responsiveCssProperties = [
   'marginLeft',
   'marginRight',
   'marginTop',
-  'padding',
-  'width',
+  'padding'
 ];
 
 const config = {

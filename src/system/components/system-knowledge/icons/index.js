@@ -4,7 +4,7 @@ import {Icon, Layout, Text} from 'uinix-ui';
 const Icons = ({icons}) => {
   return (
     <Layout wrap spacing="l" wrapSpacing="l">
-      {Object.entries(icons).map(([icon, svg]) => (
+      {Object.keys(icons).map((icon) => (
         <Layout
           key={icon}
           align="center"

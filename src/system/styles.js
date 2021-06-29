@@ -34,9 +34,13 @@ const classes = {
     alignItems: 'center',
     display: 'flex',
     height: '100%',
-    left: '-offset.anchor',
+    left: '-anchor',
     opacity: 'invisible',
     position: 'absolute',
+  },
+  '.anchor svg': {
+    height: 'anchor',
+    width: 'anchor',
   },
   '.anchor:hover svg': {
     fill: 'text.link',
@@ -170,7 +174,7 @@ const variants = {
   layout: {
     container: {
       margin: '0 auto',
-      width: ['100%', '100%', 'width.container'],
+      maxWidth: 'width.container',
     },
   },
   nav: {

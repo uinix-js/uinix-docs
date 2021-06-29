@@ -84,7 +84,7 @@ const SystemPageLayout = ({name}) => {
   }
 
   return (
-    <PageLayout isFullWidth={selectedView!==ViewType.SystemKnowledge}>
+    <PageLayout isFullWidth>
       <Layout direction="column" mt="l" spacing="l">
         <Layout align="center" spacing="m">
           {Object.values(ViewType).map((view) => (

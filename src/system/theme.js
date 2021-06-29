@@ -81,6 +81,7 @@ const shadows = {
 };
 
 const sizes = {
+  anchor: '12px',
   icon: {
     s: '16px',
     m: '24px',
@@ -93,15 +94,13 @@ const sizes = {
 };
 
 const spacings = {
+  anchor: '12px',
   chip: '6px',
-  xs: '0.25rem',
-  s: '0.5rem',
-  m: '1rem',
-  l: '2rem',
-  xl: '4rem',
-  offset: {
-    anchor: '1rem',
-  },
+  xs: '4px',
+  s: '8px',
+  m: '16px',
+  l: '32px',
+  xl: '64px',
 };
 
 const transitions = {
