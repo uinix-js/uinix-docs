@@ -18,7 +18,7 @@ const SystemKnowledge = ({system}) => {
         <Theme theme={theme} />
       </Section>
       <Section as="h3" title="Styles">
-        <Styles theme={styles} />
+        <Styles styles={styles} />
       </Section>
       <Section as="h3" title="Specs">
         <Markdown

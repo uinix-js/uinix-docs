@@ -10,7 +10,7 @@ const Icons = ({icons}) => {
           align="center"
           direction="column"
           spacing="s"
-          w="width.spec"
+          w="spec.icon"
         >
           <Icon icon={icon} size="icon.l" />
           <Text variant="chip">{icon}</Text>

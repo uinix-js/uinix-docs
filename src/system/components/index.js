@@ -1,3 +1,4 @@
+export {default as Bar} from './bar.js';
 export {default as BrandLink} from './brand-link.js';
 export {default as BrandText} from './brand-text.js';
 export {default as Button} from './button.js';

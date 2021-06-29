@@ -87,9 +87,13 @@ const sizes = {
     m: '24px',
     l: '32px',
   },
+  spec: {
+    icon: '100px',
+    name: '200px',
+    value: '200px',
+  },
   width: {
     container: '768px',
-    spec: '100px',
   },
 };
 

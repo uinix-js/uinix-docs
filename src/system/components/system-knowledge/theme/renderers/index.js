@@ -1,3 +1,1 @@
-const renderers = {};
-
-export default renderers;
+export {default as sizes} from './sizes.js';
