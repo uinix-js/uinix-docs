@@ -2,6 +2,14 @@ import palx from 'palx';
 
 const palette = palx('#0366d6');
 
+const animations = {
+  infinite: {
+    fast: '1s ease-in-out infinite',
+    default: '2s ease-in-out infinite',
+    slow: '5s ease-in-out infinite',
+  },
+};
+
 const borderColors = {
   default: 'rgba(0, 0, 0, 0.15)',
 };
@@ -68,6 +76,17 @@ const fontSizes = {
   xxl: '2rem',
 };
 
+const keyframes = {
+  flicker: {
+    '0%': {opacity: '0'},
+    '50%': {opacity: '1'},
+    '100%': {opacity: '0'},
+  },
+  spin: {
+    '100%': {transform: 'rotate(360deg)'},
+  },
+};
+
 const letterSpacings = {
   spaced: '0.3rem',
 };
@@ -125,11 +144,18 @@ const transitions = {
   fade: 'opacity 0.2s ease-in-out',
 };
 
+const transforms = {
+  rotate90: 'rotate(90deg)',
+  translateXHalf: 'translateX(50%)',
+  translateYHalf: 'translateY(50%)',
+};
+
 const zIndices = {
   forward: '1',
 };
 
 const theme = {
+  animations,
   borders,
   borderColors,
   borderStyles,
@@ -138,6 +164,7 @@ const theme = {
   fontFamilies,
   fontSizes,
   fontWeights,
+  keyframes,
   letterSpacings,
   lineHeights,
   opacities,
@@ -146,6 +173,7 @@ const theme = {
   sizes,
   spacings,
   transitions,
+  transforms,
   zIndices,
 };
 

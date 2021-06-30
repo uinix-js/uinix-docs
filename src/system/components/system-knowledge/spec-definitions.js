@@ -1,8 +1,8 @@
 import React from 'react';
-import {isPlainObject} from 'uinix-fp';
 import {Layout} from 'uinix-ui';
 
 import Spec from './spec.js';
+import {testIsNestedValue} from './test-is-nested-value.js';
 
 const SpecDefinitions = ({
   definitions,
@@ -14,7 +14,7 @@ const SpecDefinitions = ({
     <Layout direction="column" spacing="xs">
       {Object.entries(definitions).map(([key, value]) => {
         const childPropertyPath = level === 0 ? key : `${propertyPath}.${key}`;
-        if (isPlainObject(value)) {
+        if (testIsNestedValue(value)) {
           return (
             <details key={key} open>
               <summary>{childPropertyPath}</summary>
