@@ -10,7 +10,7 @@ import Theme from './theme/index.js';
 const SystemKnowledge = ({system}) => {
   const {icons, styles, theme} = system;
   return (
-    <Layout direction="column" p="m" spacing="xl">
+    <Layout direction="column" spacing="xl">
       <Section as="h3" title="Icons">
         <Icons icons={icons} />
       </Section>
@@ -20,7 +20,7 @@ const SystemKnowledge = ({system}) => {
       <Section as="h3" title="Styles">
         <Styles styles={styles} />
       </Section>
-      <Section as="h3" title="Specs">
+      <Section as="h3" title="System">
         <Markdown
           content={
             '```json\n' +

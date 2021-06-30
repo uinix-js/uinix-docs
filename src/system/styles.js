@@ -140,6 +140,14 @@ const typography = {
       overflow: 'auto',
       padding: 'm',
     },
+    summary: {
+      cursor: 'pointer',
+      fontSize: 's',
+      fontWeight: 'bold',
+    },
+    'summary:hover': {
+      opacity: 'interactive',
+    },
   },
   variants: {
     brand: {
@@ -166,6 +174,11 @@ const typography = {
       all: 'unset',
       fontSize: 'm',
       fontWeight: 'bold',
+    },
+    spec: {
+      color: 'text.secondary',
+      fontFamily: 'monospace',
+      fontSize: 'xs',
     },
   },
 };

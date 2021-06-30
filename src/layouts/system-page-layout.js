@@ -77,7 +77,21 @@ const SystemPageLayout = ({name}) => {
       );
       break;
     case ViewType.SystemKnowledge:
-      Content = <SystemKnowledge system={system} />;
+      Content = (
+        <Layout direction="column" p="m" spacing="m">
+          <p>
+            This section visualizes the system knowledge and its specs (icons,
+            theme, styles).
+          </p>
+          <p>
+            System variables such as e.g. icon keys, theme property paths, and
+            style variants, are rendered as tokens on the far left. The relating
+            values are rendered and displayed on the right. A complete JSON view
+            of the system is also provided below for completeness.
+          </p>
+          <SystemKnowledge system={system} />
+        </Layout>
+      );
       break;
     default:
       break;

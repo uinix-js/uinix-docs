@@ -1,16 +1,14 @@
 import React from 'react';
 import {Element, Layout, Text} from 'uinix-ui';
 
-const Spec = ({children, name, value}) => {
+const Spec = ({name, value, render}) => {
   return (
-    <Layout align="center" spacing="m">
+    <Layout align="center" spacing="l">
       <Element flex="none" minW="spec.name">
         <Text variant="chip">{name}</Text>
       </Element>
-      {children}
-      <Text variant="description" minW="spec.value">
-        {value}
-      </Text>
+      <Element flex="none">{render(value)}</Element>
+      <Text variant="spec">{value}</Text>
     </Layout>
   );
 };

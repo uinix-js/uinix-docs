@@ -3,7 +3,11 @@ import palx from 'palx';
 const palette = palx('#0366d6');
 
 const borderColors = {
-  default: palette.gray[2],
+  default: 'rgba(0, 0, 0, 0.15)',
+};
+
+const borderStyles = {
+  solid: 'solid',
 };
 
 const borderWidths = {
@@ -50,6 +54,11 @@ const fontFamilies = {
   monospace: 'menlo, consolas, monospace',
 };
 
+const fontWeights = {
+  normal: 'normal',
+  bold: 'bold',
+};
+
 const fontSizes = {
   xs: '0.75rem',
   s: '0.85rem',
@@ -57,6 +66,10 @@ const fontSizes = {
   l: '1.25rem',
   xl: '1.5rem',
   xxl: '2rem',
+};
+
+const letterSpacings = {
+  spaced: '0.3rem',
 };
 
 const lineHeights = {
@@ -89,8 +102,7 @@ const sizes = {
   },
   spec: {
     icon: '100px',
-    name: '200px',
-    value: '200px',
+    name: '160px',
   },
   width: {
     container: '768px',
@@ -100,11 +112,13 @@ const sizes = {
 const spacings = {
   anchor: '12px',
   chip: '6px',
+  xxs: '2px',
   xs: '4px',
   s: '8px',
   m: '16px',
   l: '32px',
   xl: '64px',
+  xxl: '128px',
 };
 
 const transitions = {
@@ -118,10 +132,13 @@ const zIndices = {
 const theme = {
   borders,
   borderColors,
+  borderStyles,
   borderWidths,
   colors,
   fontFamilies,
   fontSizes,
+  fontWeights,
+  letterSpacings,
   lineHeights,
   opacities,
   radii,

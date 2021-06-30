@@ -1,24 +1,13 @@
 import React from 'react';
 
-import Bar from '../../bar.js';
-import Spec from '../spec.js';
-import SpecList from '../spec-list.js';
-
 const Breakpoints = ({breakpoints}) => {
   return (
-    <SpecList name="breakpoints">
+    <div>
+      <h4>Breakpoints</h4>
       {breakpoints.map((breakpoint) => {
-        return (
-          <Spec
-            key={breakpoint}
-            name={breakpoint}
-            value={`@media screen and (min-width: ${breakpoint})`}
-          >
-            <Bar w={breakpoint} />
-          </Spec>
-        );
+        return breakpoint;
       })}
-    </SpecList>
+    </div>
   );
 };
 

@@ -5,9 +5,9 @@ import Heading from './heading.js';
 
 const Section = ({as, children, title}) => {
   return (
-    <Layout as="section" direction="column" spacing="m">
+    <Layout as="section" direction="column" spacing="s">
       <Heading as={as} text={title} />
-      {children}
+      <div>{children}</div>
     </Layout>
   );
 };

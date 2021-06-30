@@ -49,7 +49,7 @@ const Demo = () => {
   };
 
   return (
-    <Layout direction="column" p="m" w="width.container">
+    <Layout direction="column" p="m" spacing="l">
       <p>
         This entire site is built with the <UinixUi /> UI system. A UI system
         that builds a system to preview other UI systems. How fun! 🤗
@@ -60,7 +60,7 @@ const Demo = () => {
         controls to preview an example system or upload a valid{' '}
         <code>system.json</code> file.
       </p>
-      <Layout align="center" spacing="l">
+      <Layout align="center" spacing="m">
         <select value={system} onChange={handleSelectSystem}>
           <option value={null}>Select a system</option>
           {Object.keys(systems).map((key) => (
@@ -69,6 +69,7 @@ const Demo = () => {
             </option>
           ))}
         </select>
+        <div>or</div>
         <input type="file" onChange={handleUploadSystem} />
       </Layout>
       {system && <SystemKnowledge system={system} />}

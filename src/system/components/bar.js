@@ -7,7 +7,7 @@ const Bar = ({w}) => {
       bg="background.tones.faded"
       b="bordered"
       flex="none"
-      py="s"
+      py="xs"
       w={w}
     />
   );
