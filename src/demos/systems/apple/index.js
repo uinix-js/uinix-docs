@@ -1,23 +1,13 @@
-import {createSystem} from 'uinix-ui';
-
 import snapshot from './assets/images/snapshot.png';
 import Demo from './demo.js';
-import icons from './icons.js';
-import styles from './styles.js';
-import theme from './theme.js';
+import system from './system.js';
 
-const system = createSystem({
-  icons,
-  styles,
-  theme,
-});
-
-system.meta = {
-  name: 'Apple',
+const demo = {
   Demo,
   referenceDate: '2021-04-26',
   snapshot,
+  system,
   url: 'https://www.apple.com/mac/compare/',
 };
 
-export default system;
+export default demo;

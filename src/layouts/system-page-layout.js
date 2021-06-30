@@ -22,34 +22,34 @@ const ViewType = {
  * system when navigating out of the page.
  **/
 const SystemPageLayout = ({name}) => {
-  const [system, setSystem] = useState();
-  const [selectedView, setSelectedView] = useState(ViewType.SystemKnowledge);
+  const [page, setPage] = useState();
+  const [selectedView, setSelectedView] = useState(ViewType.Demo);
 
   useEffect(() => {
-    const loadSystem = async () => {
-      const {default: loadedSystem} = await import(
+    const loadPage = async () => {
+      const {default: loadedPage} = await import(
         `../demos/systems/${name}/index.js`
       );
 
-      const mergedSystem = merge(defaultSystem)(loadedSystem);
+      const mergedSystem = merge(defaultSystem)(loadedPage.system);
       mergedSystem.styles.breakpoints = defaultSystem.styles.breakpoints;
 
       load(h, mergedSystem, defaultConfig);
-      setSystem(loadedSystem);
+      setPage(loadedPage);
     };
 
-    loadSystem();
+    loadPage();
 
     return () => window.location.reload();
   }, [name]);
 
-  if (!system) {
+  if (!page) {
     return null;
   }
 
   const handleSelectView = (view) => () => setSelectedView(view);
 
-  const {Demo, referenceDate, snapshot, url} = system.meta;
+  const {Demo, referenceDate, snapshot, system, url} = page;
 
   let Content;
   switch (selectedView) {
@@ -59,7 +59,7 @@ const SystemPageLayout = ({name}) => {
     case ViewType.Snapshot:
       Content = (
         <Layout align="center" direction="column" p="m" spacing="m">
-          <Text as="description">
+          <Text variant="description">
             {snapshot ? (
               <>
                 This demo{' '}

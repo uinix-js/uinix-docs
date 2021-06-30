@@ -1,20 +1,10 @@
-import {createSystem} from 'uinix-ui';
-
 import Demo from './demo.js';
-import icons from './icons.js';
-import styles from './styles.js';
-import theme from './theme.js';
+import system from './system.js';
 
-const system = createSystem({
-  icons,
-  styles,
-  theme,
-});
-
-system.meta = {
-  name: 'uinix',
+const demo = {
   Demo,
+  system,
   url: 'https://github.com/uinix-js/uinix-ui',
 };
 
-export default system;
+export default demo;

@@ -2,13 +2,13 @@ import React, {createElement as h, useState} from 'react';
 import {Layout, Text, load} from 'uinix-ui';
 
 import {BrandLink, SystemKnowledge} from '../../../system/components/index.js';
-import defaultSystem from '../../../system/index.js';
-import defaultConfig from '../../../system/config.js';
-import apple from '../apple/index.js';
-import discord from '../discord/index.js';
-import github from '../github/index.js';
-import google from '../google/index.js';
-import spotify from '../spotify/index.js';
+import config from '../../../system/config.js';
+import apple from '../apple/system.js';
+import discord from '../discord/system.js';
+import github from '../github/system.js';
+import google from '../google/system.js';
+import spotify from '../spotify/system.js';
+import uinix from '../uinix/system.js';
 
 const systems = {
   apple,
@@ -16,12 +16,13 @@ const systems = {
   github,
   google,
   spotify,
+  uinix,
 };
 
 const UinixUi = () => <BrandLink to="/packages/uinix-ui" text="uinix-ui" />;
 
 const Demo = () => {
-  const [system, setSystem] = useState(null);
+  const [system, setSystem] = useState('');
   const [error, setError] = useState(null);
 
   const handleSelectSystem = (event) => {
@@ -29,17 +30,17 @@ const Demo = () => {
 
     // Merge and load just the icons
     const mergedSystem = {
-      ...defaultSystem,
+      ...uinix,
       icons: selectedSystem.icons,
     };
-    load(h, mergedSystem, defaultConfig);
+    load(h, mergedSystem, config);
 
     setSystem(selectedSystem);
   };
 
   const handleUploadSystem = async (event) => {
     setError(null);
-    setSystem(null);
+    setSystem('');
     try {
       const text = await event.target.files[0].text();
       setSystem(JSON.parse(text));
@@ -62,10 +63,10 @@ const Demo = () => {
       </p>
       <Layout align="center" spacing="m">
         <select value={system} onChange={handleSelectSystem}>
-          <option value={null}>Select a system</option>
+          <option value="">Select a system</option>
           {Object.keys(systems).map((key) => (
             <option key={key} value={key}>
-              {systems[key].meta.name}
+              {key}
             </option>
           ))}
         </select>

@@ -28,8 +28,6 @@ Build the site with `npm run build` and serve the `public/` folder.
 Please feel free to submit any [issues] or [pull requests][pull-requests].
 
 ## todos
-- [ ] Continue to build out `SystemKnowledge`
-- [ ] Better decouple `systems/*/index.js` (`Demos`, `meta`), so importing/loading system has less import baggage.
 - [ ] Build `Navigate` component (position sticky to the top, allows navigating breadcrumbs, anchor links, scroll to top.)
 - [ ] Update homepage.
 - [ ] Update `uinix-ui` guides.
