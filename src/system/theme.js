@@ -68,7 +68,7 @@ const fontWeights = {
 };
 
 const fontSizes = {
-  xs: '0.75rem',
+  xs: '0.70rem',
   s: '0.85rem',
   m: '1rem',
   l: '1.25rem',
@@ -98,6 +98,7 @@ const lineHeights = {
 const opacities = {
   invisible: '0',
   disabled: '0.3',
+  defocused: '0.5',
   interactive: '0.8',
   visible: '1',
 };
@@ -126,6 +127,7 @@ const sizes = {
   },
   width: {
     container: '768px',
+    toc: '300px',
   },
 };
 
@@ -147,13 +149,12 @@ const transitions = {
 
 const transforms = {
   rotate90: 'rotate(90deg)',
-  translateXHalf: 'translateX(50%)',
-  translateYHalf: 'translateY(50%)',
+  translateXHalf: 'translateX(-50%)',
+  translateYHalf: 'translateY(-50%)',
 };
 
 const zIndices = {
   forward: '1',
-  header: '2',
 };
 
 const theme = {

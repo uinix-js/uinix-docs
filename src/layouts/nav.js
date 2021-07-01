@@ -7,14 +7,7 @@ import {coerceLinks, getRepoLink} from '../utils/index.js';
 const Nav = () => {
   return (
     <nav>
-      <Layout
-        as="ol"
-        align="center"
-        flex="auto"
-        justify="space-between"
-        spacing="m"
-        variant="nav.list"
-      >
+      <Layout as="ol" align="center" spacing="m" variant="nav.list">
         {coerceLinks(['Packages', 'Demos', 'Learn'], {
           hasLeadingSlash: true,
         }).map(({text, to}) => (

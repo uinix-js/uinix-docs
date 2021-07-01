@@ -53,7 +53,9 @@ const SystemPageLayout = ({name}) => {
     return null;
   }
 
-  const handleSelectView = (view) => () => setSelectedView(view);
+  const handleSelectView = (view) => () => {
+    setSelectedView(view);
+  };
 
   const {Demo, referenceDate, snapshot, system, url} = page;
 

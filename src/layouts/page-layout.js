@@ -1,17 +1,18 @@
-import {navigate} from 'gatsby';
 import React, {useEffect, useState} from 'react';
 import {Layout} from 'uinix-ui';
 
+import {reload} from '../utils/index.js';
 import Breadcrumbs from './breadcrumbs.js';
 import Footer from './footer.js';
 import Header from './header.js';
+import TocSelect from './toc-select.js';
 
 const PageLayout = ({children, isFullWidth}) => {
   const [isReady, setIsReady] = useState(false);
 
   // Hack around gatsby/fela FOUC
   useEffect(() => {
-    navigate(window.location.pathname);
+    reload();
     setIsReady(true);
   }, []);
 
@@ -20,19 +21,22 @@ const PageLayout = ({children, isFullWidth}) => {
   }
 
   return (
-    <Layout
-      direction="column"
-      h="100vh"
-      spacing="m"
-      variant={isFullWidth ? 'layout.fullWidth' : 'layout.container'}
-    >
-      <Header isFullWidth={isFullWidth} />
-      <Layout as="main" flex="auto" direction="column" pt="xxl">
+    <>
+      <Layout
+        direction="column"
+        h="100vh"
+        spacing="l"
+        variant={isFullWidth ? 'layout.fullWidth' : 'layout.container'}
+      >
+        <Header />
         <Breadcrumbs />
-        {children}
+        <Layout as="main" flex="auto" direction="column">
+          {children}
+        </Layout>
+        <Footer />
       </Layout>
-      <Footer />
-    </Layout>
+      <TocSelect />
+    </>
   );
 };
 

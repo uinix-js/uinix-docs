@@ -28,7 +28,6 @@ Build the site with `npm run build` and serve the `public/` folder.
 Please feel free to submit any [issues] or [pull requests][pull-requests].
 
 ## todos
-- [ ] Build `Navigate` component (position sticky to the top, allows navigating breadcrumbs, anchor links, scroll to top.)
 - [ ] Update homepage.
 - [ ] Update `uinix-ui` guides.
 
