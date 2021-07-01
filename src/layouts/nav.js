@@ -17,13 +17,13 @@ const Nav = () => {
         {coerceLinks(['Packages', 'Demos', 'Learn'], {
           hasLeadingSlash: true,
         }).map(({text, to}) => (
-          <Element key={to} as="li" variant="nav.list.item">
+          <Element key={to} as="li" variant="nav.item">
             <Link to={to}>{text}</Link>
           </Element>
         ))}
       </Layout>
       <Layout as="ol" spacing="m" variant="nav.list">
-        <Element as="li" variant="nav.list.item">
+        <Element as="li" variant="nav.item">
           <a href={getRepoLink()}>
             <Icon icon="github" size="icon.m" title="Github" />
           </a>

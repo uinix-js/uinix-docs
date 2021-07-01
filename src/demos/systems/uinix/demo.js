@@ -1,5 +1,5 @@
 import React, {createElement as h, useState} from 'react';
-import {Layout, Text, load} from 'uinix-ui';
+import {Layout, Text, load, merge} from 'uinix-ui';
 
 import {BrandLink, SystemKnowledge} from '../../../system/components/index.js';
 import config from '../../../system/config.js';
@@ -28,10 +28,10 @@ const Demo = () => {
   const handleSelectSystem = (event) => {
     const selectedSystem = systems[event.target.value];
 
-    // Merge and load just the icons
+    // Merge only the icons (retain the current system for demo styling needs)
     const mergedSystem = {
       ...uinix,
-      icons: selectedSystem.icons,
+      icons: merge(uinix.icons)(selectedSystem.icons),
     };
     load(h, mergedSystem, config);
 

@@ -105,6 +105,6 @@ export const memberGroups = [
 export const messages = Array.from({length: 100}).map((_, i) => ({
   id: `m${i}`,
   user: users[i % 5],
-  text: 'The quick brown fox jumps over the lazy dog.',
+  text: 'The quick brown fox jumps over the lazy dog',
   at: new Date(Date.now() - i * 1_000_000).toLocaleTimeString(),
 }));

@@ -7,6 +7,8 @@ export {default as Card} from './card.js';
 export {default as Chips} from './chips.js';
 export {default as Dot} from './dot.js';
 export {default as Heading} from './heading.js';
+export {default as Js} from './js.js';
+export {default as Json} from './json.js';
 export {default as Links} from './links.js';
 export {default as LiveCode} from './live-code.js';
 export {default as LoadingPage} from './loading-page.js';

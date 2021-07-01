@@ -1,7 +1,7 @@
 import React from 'react';
 import {Layout} from 'uinix-ui';
 
-import Markdown from '../markdown.js';
+import Json from '../json.js';
 import Section from '../section.js';
 import Icons from './icons/index.js';
 import Styles from './styles/index.js';
@@ -21,13 +21,7 @@ const SystemKnowledge = ({system}) => {
         <Styles styles={styles} />
       </Section>
       <Section as="h3" title="System">
-        <Markdown
-          content={
-            '```json\n' +
-            JSON.stringify({icons, theme, styles}, null, 2) +
-            '\n```'
-          }
-        />
+        <Json value={{icons, styles, theme}} />
       </Section>
     </Layout>
   );

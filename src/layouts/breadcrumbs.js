@@ -34,7 +34,7 @@ const Breadcrumbs = () => {
             const crumb = <BrandText text={text} />;
 
             return (
-              <Element key={to} as="li" variant="nav.list.item">
+              <Element key={to} as="li" variant="nav.item">
                 <Text color={color} fontWeight={fontWeight}>
                   {isLastCrumb ? crumb : <Link to={to}>{crumb}</Link>}
                 </Text>

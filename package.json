@@ -23,6 +23,7 @@
     "gatsby-remark-table-of-contents": "^1.0.0",
     "gatsby-source-filesystem": "^3.8.0",
     "github-markdown-css": "^4.0.0",
+    "html-tags": "^3.1.0",
     "palx": "^1.0.3",
     "prism-react-renderer": "^1.2.1",
     "prismjs": "^1.23.0",

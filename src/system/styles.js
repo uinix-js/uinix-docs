@@ -194,11 +194,11 @@ const variants = {
     list: {
       margin: 0,
       padding: 0,
-      item: {
-        display: 'inline',
-        fontSize: 'm',
-        listStyleType: 'none',
-      },
+    },
+    item: {
+      display: 'inline',
+      fontSize: 'm',
+      listStyleType: 'none',
     },
   },
 };

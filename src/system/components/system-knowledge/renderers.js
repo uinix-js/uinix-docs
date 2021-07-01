@@ -1,9 +1,12 @@
+import htmlTags from 'html-tags';
+import voidHtmlTags from 'html-tags/void.js';
 import React from 'react';
 import {Element, Text} from 'uinix-ui';
 
 import Bar from '../bar.js';
 import Box from '../box.js';
 import Dot from '../dot.js';
+import Json from '../json.js';
 
 export const bar = () => (value) => {
   return <Bar w={value} />;
@@ -18,6 +21,34 @@ export const dot = (key, color) => (value) => {
     <Element styles={{[key]: value}}>
       <Dot isBordered color={color || value} size="icon.m" />
     </Element>
+  );
+};
+
+export const json = () => (value) => {
+  return <Json value={value} />;
+};
+
+export const styled = (enableAs) => (value, name) => {
+  let as;
+  let children;
+  if (enableAs) {
+    if (htmlTags.includes(name)) {
+      as = name;
+    }
+
+    if (!voidHtmlTags.includes(name)) {
+      children = name;
+    }
+  } else {
+    children = name;
+  }
+
+  return (
+    <Box>
+      <Element as={as} styles={value}>
+        {children}
+      </Element>
+    </Box>
   );
 };
 

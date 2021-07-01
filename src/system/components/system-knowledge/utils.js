@@ -1,5 +1,22 @@
 import {isPlainObject} from 'uinix-fp';
 
+const RESERVED_REGEXPS = [
+  /^\d*?%$/, //
+  /^from$/,
+  /^to$/,
+  /^:/,
+  /^\./,
+  /^&/,
+];
+
+export const testIsEveryUnreserved = (x) => {
+  return RESERVED_REGEXPS.every((regexp) => !regexp.test(x));
+};
+
+export const testIsEveryValueNonPlainObject = (x) => {
+  return Object.values(x).every((value) => !isPlainObject(value));
+};
+
 /**
  * This is a naive test to determine if a provided value terminates to a spec value or a recursive spec definitions.
  *
@@ -14,21 +31,9 @@ import {isPlainObject} from 'uinix-fp';
  * in arbitrary form, so a robust check is out of scope for this
  * system knowledge implementation.
  */
-
-const RESERVED_REGEXPS = [
-  /^\d*?%$/, //
-  /^from$/,
-  /^to$/,
-  /^:/,
-  /^\./,
-  /^&/,
-];
-
 export const testIsNestedValue = (value) => {
   if (isPlainObject(value)) {
-    return Object.keys(value).every((key) => {
-      return RESERVED_REGEXPS.every((regexp) => !regexp.test(key));
-    });
+    return Object.keys(value).every(testIsEveryUnreserved);
   }
 
   return false;
