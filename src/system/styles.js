@@ -151,6 +151,7 @@ const typography = {
   },
   variants: {
     brand: {
+      flex: 'none',
       fontSize: 'l',
       fontWeight: 'bold',
       margin: 0,
@@ -188,6 +189,14 @@ const variants = {
     container: {
       margin: '0 auto',
       maxWidth: 'width.container',
+      paddingLeft: 'l',
+      paddingRight: 'l',
+      width: '100%',
+    },
+    fullWidth: {
+      paddingLeft: 'l',
+      paddingRight: 'l',
+      width: '100%',
     },
   },
   nav: {

@@ -2,7 +2,6 @@ import {navigate} from 'gatsby';
 import React, {useEffect, useState} from 'react';
 import {Layout} from 'uinix-ui';
 
-import {ScrollTop} from '../system/components/index.js';
 import Breadcrumbs from './breadcrumbs.js';
 import Footer from './footer.js';
 import Header from './header.js';
@@ -24,17 +23,15 @@ const PageLayout = ({children, isFullWidth}) => {
     <Layout
       direction="column"
       h="100vh"
-      px="l"
       spacing="m"
-      variant={isFullWidth ? undefined : 'layout.container'}
+      variant={isFullWidth ? 'layout.fullWidth' : 'layout.container'}
     >
-      <Header />
-      <Breadcrumbs />
-      <Layout as="main" flex="auto" direction="column">
+      <Header isFullWidth={isFullWidth} />
+      <Layout as="main" flex="auto" direction="column" pt="xxl">
+        <Breadcrumbs />
         {children}
       </Layout>
       <Footer />
-      <ScrollTop />
     </Layout>
   );
 };

@@ -6,14 +6,15 @@ import {coerceLinks, getRepoLink} from '../utils/index.js';
 
 const Nav = () => {
   return (
-    <Layout
-      as="nav"
-      align="center"
-      flex="auto"
-      justify="space-between"
-      spacing="m"
-    >
-      <Layout as="ol" spacing="m" variant="nav.list">
+    <nav>
+      <Layout
+        as="ol"
+        align="center"
+        flex="auto"
+        justify="space-between"
+        spacing="m"
+        variant="nav.list"
+      >
         {coerceLinks(['Packages', 'Demos', 'Learn'], {
           hasLeadingSlash: true,
         }).map(({text, to}) => (
@@ -21,15 +22,13 @@ const Nav = () => {
             <Link to={to}>{text}</Link>
           </Element>
         ))}
-      </Layout>
-      <Layout as="ol" spacing="m" variant="nav.list">
         <Element as="li" variant="nav.item">
           <a href={getRepoLink()}>
             <Icon icon="github" size="icon.m" title="Github" />
           </a>
         </Element>
       </Layout>
-    </Layout>
+    </nav>
   );
 };
 

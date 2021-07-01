@@ -31,8 +31,11 @@ const PackagePageLayout = ({links = [], pkg}) => {
 
   return (
     <PageLayout>
-      {stats}
-      <Links links={links} />
+      <Layout direction="column" spacing="l">
+        <div />
+        {stats}
+        <Links links={links} />
+      </Layout>
     </PageLayout>
   );
 };

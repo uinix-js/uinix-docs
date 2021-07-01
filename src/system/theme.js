@@ -109,15 +109,16 @@ const radii = {
 };
 
 const shadows = {
-  m: '0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12)',
+  s: 'rgba(0, 0, 0, 0.05) 0px 1px 2px 0px',
+  m: 'rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;',
 };
 
 const sizes = {
   anchor: '12px',
   icon: {
     s: '16px',
-    m: '24px',
-    l: '32px',
+    m: '20px',
+    l: '24px',
   },
   spec: {
     icon: '100px',
@@ -152,6 +153,7 @@ const transforms = {
 
 const zIndices = {
   forward: '1',
+  header: '2',
 };
 
 const theme = {

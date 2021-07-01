@@ -23,6 +23,7 @@ const colors = {
     gray2: '#282828',
     gray3: '#181818',
     gray4: '#121212',
+    primary: '#181818',
   },
   icon: {
     default: '#b3b3b3',

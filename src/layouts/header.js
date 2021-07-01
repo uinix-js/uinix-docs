@@ -4,19 +4,30 @@ import {Layout, Text} from 'uinix-ui';
 import {BrandLink} from '../system/components/index.js';
 import Nav from './nav.js';
 
-const Header = () => {
+const Header = ({isFullWidth}) => {
   return (
     <Layout
       as="header"
-      align="baseline"
-      direction={['column', 'column', 'row']}
-      py="m"
-      spacing="m"
+      bg="background.primary"
+      boxShadow="s"
+      left={0}
+      position="fixed"
+      right={0}
+      top={0}
+      z="header"
     >
-      <Text as="h1" variant="brand">
-        <BrandLink />
-      </Text>
-      <Nav />
+      <Layout
+        align="baseline"
+        direction={['column', 'column', 'row']}
+        py="s"
+        spacing="m"
+        variant={isFullWidth ? 'layout.fullWidth' : 'layout.container'}
+      >
+        <Text as="h1" variant="brand">
+          <BrandLink />
+        </Text>
+        <Nav />
+      </Layout>
     </Layout>
   );
 };

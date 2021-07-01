@@ -12,7 +12,6 @@ export {default as Json} from './json.js';
 export {default as Links} from './links.js';
 export {default as LiveCode} from './live-code.js';
 export {default as Markdown} from './markdown.js';
-export {default as ScrollTop} from './scroll-top.js';
 export {default as Section} from './section.js';
 export {default as SystemKnowledge} from './system-knowledge/index.js';
 export {default as Window} from './window.js';
