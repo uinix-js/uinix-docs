@@ -9,7 +9,6 @@ import Window from './window.js';
 
 const {Element, Layout, Text} = ui;
 
-// TODO: check and formalize this
 const scope = {
   ...fp,
   ...ui,

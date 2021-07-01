@@ -8,6 +8,15 @@ import Box from '../box.js';
 import Dot from '../dot.js';
 import Json from '../json.js';
 
+const blacklistedHtmlTags = new Set([
+  'html',
+  'head',
+  'style',
+  'link',
+  'body',
+  'script',
+]);
+
 export const bar = () => (value) => {
   return <Bar w={value} />;
 };
@@ -32,7 +41,7 @@ export const styled = (enableAs) => (value, name) => {
   let as;
   let children;
   if (enableAs) {
-    if (htmlTags.includes(name)) {
+    if (htmlTags.includes(name) && !blacklistedHtmlTags.has(name)) {
       as = name;
     }
 

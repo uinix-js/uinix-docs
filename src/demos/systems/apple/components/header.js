@@ -8,10 +8,10 @@ const Header = () => {
   return (
     <Layout as="header" bg="background.inverse" color="text.inverse">
       <Container as="ul" align="center" justify="space-between" py="x3">
-        {navItems.map(({href, icon, label, onClick}) => {
+        {navItems.map(({href, icon, label, onClick}, i) => {
           return (
             <Text
-              key={label}
+              key={i}
               as={href ? 'a' : 'div'}
               href={href}
               variant="headerLink"

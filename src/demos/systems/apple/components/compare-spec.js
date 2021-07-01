@@ -5,7 +5,7 @@ const CompareSpec = ({model, spec}) => {
   const specData = Object.values(model.specs[spec]);
   return (
     <Layout direction="column" spacing="x10" w="33%">
-      {specData.map((d) => {
+      {specData.map((d, i) => {
         let details = [];
         let title = null;
         if (Array.isArray(d)) {
@@ -16,7 +16,7 @@ const CompareSpec = ({model, spec}) => {
         }
 
         return (
-          <Layout key={title} direction="column">
+          <Layout key={i} direction="column">
             {title && <strong>{title}</strong>}
             <span>
               {details.map((detail) => (

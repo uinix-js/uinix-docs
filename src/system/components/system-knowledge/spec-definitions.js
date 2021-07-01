@@ -30,7 +30,12 @@ const SpecDefinitions = ({
         if (!disableNest && testIsNestedValue(value)) {
           if (enableEarlyTerminate && testIsEveryValueNonPlainObject(value)) {
             return (
-              <Spec name={childPropertyPath} value={value} render={render} />
+              <Spec
+                key={key}
+                name={childPropertyPath}
+                value={value}
+                render={render}
+              />
             );
           }
 

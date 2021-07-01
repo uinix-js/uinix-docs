@@ -40,7 +40,13 @@ const SystemPageLayout = ({name}) => {
 
     loadPage();
 
-    return () => window.location.reload();
+    // Reset system global styles, reload default system
+    return () => {
+      document
+        .querySelectorAll('style[data-fela-type="STATIC"]')
+        .forEach((stylesheet) => stylesheet.remove());
+      load(h, defaultSystem, defaultConfig);
+    };
   }, [name]);
 
   if (!page) {

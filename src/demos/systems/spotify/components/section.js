@@ -30,8 +30,8 @@ const Section = ({
         )}
       </Layout>
       <Layout wrap spacing="l" wrapSpacing="m">
-        {cards.map((card) => (
-          <CardComponent key={card.title} {...card} />
+        {cards.map((card, i) => (
+          <CardComponent key={i} {...card} />
         ))}
       </Layout>
     </Layout>

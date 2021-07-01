@@ -15,7 +15,7 @@ const CompareSummary = () => {
           const {colors, imageSrc2, name, startingPrice} = model;
           return (
             <Layout key={name} align="center" direction="column" spacing="x12">
-              <select value={name} onBlur={noop}>
+              <select value={name} onChange={noop}>
                 <option value={name}>{name}</option>
               </select>
               <Layout align="center" direction="column" pt="x20" spacing="x10">
