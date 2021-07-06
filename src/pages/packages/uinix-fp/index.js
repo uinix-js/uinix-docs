@@ -3,9 +3,12 @@ import pkg from 'uinix-fp/package.json';
 
 import PackagePageLayout from '../../../layouts/package-page-layout.js';
 
-const Page = () => {
-  const links = ['readme'];
+const links = [
+  'Readme', //
+  'Recipes',
+];
 
+const Page = () => {
   return <PackagePageLayout links={links} pkg={pkg} />;
 };
 

@@ -1,0 +1,259 @@
+# Recipes
+
+Common recipes and patterns when using **uinix-fp** to author JS code in functional form.
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Methods
+
+The following outlines bad vs good patterns when using the respective **uinix-fp** API methods.
+
+### `filter`
+Use the `filter` method to filter iterables with the provided predicate.
+
+```js
+// bad
+const filteredArr = arr.filter(predicate);
+const filteredObj = Object.entries(obj).reduce((acc, entry) => {
+  const [key, value] = entry;
+  if (predicate(value)) {
+    acc[key] = value;
+  }
+  return acc;
+}, {});
+
+// good
+import {filter} from 'uinix-fp';
+const filteredArr = filter(predicate)(arr);
+const filteredObj = filter(predicate)(obj);
+```
+
+`filter` uses a default truthy predicate (see [§ `i`](#i)), so you can easily use this to create filtered arrays and objects without empty values.
+
+```js
+const arr = ['one', null, null, 'four'];
+const obj = {
+  a: 'one',
+  b: null,
+  c: null,
+  d: 'four',
+};
+
+filter()(arr); // ['one', 'four']
+filter()(obj): // {a: 'one', d: 'four'}
+```
+
+### `i`
+Use the `i` (i.e. *identity*) method for implementing passthroughs.
+
+```js
+// bad
+const passThrough = (x) => x;
+
+// good
+import {i} from 'uinix-fp';
+const passThrough = i;
+```
+
+The `i` method can also be conveniently used as a coercing predicate for truthy values:
+
+```js
+// bad
+const truthyValues = arr.filter(x => x);
+
+// good
+import {i} from 'uinix-fp';
+const truthyValues = arr.filter(i);
+```
+
+### `isPlainObject`
+Use the `isPlainObject` method to check if an object is plain (i.e. created via `Object` APIs).
+
+```js
+// bad
+console.log(typeof x === 'object'); // does not always work
+
+// good
+import {isPlainObject} from 'uinix-fp';
+console.log(isPlainObject(x));
+```
+
+### `k`
+Use the `k` (i.e. *constant*) method to always return the first argument.
+
+```js
+// bad
+const result = arr.map(x => 'x');
+
+// good
+import {k} from 'uinix-fp';
+const result = arr.map(k('x'));
+```
+
+### `merge`
+Use the `merge` method to correctly deep-merge objects and avoid mutations.
+```js
+// bad
+const merged = {
+  ...x1,
+  ...x2,
+  a: {
+    ...x1.a,
+    ...x2.a,
+    ...
+  },
+  ...
+};
+
+// good
+import {merge} from 'uinix-fp';
+const merged = merge(x1)(x2);
+```
+
+### `noop`
+Use the `noop` (i.e. *no-operation*) method instead of creating a custom noop function.
+
+```js
+// bad
+const defaultFunction = () => {};
+
+// good
+import {noop} from 'uinix-fp';
+const defaultFunction = noop;
+```
+
+### `pipe`
+
+Use pipe to organize sequential operations on an input.
+
+```js
+// bad
+const result = step3(step2(step1(x)));
+
+// good
+import {pipe} from 'uinix-fp';
+const result = pipe([
+  step1,
+  step2,
+  step3,
+])(x);
+```
+
+### `prop`
+Use the `prop` method to access the specified property of an object.  Useful to create composed object accessors.
+
+```js
+// bad
+const result1 = arr1.map(x => x.a);
+const result2 = arr2.map(x => x.a);
+
+// good
+import {prop} from 'uinix-fp';
+const propByA = prop('a');
+const result1 = arr1.map(propByA);
+const result2 = arr2.map(propByA);
+```
+
+### `props`
+Use the `props` method to deeply access nested properties of an object.  Userful to create composed object accessors.
+
+```js
+// bad
+const getUserNameFromResponse = x => x.payload.data.user.name;
+getUserNameFromResponse(response); // may throw undefined error
+
+// good
+import {props} from 'uinix-fp';
+const getUserNameFromResponse = props('payload.data.user.name');
+getUserNameFromResponse(response); // returns undefined if not accessible.
+```
+
+## Patterns
+
+Wherever appropriate,
+
+### Use composition
+
+**uinix-fp** methods are conveniently curried to support composition.
+
+```js
+import {merge, prop} from 'uinix-fp';
+
+// bad
+const m1 = merge(y)(x1);
+const m2 = merge(y)(x2);
+const m3 = merge(y)(x3);
+const v1 = prop(p)(x1);
+const v2 = prop(p)(x2);
+const v3 = prop(p)(x3);
+
+// good
+const mergeWithY = merge(y);
+const propByP = prop(p);
+const m1 = mergeWithY(x1);
+const m2 = mergeWithY(x2);
+const m3 = mergeWithY(x3);
+const v1 = propByP(x1);
+const v2 = propByP(x2);
+const v3 = propByP(x3);
+```
+
+### Use pointfree notation
+
+**uinix-fp** methods are designed to faciliate [pointfree] notation.
+
+```js
+const addOne = x => x + 1;
+
+// bad
+const result = arr
+  .map(x => x.a.b.c)
+  .filter(x => !!x)
+  .map(x => addOne(x));
+
+// good
+import {i, props} from 'uinix-fp';
+const result = arr
+  .map(props('a.b.c'))
+  .filter(i)
+  .map(addOne);
+```
+
+Pointfree notation plays nice with `pipe`, and the above can expressed as:
+
+```js
+// better
+import {filter, i, map, pipe, props} from 'uinix-fp';
+const result = pipe([
+  map(props('a.b.c')),
+  filter(i),
+  map(addOne),
+])(arr);
+```
+
+### Use `pipe`
+
+Use `pipe` to organize sequential operations on an input.  See [§ `pipe`](#pipe).
+
+Debug a `pipe` by simply `tap`ping it.
+
+```js
+import {pipe, tap} from 'uinix-fp';
+
+const result = pipe([
+  step1,
+  step2,
+  tap('after step 2'),
+  step3,
+  step4,
+]);
+```
+
+
+<!-- defs -->
+[pointfree]: https://en.wikipedia.org/wiki/Tacit_programming
