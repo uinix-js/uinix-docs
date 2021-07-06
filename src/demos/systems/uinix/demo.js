@@ -1,7 +1,10 @@
 import React, {createElement as h, useState} from 'react';
 import {Layout, Text, load, merge} from 'uinix-ui';
 
-import {BrandLink, SystemKnowledge} from '../../../system/components/index.js';
+import {
+  PackageLink,
+  SystemKnowledge,
+} from '../../../system/components/index.js';
 import config from '../../../system/config.js';
 import apple from '../apple/system.js';
 import discord from '../discord/system.js';
@@ -18,8 +21,6 @@ const systems = {
   spotify,
   uinix,
 };
-
-const UinixUi = () => <BrandLink to="/packages/uinix-ui" text="uinix-ui" />;
 
 const Demo = () => {
   const [system, setSystem] = useState('');
@@ -52,14 +53,15 @@ const Demo = () => {
   return (
     <Layout direction="column" p="m" spacing="l">
       <p>
-        This entire site is built with the <UinixUi /> UI system. A UI system
-        that builds a system to preview other UI systems. How fun! 🤗
+        This entire site is built with the <PackageLink name="uinix-ui" /> UI
+        system. A UI system that builds a system to preview other UI systems.
+        How fun! 🤗
       </p>
       <p>
-        In addition to supporting rapid UI development, <UinixUi /> allows easy
-        definition, management and access of system knowledge. Use the following
-        controls to preview an example system or upload a valid{' '}
-        <code>system.json</code> file.
+        In addition to supporting rapid UI development,{' '}
+        <PackageLink name="uinix-ui" /> allows easy definition, management and
+        access of system knowledge. Use the following controls to preview an
+        example system or upload a valid <code>system.json</code> file.
       </p>
       <Layout align="center" spacing="m">
         <select value={system} onChange={handleSelectSystem}>
@@ -78,7 +80,8 @@ const Demo = () => {
         {error && (
           <Text color="text.tones.error">
             Unable to parse system. Please ensure that a valid system is
-            provided. Refer to the <UinixUi /> documentation for details.
+            provided. Refer to the <PackageLink name="uinix-ui" /> documentation
+            for details.
           </Text>
         )}
       </p>
