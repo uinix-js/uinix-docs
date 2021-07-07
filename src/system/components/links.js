@@ -15,17 +15,17 @@ const Links = ({links}) => {
           const {description, tags, text, to} = link;
           return (
             <li key={to}>
-              <Layout align="flex-start" direction="column">
+              <Layout wrap align="center" spacing="s">
                 <Link to={to}>
                   <BrandText text={text} />
                 </Link>
-                {description && (
-                  <Text variant="description">
-                    <Markdown content={description} />
-                  </Text>
-                )}
                 {tags && <Chips chips={tags} />}
               </Layout>
+              {description && (
+                <Text variant="description">
+                  <Markdown content={description} />
+                </Text>
+              )}
             </li>
           );
         })}

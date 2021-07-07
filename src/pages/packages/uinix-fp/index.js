@@ -3,13 +3,15 @@ import pkg from 'uinix-fp/package.json';
 
 import PackagePageLayout from '../../../layouts/package-page-layout.js';
 
-const links = [
-  'Readme', //
-  'Recipes',
+const resources = [
+  {
+    name: 'Resources',
+    links: ['Recipes'],
+  },
 ];
 
 const Page = () => {
-  return <PackagePageLayout links={links} pkg={pkg} />;
+  return <PackagePageLayout resources={resources} pkg={pkg} />;
 };
 
 export default Page;

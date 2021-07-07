@@ -1,3 +1,4 @@
+import {Link} from 'gatsby';
 import React from 'react';
 import {Layout, Text} from 'uinix-ui';
 
@@ -5,7 +6,7 @@ import PageLayout from '../layouts/page-layout.js';
 import {BrandText, Card, Chips, Links} from '../system/components/index.js';
 import {getRepoLink} from '../utils/index.js';
 
-const PackagePageLayout = ({links = [], pkg}) => {
+const PackagePageLayout = ({pkg, resources = []}) => {
   const {name, description, keywords, version} = pkg;
 
   const stats = (
@@ -25,6 +26,9 @@ const PackagePageLayout = ({links = [], pkg}) => {
         </Text>
         <Text variant="description">{description}</Text>
         <Chips chips={keywords} />
+        <Link to="readme">
+          <h4>readme</h4>
+        </Link>
       </Layout>
     </Card>
   );
@@ -34,7 +38,14 @@ const PackagePageLayout = ({links = [], pkg}) => {
       <Layout direction="column" spacing="m">
         <div />
         {stats}
-        <Links links={links} />
+        {resources.map(({name, links}) => {
+          return (
+            <div key={name}>
+              <h4>{name}</h4>
+              <Links links={links} />
+            </div>
+          );
+        })}
       </Layout>
     </PageLayout>
   );

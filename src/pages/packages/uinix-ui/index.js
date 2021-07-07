@@ -3,10 +3,32 @@ import pkg from 'uinix-ui/package.json';
 
 import PackagePageLayout from '../../../layouts/package-page-layout.js';
 
-const Page = () => {
-  const links = ['readme'];
+const resources = [
+  {
+    name: 'Guides',
+    links: [
+      'Build a Box',
+      'Build a Button',
+      'Variants',
+      'Typography',
+      'Responsive',
+      'Animations',
+      'System Knowledge',
+      'hyperscript',
+    ],
+  },
+  {
+    name: 'Recipes',
+    links: ['Components', 'Styles', 'Theme'],
+  },
+  {
+    name: 'Others',
+    links: ['Comparison with theme-ui'],
+  },
+];
 
-  return <PackagePageLayout links={links} pkg={pkg} />;
+const Page = () => {
+  return <PackagePageLayout resources={resources} pkg={pkg} />;
 };
 
 export default Page;
