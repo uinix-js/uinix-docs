@@ -17,25 +17,18 @@ const blacklistedHtmlTags = new Set([
   'script',
 ]);
 
-export const bar = () => (value) => {
-  return <Bar w={value} />;
-};
+export const bar = () => (value) => <Bar w={value} />;
 
-export const box = (key) => (value) => {
-  return <Box styles={{[key]: value}} />;
-};
+export const box = (key) => (value) => <Box styles={{[key]: value}} />;
 
-export const dot = (key, color) => (value) => {
-  return (
+export const dot = (key, color) => (value) =>
+  (
     <Element styles={{[key]: value}}>
       <Dot isBordered color={color || value} size="icon.m" />
     </Element>
   );
-};
 
-export const json = () => (value) => {
-  return <Json value={value} />;
-};
+export const json = () => (value) => <Json value={value} />;
 
 export const styled = (enableAs) => (value, name) => {
   let as;

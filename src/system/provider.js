@@ -6,11 +6,11 @@ import config from '../system/config.js';
 import system from '../system/index.js';
 import {LiveCode} from './components/index.js';
 
-load(h, system, config);
+load({config, h, system});
 
-const Provider = ({children}) => {
-  return <MDXProvider components={components}>{children}</MDXProvider>;
-};
+const Provider = ({children}) => (
+  <MDXProvider components={components}>{children}</MDXProvider>
+);
 
 const pre = (props) => {
   const {children: code, className = '', live, ...rest} = props.children.props;

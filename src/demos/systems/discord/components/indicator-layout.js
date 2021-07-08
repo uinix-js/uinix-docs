@@ -11,26 +11,24 @@ const IndicatorLayout = ({
   hasIndicator,
   isActive,
   ...rest
-}) => {
-  return (
-    <Layout
-      {...rest}
-      align={align}
-      justify={justify}
-      position="relative"
-      w="100%"
-      styleProps={{isActive}}
-      styles={enableHover ? styles.hover : null}
-    >
-      {children}
-      <Element
-        className={indicatorClassName}
-        styleProps={{hasIndicator, isActive}}
-        styles={styles.indicator}
-      />
-    </Layout>
-  );
-};
+}) => (
+  <Layout
+    {...rest}
+    align={align}
+    justify={justify}
+    position="relative"
+    w="100%"
+    styleProps={{isActive}}
+    styles={enableHover ? styles.hover : null}
+  >
+    {children}
+    <Element
+      className={indicatorClassName}
+      styleProps={{hasIndicator, isActive}}
+      styles={styles.indicator}
+    />
+  </Layout>
+);
 
 const styles = {
   hover: ({isActive}) => ({

@@ -3,15 +3,13 @@ import {Layout, Text} from 'uinix-ui';
 
 import Progress from './progress.js';
 
-const SongProgress = ({current, duration}) => {
-  return (
-    <Layout align="center" alignSelf="stretch" spacing="m">
-      <Text variant="xs">{formatTime(current)}</Text>
-      <Progress max={duration} value={current} />
-      <Text variant="xs">{formatTime(duration)}</Text>
-    </Layout>
-  );
-};
+const SongProgress = ({current, duration}) => (
+  <Layout align="center" alignSelf="stretch" spacing="m">
+    <Text variant="xs">{formatTime(current)}</Text>
+    <Progress max={duration} value={current} />
+    <Text variant="xs">{formatTime(duration)}</Text>
+  </Layout>
+);
 
 const formatTime = (seconds) => {
   const format = (value) => `${Math.floor(value)}`.slice(-2);

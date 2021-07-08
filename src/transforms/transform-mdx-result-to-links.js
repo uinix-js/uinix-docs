@@ -1,5 +1,5 @@
-export const transformMdxResultToLinks = (data) => {
-  return data.allMdx.edges.map((edge) => {
+export const transformMdxResultToLinks = (data) =>
+  data.allMdx.edges.map((edge) => {
     const {frontmatter, slug, timeToRead} = edge.node;
     const {description, tags, title} = frontmatter;
     return {
@@ -9,4 +9,3 @@ export const transformMdxResultToLinks = (data) => {
       to: `/${slug}`,
     };
   });
-};

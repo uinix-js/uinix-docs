@@ -1,7 +1,7 @@
 import {slugify} from './slugify.js';
 
-export const coerceLinks = (links, options = {}) => {
-  return links.map((link) => {
+export const coerceLinks = (links, options = {}) =>
+  links.map((link) => {
     if (typeof link === 'string') {
       return {
         text: link,
@@ -11,4 +11,3 @@ export const coerceLinks = (links, options = {}) => {
 
     return link;
   });
-};

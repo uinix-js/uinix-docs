@@ -34,7 +34,11 @@ const SystemPageLayout = ({name}) => {
       const mergedSystem = merge(defaultSystem)(loadedPage.system);
       mergedSystem.styles.breakpoints = defaultSystem.styles.breakpoints;
 
-      load(h, mergedSystem, defaultConfig);
+      load({
+        config: defaultConfig,
+        h,
+        system: mergedSystem,
+      });
       setPage(loadedPage);
     };
 
@@ -45,7 +49,11 @@ const SystemPageLayout = ({name}) => {
       document
         .querySelectorAll('style[data-fela-type="STATIC"]')
         .forEach((stylesheet) => stylesheet.remove());
-      load(h, defaultSystem, defaultConfig);
+      load({
+        config: defaultConfig,
+        h,
+        system: defaultSystem,
+      });
     };
   }, [name]);
 

@@ -34,7 +34,11 @@ const Demo = () => {
       ...uinix,
       icons: merge(uinix.icons)(selectedSystem.icons),
     };
-    load(h, mergedSystem, config);
+    load({
+      config,
+      h,
+      system: mergedSystem,
+    });
 
     setSystem(selectedSystem);
   };

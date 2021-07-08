@@ -10,8 +10,6 @@ const resources = [
   },
 ];
 
-const Page = () => {
-  return <PackagePageLayout resources={resources} pkg={pkg} />;
-};
+const Page = () => <PackagePageLayout resources={resources} pkg={pkg} />;
 
 export default Page;

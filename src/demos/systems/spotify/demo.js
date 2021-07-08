@@ -6,19 +6,17 @@ import Footer from './components/footer.js';
 import Main from './components/main.js';
 import Nav from './components/nav.js';
 
-const Demo = () => {
-  return (
-    <Layout direction="column">
-      <Layout>
-        <Nav />
-        <Layout direction="column">
-          <Header />
-          <Main />
-        </Layout>
+const Demo = () => (
+  <Layout direction="column">
+    <Layout>
+      <Nav />
+      <Layout direction="column">
+        <Header />
+        <Main />
       </Layout>
-      <Footer />
     </Layout>
-  );
-};
+    <Footer />
+  </Layout>
+);
 
 export default Demo;

@@ -118,37 +118,29 @@ const OptionText = ({enableIndent, label: overrideLabel, option}) => {
 
 const IndicatorsContainer = () => null;
 
-const MenuList = (props) => {
-  return (
-    <components.MenuList {...props}>
-      <Element bg="background.primary">{props.children}</Element>
-    </components.MenuList>
-  );
-};
+const MenuList = (props) => (
+  <components.MenuList {...props}>
+    <Element bg="background.primary">{props.children}</Element>
+  </components.MenuList>
+);
 
-const NoOptionsMessage = (props) => {
-  return (
-    <components.NoOptionsMessage {...props}>
-      <Text fontSize="xs">No match.</Text>
-    </components.NoOptionsMessage>
-  );
-};
+const NoOptionsMessage = (props) => (
+  <components.NoOptionsMessage {...props}>
+    <Text fontSize="xs">No match.</Text>
+  </components.NoOptionsMessage>
+);
 
-const Option = (props) => {
-  return (
-    <components.Option {...props}>
-      <OptionText enableIndent option={props.data} />
-    </components.Option>
-  );
-};
+const Option = (props) => (
+  <components.Option {...props}>
+    <OptionText enableIndent option={props.data} />
+  </components.Option>
+);
 
-const ValueContainer = (props) => {
-  return (
-    <components.ValueContainer {...props}>
-      <OptionText label={props.children} option={props.getValue()[0]} />
-    </components.ValueContainer>
-  );
-};
+const ValueContainer = (props) => (
+  <components.ValueContainer {...props}>
+    <OptionText label={props.children} option={props.getValue()[0]} />
+  </components.ValueContainer>
+);
 
 const styles = {
   container: {

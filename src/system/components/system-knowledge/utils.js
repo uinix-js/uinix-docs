@@ -9,13 +9,11 @@ const RESERVED_REGEXPS = [
   /^&/,
 ];
 
-export const testIsEveryUnreserved = (x) => {
-  return RESERVED_REGEXPS.every((regexp) => !regexp.test(x));
-};
+export const testIsEveryUnreserved = (x) =>
+  RESERVED_REGEXPS.every((regexp) => !regexp.test(x));
 
-export const testIsEveryValueNonPlainObject = (x) => {
-  return Object.values(x).every((value) => !isPlainObject(value));
-};
+export const testIsEveryValueNonPlainObject = (x) =>
+  Object.values(x).every((value) => !isPlainObject(value));
 
 /**
  * This is a naive test to determine if a provided value terminates to a spec value or a recursive spec definitions.

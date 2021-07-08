@@ -4,27 +4,23 @@ import {Icon, Layout, Text} from 'uinix-ui';
 
 import Container from './container.js';
 
-const Header = () => {
-  return (
-    <Layout as="header" bg="background.inverse" color="text.inverse">
-      <Container as="ul" align="center" justify="space-between" py="x3">
-        {navItems.map(({href, icon, label, onClick}, i) => {
-          return (
-            <Text
-              key={i}
-              as={href ? 'a' : 'div'}
-              href={href}
-              variant="headerLink"
-              onClick={onClick}
-            >
-              {icon ? <Icon icon={icon} size="icon.m" /> : <Text>{label}</Text>}
-            </Text>
-          );
-        })}
-      </Container>
-    </Layout>
-  );
-};
+const Header = () => (
+  <Layout as="header" bg="background.inverse" color="text.inverse">
+    <Container as="ul" align="center" justify="space-between" py="x3">
+      {navItems.map(({href, icon, label, onClick}, i) => (
+        <Text
+          key={i}
+          as={href ? 'a' : 'div'}
+          href={href}
+          variant="headerLink"
+          onClick={onClick}
+        >
+          {icon ? <Icon icon={icon} size="icon.m" /> : <Text>{label}</Text>}
+        </Text>
+      ))}
+    </Container>
+  </Layout>
+);
 
 const navItems = [
   {

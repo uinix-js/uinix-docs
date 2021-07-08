@@ -38,14 +38,12 @@ const PackagePageLayout = ({pkg, resources = []}) => {
       <Layout direction="column" spacing="m">
         <div />
         {stats}
-        {resources.map(({name, links}) => {
-          return (
-            <div key={name}>
-              <h4>{name}</h4>
-              <Links links={links} />
-            </div>
-          );
-        })}
+        {resources.map(({name, links}) => (
+          <div key={name}>
+            <h4>{name}</h4>
+            <Links links={links} />
+          </div>
+        ))}
       </Layout>
     </PageLayout>
   );

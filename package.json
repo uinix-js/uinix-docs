@@ -18,11 +18,11 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "@use-it/interval": "^1.0.0",
-    "gatsby": "^3.8.0",
-    "gatsby-plugin-mdx": "^2.8.0",
-    "gatsby-remark-autolink-headers": "^4.5.0",
+    "gatsby": "^3.9.0",
+    "gatsby-plugin-mdx": "^2.9.0",
+    "gatsby-remark-autolink-headers": "^4.6.0",
     "gatsby-remark-table-of-contents": "^1.0.0",
-    "gatsby-source-filesystem": "^3.8.0",
+    "gatsby-source-filesystem": "^3.9.0",
     "github-markdown-css": "^4.0.0",
     "html-tags": "^3.1.0",
     "palx": "^1.0.3",
@@ -37,13 +37,13 @@
     "remark-react": "^8.0.0",
     "remark-slug": "^6.0.0",
     "slugify": "^1.5.3",
-    "uinix-ui": "^0.1.6-beta.1"
+    "uinix-ui": "^0.1.7-beta.1"
   },
   "devDependencies": {
     "eslint-config-xo-react": "^0.25.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "xo": "^0.40.3"
+    "xo": "^0.41.0"
   },
   "scripts": {
     "develop": "gatsby develop",

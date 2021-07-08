@@ -5,23 +5,21 @@ import {models} from '../data.js';
 import Container from './container.js';
 import CompareGroup from './compare-group.js';
 
-const Compare = () => {
-  return (
-    <Container>
-      <Layout as="section" direction="column" flex="auto" spacing="x30">
-        {Object.entries(specDisplayData).map(([spec, {footnote, title}]) => (
-          <CompareGroup
-            key={spec}
-            footnote={footnote}
-            models={models}
-            spec={spec}
-            title={title}
-          />
-        ))}
-      </Layout>
-    </Container>
-  );
-};
+const Compare = () => (
+  <Container>
+    <Layout as="section" direction="column" flex="auto" spacing="x30">
+      {Object.entries(specDisplayData).map(([spec, {footnote, title}]) => (
+        <CompareGroup
+          key={spec}
+          footnote={footnote}
+          models={models}
+          spec={spec}
+          title={title}
+        />
+      ))}
+    </Layout>
+  </Container>
+);
 
 const specDisplayData = {
   compute: {
