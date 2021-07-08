@@ -1,0 +1,111 @@
+import {PackageLink} from '../../../system/components/index.js';
+
+# Animations
+
+In this guide, we will learn how to organize and implement CSS animations for <PackageLink name="uinix-ui" /> components.
+
+> **Note:** This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Defining animations
+
+Animations and CSS keyframes receive first-class support in <PackageLink name="uinix-ui" /> (no dependencies and further setup is required).  These are formalized in `system.theme`, providing a convenient way to define and centralize animations in the system.
+
+For more details on how animation theme properties relate with their corresponding CSS properties, please refer to the <PackageLink name="uinix-theme" /> package.
+
+
+### `theme.animations`
+
+Define the [CSS `animation` property][css-animation-property] in `theme.animations`.  You can recursively nest theme definitions as long as they eventually resolve to valid `animation` CSS values.
+
+```js
+const theme = {
+  animations: {
+    infinite: {
+      fast: '1s ease-in-out infinite',
+      default: '2s ease-in-out infinite',
+      slow: '5s ease-in-out infinite',
+    },
+  },
+};
+```
+
+### `theme.keyframes`
+
+Define the [CSS `animation-name` property][css-animation-name-property] in `theme.keyframes`.  You can recursively nest theme definitions as long as they eventually resolve to valid [`CSSKeyframesRule`][csskeyframesrule] expressed in JS notation.
+
+```js
+const theme = {
+  keyframes: {
+    flicker: {
+      '0%': {opacity: '0'},
+      '50%': {opacity: '1'},
+      '100%': {opacity: '0'},
+    },
+    spin: {
+      default: { // can be recursively nested and organized
+        '100%': {transform: 'rotate(360deg)'},
+      },
+    },
+  },
+};
+```
+
+## Using animations
+
+Ensure that your system is `load`ed, then simply reference animations by their theme property paths and define them in the `styles` prop.
+
+The example below is interactive so feel free to edit the code!
+
+```js live
+() => {
+  const animatedStyle = {
+    // edit and use a valid theme.animations property path (e.g. "infinite.fast")
+    animation: 'infinite.slow',
+    // edit and use a valid theme.keyframes property path (e.g. "spin.default")
+    animationName: 'flicker',
+  };
+
+  const animatedStyle2 = {
+    animation: 'infinite.fast',
+    animationName: 'spin.default',
+  };
+
+  // edit other styles
+  const otherStyle = {
+    border: 'bordered',
+    padding: 'm',
+  };
+
+  const styles = [animatedStyle, otherStyle];
+
+  return (
+    <Element styles={styles}>
+      Animation is simple with uinix-ui.
+      It works for any uinix-ui component, like the following icon component:
+      <Icon icon="up" styles={animatedStyle2} w="min-content" />
+    </Element>
+  );
+}
+```
+
+> **Note:** There is a slight precedence requirement based on how shorthand CSS properties behave.  Since the [`animation`][css-animation-property] shorthand CSS property includes the [`animation-name`][css-animation-name-property] CSS property, you should ensure that the `animationName` key is specified after the `animation` key, to prevent overriding with an empty `animationName`.
+
+## Conclusion
+
+In this guide, we learned how simple it is to apply animations to <PackageLink name="uinix-ui" /> components.  In addition, we also learned how <PackageLink name="uinix-ui" /> formalizes animations and CSS keyframes directly in `system.theme`, providing a centralized way to organize system animations.
+
+<!-- defs -->
+[csskeyframesrule]: https://developer.mozilla.org/en-US/docs/Web/API/CSSKeyframesRule
+[css-animation-property]: https://developer.mozilla.org/en-US/docs/Web/CSS/animation
+[css-animation-name-property]: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[react]: https://github.com/facebook/react
