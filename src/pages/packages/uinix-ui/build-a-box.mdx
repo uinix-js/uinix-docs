@@ -1,0 +1,286 @@
+# Build a `Box`
+
+In this guide, we will learn how to build and configure a `Box` component with **uinix-ui**.
+
+> **Note:** This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the [uinix-ui] package for API documentation.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## `Box`
+
+The `Box` component is [popularized][theme-ui-box] by libraries such as [rebass] and [theme-ui].  It serves as a primitive component to build other components in UI systems.  We will use **uinix-ui** to implement `Box`, supporting the following [theme-ui]-inspired features:
+- Shorthand style props: (i.e. the `bg`, `color`, `m`, `mt`, `mr`, `mb`, `ml`, `mx`, `my`, `p`, `pt`, `pr`, `pb`, `pl`, `px`, `py` props)
+- Themeable styles (i.e. the `sx` prop)
+- Transclusion (i.e. the `as` prop)
+
+## Configure the System
+
+To support [shorthand style props][theme-ui-shorthand-style-props], let us first configure them for the **uinix-ui** `Element` component.
+
+```js
+import {createConfig} from 'uinix-ui';
+
+const config = createConfig({
+  elementShorthandPropsMapping: {
+    backgroundColor: ['bg'],
+    color: ['color'],
+    margin: ['m'],
+    marginBottom: ['mb', 'my', 'm'],
+    marginLeft: ['ml', 'mx', 'm'],
+    marginRight: ['mr', 'mx', 'm'],
+    marginTop: ['mt', 'my', 'm'],
+    padding: ['p'],
+    paddingBottom: ['pb', 'py', 'p'],
+    paddingLeft: ['pl', 'px', 'p'],
+    paddingRight: ['pr', 'px', 'p'],
+    paddingTop: ['pt', 'py', 'p'],
+  },
+});
+```
+
+> **Note:** We can further configure other shorthand props by simply defining them in `config.elementShorthandPropsMapping`.  One may find this useful to implement other shorthand props that were previously provided by [rebass] (e.g. `height`, `width`), or to simply define new style props that fit your needs.  **uinix-ui** allows this to be fully configurable.
+
+## Load the System
+
+Let us create an example `theme` and load the system so we can test as we develop `Box`.
+
+```js
+import {createElement as h} from 'react';
+import {load} from 'uinix-ui';
+
+import config from './config.js'; // the config we created previously
+
+const system = {
+  theme: { // create a simple theme to test shorthand props
+    colors: {
+      brand: {
+        primary: '#abc'
+      },
+    },
+    spacings: {
+      s: '8px',
+      m: '16px'
+      l: '32px'
+    },
+  },
+},
+
+load({config, h, system});
+```
+
+## Verify Features
+
+After `load`ing our configuration and system, the `Element` component is now configured based on our needs.
+
+### Shorthand style props
+
+Let us verify that shorthand style props work as expected with an example:
+
+```js
+import {Element} from 'uinix-ui';
+
+const Example = () => {
+  return (
+    <Element
+      bg="brand.primary"
+      color="pink"
+      mx="auto"
+      my="0"
+      p="m"
+      pl="l">
+      Element
+    </Element>
+  );
+}
+```
+
+Our example should render with the following CSS:
+
+```css
+.rendered {
+  background-color: #abc;
+  color: pink;
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+  padding-left: 32px;
+}
+```
+
+### Transclusion
+
+`Element` supports the `as` prop and we can easily verify with an example.
+
+```js
+import {Element} from 'uinix-ui';
+
+const Example = () => {
+  return (
+    <Element as="button" onClick={() => alert('clicked')}>
+      Should render as a HTMLButtonElement
+    </Element>
+  );
+}
+```
+
+### Themeable Styles
+
+`Element` supports the `styles` prop which allows specifying themeable styles, similar to [theme-ui]'s [`sx`][theme-ui-sx-prop] prop.  The `styles` prop has a few additional powerful features of supporting style composition when specified as an array of styles.
+
+```js
+import {Element} from 'uinix-ui';
+
+const Example = () => {
+  const spacingStyle = {
+    margin: 'm',
+    padding: 'l',
+  };
+  const colorStyle = {
+    backgroundColor: 'brand.primary',
+    ':hover': {
+      backgroundColor: 'pink',
+    },
+  };
+
+  return (
+    <Element styles={[spacingStyle, colorStyle]}>
+      Button
+    </Element>
+  );
+}
+```
+
+Our example should render with the following CSS:
+
+```css
+.rendered {
+  background-color: #abc;
+  margin: 16px;
+  padding: 32px;
+}
+.rendered:hover {
+  background-color: pink;
+}
+```
+
+## `Element == Box`
+
+At this point, we observe that all required `Box` features are actually already supported by `Element`, and we can use `Element` interchangeably with `Box`.
+
+You may choose to re-export `Element` as `Box` in your app if you prefer to associate the component using the `Box` name.
+
+```js
+// ui/index.js
+
+export {Element as Box} from 'uinix-ui';
+```
+
+If you are intending to migrate from [theme-ui], you may find it convenient to formalize a simple implementation of `Box` to facilitate refactoring.
+
+```js
+import {Element} from 'uinix-ui';
+
+export const Box = ({sx, ...rest}) => {
+  return <Element {...rest} styles={sx} />
+};
+```
+
+## Further Style Customizations
+
+In addition to configuring `Box` with [§ Shorthand style props](#shorthand-style-props), **uinix-ui** provides further style customizations for `Box` via `config.elementStyles`.
+
+Say we would like to enforce the following shared style behaviors for `Box` (and subsequently any components built with `Box`):
+- When `disabled`, disable pointer events and render a `'not-allowed'` cursor.
+- When clickable, render a `'pointer'` cursor and an opacity hover effect.
+- When `active`, render a blue background and white text.
+
+We will define the following *style functions* in `config.elementStyles`:
+
+```js
+import {createConfig} from 'uinix-ui';
+
+const styles = { // this maybe organized in another shared file
+  active: ({active}) => active ? {
+    backgroundColor: 'blue',
+    color: 'white',
+  } : null,
+  clickable: ({onClick}) => onClick ? {
+    cursor: 'pointer',
+    opacity: 1,
+    ':hover': {
+      opacity: '0.7'
+    },
+  } : null,
+  disabled: ({disabled}) => disabled ? {
+    cursor: 'not-allowed',
+    pointerEvents: 'none',
+  } : null,
+};
+
+const config = {
+  elementShorthandPropsMapping: {...}; // defined in previous section,
+  elementStyles: [
+    styles.active,
+    styles.clickable,
+    styles.disabled,
+  ],
+};
+```
+
+[§ Load the System](#load-the-system) appropriately, and test with the following examples to confirm that `Box` and any components built with `Box` should enjoy the same shared styles.
+
+```js
+import {Element, Text} from 'uinix-ui';
+
+const Example = () => {
+  return (
+    <div>
+      <Element disabled>
+        Renders as a HTMLDivElement with a 'not-allowed' cursor.
+      </Element>
+      <Element as="button" disabled>
+        Renders as a HTMLButtonElement with a 'not-allowed' cursor.
+      </Element>
+      <Element as="button" active>
+        Renders as a HTMLButtonElement with the specified active style
+      </Element>
+      <Text disabled active>
+        Renders with the specified disabled and active styles on a
+        non-Element component that is composed from Element.
+      </Text>
+      <Text onClick={() => alert('clicked')}>
+        Renders with the specified clickable style.
+      </Text>
+    </div>
+  );
+}
+```
+
+> **Note:** `config.elementStyles` is a very powerful way to share common props-driven styles defined on `Element` and all components built with `Element`.  It is recommended to be use caution when making these design decisions as they may have unintended effects on downstream components.  A good rule of thumb is to use this powerful feature sparingly, and keep things simple!
+
+## Conclusion
+
+In this guide, we covered building a `Box` component with **uinix-ui**.  Not only were we able to quickly implement popular features from libraries such as [theme-ui], we also explored that **uinix-ui**'s `Element` component behaves essentially as a configurable `Box` component.
+
+Your `Box`, your system, your rules 🤘.
+
+<!-- defs -->
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[react]: https://github.com/facebook/react
+[rebass]: https://github.com/rebassjs/rebass
+[theme-ui]: https://github.com/system-ui/theme-ui
+[theme-ui-box]: https://theme-ui.com/components/box
+[theme-ui-shorthand-style-props]: https://theme-ui.com/components/#style-props
+[theme-ui-sx-prop]: https://theme-ui.com/sx-prop
+[uinix-ui]: https://github.com/uinix-js/uinix-ui
