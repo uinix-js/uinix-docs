@@ -1,6 +1,8 @@
+import {PackageLink} from '../../../system/components/index.js';
+
 # Recipes
 
-Common recipes and patterns when using **uinix-fp** to author JS code in functional form.
+Common recipes and patterns when using <PackageLink name="uinix-fp" />  to author JS code in functional form.
 
 ## Contents
 ```toc
@@ -11,7 +13,7 @@ to-heading: 3
 
 ## Methods
 
-The following outlines bad vs good patterns when using the respective **uinix-fp** API methods.
+The following outlines bad vs good patterns when using the respective <PackageLink name="uinix-fp" />  API methods.
 
 ### `filter`
 Use the `filter` method to filter iterables with the provided predicate.
@@ -179,7 +181,7 @@ Wherever appropriate,
 
 ### Use composition
 
-**uinix-fp** methods are conveniently curried to support composition.
+<PackageLink name="uinix-fp" />  methods are conveniently curried to support composition.
 
 ```js
 import {merge, prop} from 'uinix-fp';
@@ -205,7 +207,7 @@ const v3 = propByP(x3);
 
 ### Use pointfree notation
 
-**uinix-fp** methods are designed to faciliate [pointfree] notation.
+<PackageLink name="uinix-fp" />  methods are designed to faciliate [pointfree] notation.
 
 ```js
 const addOne = x => x + 1;
