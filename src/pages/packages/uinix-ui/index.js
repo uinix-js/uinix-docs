@@ -22,13 +22,11 @@ const resources = [
     links: ['Components', 'Styles', 'Theme'],
   },
   {
-    name: 'Others',
+    name: 'Resources',
     links: ['Comparison with theme-ui'],
   },
 ];
 
-const Page = () => {
-  return <PackagePageLayout resources={resources} pkg={pkg} />;
-};
+const Page = () => <PackagePageLayout resources={resources} pkg={pkg} />;
 
 export default Page;

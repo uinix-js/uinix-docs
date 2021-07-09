@@ -49,6 +49,7 @@ const SystemPageLayout = ({name}) => {
       document
         .querySelectorAll('style[data-fela-type="STATIC"]')
         .forEach((stylesheet) => stylesheet.remove());
+
       load({
         config: defaultConfig,
         h,

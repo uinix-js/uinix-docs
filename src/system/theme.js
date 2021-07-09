@@ -83,7 +83,9 @@ const keyframes = {
     '100%': {opacity: '0'},
   },
   spin: {
-    '100%': {transform: 'rotate(360deg)'},
+    default: {
+      '100%': {transform: 'rotate(360deg)'},
+    },
   },
 };
 

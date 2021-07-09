@@ -1,0 +1,106 @@
+import {PackageLink} from '../../../system/components/index.js';
+
+# `hyperscript`
+
+In this guide, we will learn more about [hyperscript], and how <PackageLink name="uinix-ui" /> leverages it to support building UI components and systems in framework-agnostic ways.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Overview
+
+[hyperscript] supports a [DSL] to easily and idiomatically create a tree of nodes.  It popularizes the `h` (also known as `createElement`) method which usually has the following signature:
+
+`h(nodeName, attributes, [children])`
+- A required [node name].
+- An object containing attributes for the node.
+- An optional array of children which can take the following values:
+  - Scalar values (string, number, boolean, null, undefined)
+  - Elements created via `h`.
+  - Recurisvely nested arrays of the above.
+
+Using `h`, it is simple to create a tree of nodes.  For example,
+
+```js
+const tree = h(
+  'blockquote',
+  {
+    id: 'test',
+    className: 'demo'
+  }, [
+    'This is a blockquote with some '
+    h('strong', {}, 'strong'),
+    ' content'
+  ],
+);
+```
+
+will create the following DOM tree:
+
+```html
+<blockquote id="test" class="demo">
+  This is a blockquote with some <strong>strong</strong> content.
+</blockquote>
+```
+
+## [hyperscript]-based Libraries
+
+The `h` pattern is supported in many view libraries.  Some popular libraries are listed below:
+- [hyperscript]
+- [react]
+- [preact]
+- [vue]
+- [svelte]
+- [solid]
+- [mithril]
+- [htm]
+- [virtual-dom]
+
+## uinix-ui
+
+Please refer to **§ Frameworks** in <PackageLink name="uinix-ui" /> on how to use **uinix-ui** in the respective [hyperscript]-based libraries.
+
+**uinix-ui** supports any [hyperscript]-based view library.  This is specified at a single instance when loading your system.
+
+```js
+import {createElement as h} from 'react';
+import {load} from 'uinix-ui';
+
+const config = {...};
+const system = {...};
+
+// specify the h method when loading your system.
+load({h, config, system});
+```
+
+Building components will now use the specified/loaded `h` method.
+
+## Caveats
+
+[hyperscript] has a huge and vibrant ecosystem, but there is [no official or standardized API][hyperscript-issue-66].  This means that its implementation varies with different providers.  For example [React]'s `createElement` differs from [Mithril]'s `m` which differs from [Vue]'s `h` and so on.
+
+When using with <PackageLink name="uinix-ui" />, we assume the interface mentioned in [§ Overview](#overview).
+
+## Conclusion
+
+In this short guide, we covered [hyperscript] and view libraries utilizing [hyperscript].  We explored how <PackageLink name="uinix-ui" /> leverages [hyperscript] to support building UI components and systems in framework-agnostic ways.
+
+<!-- defs -->
+[dsl]: https://en.wikipedia.org/wiki/Domain-specific_language
+[htm]: https://github.com/developit/htm
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[hyperscript-issue-66]: https://github.com/hyperhype/hyperscript/issues/66
+[mithril]: https://github.com/MithrilJS/mithril.js
+[node name]: https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeName
+[preact]: https://github.com/preactjs/preact
+[react]: https://github.com/facebook/react
+[solid]: https://github.com/solidjs/solid
+[svelte]: https://github.com/sveltejs/svelte
+[virtual-dom]: https://github.com/Matt-Esch/virtual-dom
+[vue]: https://github.com/vuejs/vue

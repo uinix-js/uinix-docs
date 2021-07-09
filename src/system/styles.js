@@ -72,6 +72,24 @@ const global = {
     border: 'bordered',
     width: '100%',
   },
+  table: {
+    border: 'bordered',
+    borderCollapse: 'collapse',
+  },
+  td: {
+    border: 'bordered',
+    paddingLeft: 'm',
+    paddingRight: 'm',
+  },
+  th: {
+    border: 'bordered',
+    paddingLeft: 'm',
+    paddingRight: 'm',
+    whiteSpace: 'nowrap',
+  },
+  tr: {
+    verticalAlign: 'top',
+  },
   ...classes,
 };
 
