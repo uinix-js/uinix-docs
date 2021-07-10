@@ -4,7 +4,9 @@ import {PackageLink} from '../../../system/components/index.js';
 
 In this guide, we will learn how to organize and implement CSS animations for <PackageLink name="uinix-ui" /> components.
 
-> **Note:** This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
 
 ---
 
@@ -63,38 +65,24 @@ const theme = {
 
 Ensure that your system is `load`ed, then simply reference animations by their theme property paths and define them in the `styles` prop.
 
-The example below is interactive so feel free to edit the code!
-
 ```js live
-() => {
-  const animatedStyle = {
-    // edit and use a valid theme.animations property path (e.g. "infinite.fast")
-    animation: 'infinite.slow',
-    // edit and use a valid theme.keyframes property path (e.g. "spin.default")
-    animationName: 'flicker',
-  };
-
-  const animatedStyle2 = {
-    animation: 'infinite.fast',
-    animationName: 'spin.default',
-  };
-
-  // edit other styles
-  const otherStyle = {
-    border: 'bordered',
-    padding: 'm',
-  };
-
-  const styles = [animatedStyle, otherStyle];
-
-  return (
-    <Element styles={styles}>
-      Animation is simple with uinix-ui.
-      It works for any uinix-ui component, like the following icon component:
-      <Icon icon="up" styles={animatedStyle2} w="min-content" />
-    </Element>
-  );
-}
+<Element
+  styles={[
+    // edit using valid theme.animations and theme.keyframes property paths
+    {animation: 'infinite.slow', animationName: 'flicker'},
+    // other styles
+    {border: 'bordered', padding: 'm'},
+  ]}>
+  Animation is simple with uinix-ui.
+  It works for any uinix-ui component, like the following icon component:
+  <Icon
+    icon="up"
+    styles={[
+      {animation: 'infinite.fast', animationName: 'spin.default'},
+    ]}
+    w="min-content"
+  />
+</Element>
 ```
 
 > **Note:** There is a slight precedence requirement based on how shorthand CSS properties behave.  Since the [`animation`][css-animation-property] shorthand CSS property includes the [`animation-name`][css-animation-name-property] CSS property, you should ensure that the `animationName` key is specified after the `animation` key, to prevent overriding with an empty `animationName`.
