@@ -1,0 +1,133 @@
+import {BrandLink, PackageLink} from '../../../system/components/index.js';
+
+# Comparison with [theme-ui]
+
+In this documentation, we compare main differences between <PackageLink name="uinix-ui" /> and [theme-ui].  <PackageLink name="uinix-ui" /> is a [theme-ui]-inspired library, but there are some differences in goals, features and API designs, which this document hopefully helps outline.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Comparison
+
+The goal of this section is not to provide a recommendation for either library, but to provide a comparison between the libraries based on a collection of topics that are summarized and organized by the author.  If you find this collection of topics to be incomplete or inaccurate, please feel free to improve the documentation by raising an [issue].
+
+We will use the following legend to denote support:
+
+| Symbol | Description
+| :---: | :---
+| ○ | No support.
+| ◑ | Partial support with some API workarounds.
+| ● | Fully supported.
+| ◍ | Out of scope and can be supported by upstream implementors.
+
+### Goals
+
+| Description | uinix-ui | theme-ui
+| :--- | :---: | :---:
+| Themeable | ● | ●
+| Typography | ● | ●
+| Responsive | ● | ●
+| Theme Spec | ● | ●
+| Modern CSS-in-JS | ● | ●
+| [React] | ● | ●
+| Configurable | ● | ◑
+| Framework-agnostic | ● | ○
+| Components | ◑ | ●
+| Integrations | ◍ | ●
+
+Both [theme-ui] and <PackageLink name="uinix-ui" /> share high level goals of providing constraint-driven APIs to build UI components against a theme spec with modern CSS-in-JS support.  [theme-ui] is a [React]-only library and provides direct integrations with other frameworks (see [§ Frameworks](#frameworks)).  It also ships with a larger collection of ready-to-use components.  <PackageLink name="uinix-ui" /> is framework-agnostic, useable with any [hyperscript]-based view library, and ships with a minimal set of component primitives and leaves implementors to build relevant UI components and integrations.  <PackageLink name="uinix-ui" /> is also more configurable since it is unopinionated by design.  You can configure base `Element` styles and shorthand style props to fit your needs and requirements.
+
+### Setup
+
+| Description | uinix-ui | theme-ui
+| :--- | :---: | :---:
+| Transpile (e.g. [babel]) | ○ | ●
+| [JSX] | ○ | ●
+| [JSX pragma] | ○ | ●
+| Dependencies | ○ | ●
+
+[theme-ui] requires some setup with your build tools to transpile JSX and use custom JSX pragma.  To use components and typography, other packages and dependencies need to be installed (e.g. various `@theme-ui/*`, `typography-*` packages).  <PackageLink name="uinix-ui" /> is completely setup-free and build-free: no transpiling, no Babel, no JSX pragma, and no other dependencies are required.  Just plain old Javascript.
+
+### Frameworks
+
+| Description | uinix-ui | theme-ui
+| :--- | :---: | :---:
+| [react] | ● | ●
+| [preact] | ● | ○
+| [htm] | ● | ○
+| [mithril] | ● | ○
+| [solid] | ● | ○
+| [svelte] | ● | ○
+| [virtual-dom] | ● | ○
+| [vue] | ● | ○
+| [hyperscript]-based | ● | ○
+| [gatsby] | ◍ | ●
+| [prism] | ◍ | ●
+| [tailwind] | ◍ | ●
+| [tachyons] | ◍ | ●
+| [emotion] | ○ | ●
+| [typography.js] | ○ | ●
+
+The first major point of difference is [theme-ui] is a [React]-only library while <PackageLink name="uinix-ui" /> is framework-agnostic and works with any [hyperscript]-based view library.
+
+[theme-ui] has formal integrations with other libraries such as [emotion], [prism], [typography.js].  <PackageLink name="uinix-ui" />'s' lack of integrations is by design and deferred to upstream implementors in their respective ecosystems.  Note that integrations maybe formally supported by the <BrandLink /> ecosystem in the future.
+
+[theme-ui] provides a wide range of CSS and typography support through packages. <PackageLink name="uinix-ui" /> provides first-class CSS and typography support directly through its API.
+
+### Features
+
+| Description | uinix-ui | theme-ui | Comments
+| :--- | :---: | :---: | :---
+| Theme spec | ● | ● | The theme spec is more strict in **uinix-ui**.  Most theme properties are supported by both libraries, with small renaming differences.  See <PackageLink name="uinix-theme" /> for details.
+| `Box` primitive | ● | ● | **uinix-ui** refers to this as the `Element` component.
+| System hooks | ● | ● | Hooks to retrieve system values (e.g. `theme`).
+| Modern CSS-in-JS | ● | ● | Both libraries support modern CSS-in-JS features (e.g. nested/pseudo/class selectors).
+| Global/Root styles | ● | ● | Both libraries provide a way to define and set the global CSS stylesheet.
+| Themeable styles | ● | ● | Supported through the `sx` prop in **theme-ui** and the `styles` prop in **uinix-ui**.
+| Variant styles | ● | ● | Managed through `theme` in **theme-ui**, and explicitly in `styles` in **uinix-ui**.
+| Responsive styles | ● | ● | Managed through `theme` in **theme-ui**, and explicitly in `styles` (i.e. `styles.breakpoints`) in **uinix-ui**.
+| Typography styles | ● | ● | Managed through `theme` in **theme-ui**, and explicitly in `styles.typography` in **uinix-ui**.
+| Shorthand style props | ● | ◑ | Fully configurable in **uinix-ui** and fixed in **theme-ui**.
+| Reusable styles | ● | ◑ | Not formally managed in **theme-ui**.
+| Style functions | ● | ○ | Style functions in **uinix-ui** allow sharing and reusing of props-driven style logic.
+| Composable styles | ● | ○ | Styles in **uinix-ui** can be easily composed/merged by specifying them in array-form.
+| `theme.animations` | ● | ○ | Animations are formally supported in **uinix-ui**.
+| `theme.keyframes` | ● | ○ | CSS keyframes are formally supported in **uinix-ui**.
+| Icons | ● | ○ | **uinix-ui** formally supports SVG icons, utilities and the `Icon` component.
+| MDX Styles | ◍ | ● | Not in scope for **uinix-ui** and can be implemented upstream.
+| Syntax Highlighting | ◍ | ● | Not in scope for **uinix-ui** and can be implemented upstream.
+| Color/Dark modes | ○ | ● | In **uinix-ui**, this is achieved by simply using another `theme`.
+| Responsive theme | ○ | ● | In **uinix-ui**, the `theme` construct only defines theme values.  Responsive feature is delegated explicitly to the `styles` construct.
+
+## Conclusion
+
+In this section, we compared the main differences between <PackageLink name="uinix-ui" /> and [theme-ui].  We learned that [theme-ui] has a richer set of features and configurations, supporting a wider range of UI development needs.  However, it only supports [React]-based development, and requires additional setup, dependencies, and external knowledge when using specific features.  We learned that <PackageLink name="uinix-ui" /> is setup-free and framework-agnostic, and provides a smaller set of well-defined APIs and patterns usable in any [hyperscript]-based view library.
+
+<!-- defs -->
+[babel]: https://github.com/babel/babel
+[emotion]: https://github.com/emotion-js/emotion
+[gatsby]: https://github.com/gatsbyjs/gatsby
+[htm]: https://github.com/developit/htm
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[issue]: https://github.com/uinix-js/uinix-docs/issues
+[jsx]: https://facebook.github.io/jsx/
+[jsx pragma]: https://theme-ui.com/guides/jsx-pragma/
+[mdx]: https://github.com/mdx-js/mdx
+[mithril]: https://github.com/MithrilJS/mithril.js
+[preact]: https://github.com/preactjs/preact
+[prism]: https://github.com/PrismJS/prism
+[react]: https://github.com/facebook/react
+[solid]: https://github.com/solidjs/solid
+[svelte]: https://github.com/sveltejs/svelte
+[tachyons]: https://github.com/tachyons-css/tachyons
+[tailwind]: https://github.com/tailwindlabs/tailwindcss
+[theme-ui]: https://github.com/system-ui/theme-ui
+[typography.js]: https://github.com/KyleAMathews/typography.js
+[virtual-dom]: https://github.com/Matt-Esch/virtual-dom
+[vue]: https://github.com/vuejs/vue
