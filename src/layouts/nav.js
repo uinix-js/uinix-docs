@@ -16,7 +16,7 @@ const Nav = () => (
       ))}
       <Element as="li" variant="nav.item">
         <a href={getRepoLink()}>
-          <Icon icon="github" size="icon.m" title="Github" />
+          <Icon icon="github.mark" size="icon.m" title="Github" />
         </a>
       </Element>
     </Layout>

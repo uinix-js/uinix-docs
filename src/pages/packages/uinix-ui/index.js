@@ -7,23 +7,23 @@ const resources = [
   {
     name: 'Guides',
     links: [
-      'Build a Box',
-      'Build a Button',
-      'Variants',
+      'System Knowledge',
+      'Icons',
       'Typography',
+      'Variants',
       'Responsive',
       'Animations',
-      'System Knowledge',
-      'hyperscript',
+      'Build a Box',
+      'Build a Button',
     ],
   },
   {
     name: 'Recipes',
-    links: ['Components', 'Styles', 'Theme'],
+    links: ['Components', 'Layouts', 'Styles', 'Theme'],
   },
   {
     name: 'Resources',
-    links: ['Comparison with theme-ui'],
+    links: ['Comparison with theme-ui', 'hyperscript'],
   },
 ];
 

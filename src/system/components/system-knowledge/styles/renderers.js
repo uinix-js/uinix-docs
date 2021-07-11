@@ -8,7 +8,7 @@ const renderers = {
   fontFaces: (_, name) => (
     <Text fontFamily={name}>The quick brown fox jumps over the lazy dog</Text>
   ),
-  global: styled(true),
+  global: styled(),
   rules: nothing(),
   variants: styled(),
 };
