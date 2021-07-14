@@ -5,7 +5,7 @@ import {LiveEditor, LiveError, LiveProvider, LivePreview} from 'react-live';
 import * as fp from 'uinix-fp';
 import * as ui from 'uinix-ui';
 
-import CopyClipboard from './copy-clipboard.js';
+import Copyable from './copyable.js';
 import Window from './window.js';
 
 const {Element, Layout, Text} = ui;
@@ -66,24 +66,16 @@ const LiveCode = ({code, language, live, scope}) => {
     );
   }
 
+  const editableBadge = live && (
+    <Text textTransform="uppercase" variant="spec">
+      Editable
+    </Text>
+  );
+
   return (
-    <Element position="relative">
+    <Copyable other={editableBadge} text={code}>
       {content}
-      <Layout
-        align="center"
-        bottom="xs"
-        position="absolute"
-        right="xs"
-        spacing="m"
-      >
-        {live && (
-          <Text textTransform="uppercase" variant="spec">
-            Editable
-          </Text>
-        )}
-        <CopyClipboard text={code} />
-      </Layout>
-    </Element>
+    </Copyable>
   );
 };
 
