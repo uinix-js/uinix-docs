@@ -1,0 +1,267 @@
+import {PackageLink} from '../../../system/components/index.js';
+
+# Typography
+
+In this guide, we will learn how to organize and work with <PackageLink name="uinix-ui" /> typography features.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## `system.styles.typography`
+
+Typography specs are conveniently defined in <PackageLink name="uinix-ui" /> under the `system.styles.typography` construct.
+
+### `fontFaces`
+
+You can define [@font-face] CSS at-rules formally under `typography.fontFaces`.  Font faces defined this way are usable in `theme.fontFamilies` by using the font-face key.  Further styles may reference `theme.fontFamilies` theme values without re-referencing font-face definitions.
+
+The font-face `src` can be specified as a relative path (if your build supports importing font assets), or specified as an absolute URL.
+
+```js
+import relativeFontSrc from './fonts/relative-font.woff';
+
+const system = {
+  theme: {
+    fontFamilies: {
+      // can reference a font-face based on the keys under styles.typography.fontFaces
+      body: 'RelativeFont',
+      heading: 'AbsoluteFont',
+    },
+  },
+  styles: {
+    typography: {
+        fontFaces: {
+          RelativeFont: {
+            src: [relativeFontSrc],
+            fontWeight: '600', // other font-face properties can be defined
+          },
+          AbsoluteFont: {
+            src: 'https://absolute-font.woff',
+          },
+        },
+      },
+    },
+    global: {
+      body: {
+        // reference theme.fontFamilies (as usual when defining themed styles)
+        fontFamily: 'body',
+      },
+    },
+  },
+};
+```
+
+### `global`
+
+If you would like to apply typographic styles on the global CSS stylesheet affecting HTML elements, you can do so in `typography.global`.  The [HTML text fundamentals] MDN article is helpful for identifying common semantic typographic HTML elements.
+
+Say we have the following global typography styles referencing theme values:
+
+```js
+const system = {
+  styles: {
+    global: {
+      body: {
+        color: 'text.primary',
+        fontFamily: 'body',
+        fontSize: 'm',
+        lineHeight: 'body',
+        '-mozOsxFontSmoothing': 'grayscale',
+      },
+      a: {
+        color: 'text.link',
+        textDecoration: 'none',
+        transition: 'fade',
+      },
+      'a:hover': {
+        opacity: 'interactive',
+      },
+      blockquote: {
+        borderLeft: 'bordered',
+        borderWidth: 'l',
+        fontStyle: 'italic',
+        marginLeft: 0,
+        marginBottom: 'm',
+        marginRight: 0,
+        marginTop: 'm',
+        paddingLeft: 'm',
+      },
+      code: {
+        backgroundColor: 'background.tones.faded',
+        borderRadius: 's',
+        fontFamily: 'monospace',
+      },
+      h1: {
+        marginBottom: 'm',
+        fontSize: 'xxl',
+        fontWeight: 'bold',
+        marginTop: 'xl',
+      },
+      h2: {
+        marginBottom: 'm',
+        fontSize: 'xl',
+        fontWeight: 'bold',
+        marginTop: 'xl',
+      },
+      h3: {
+        marginBottom: 'm',
+        fontSize: 'l',
+        fontWeight: 'bold',
+        marginTop: 'l',
+      },
+      pre: {
+        backgroundColor: 'background.tones.faded',
+        border: 'bordered',
+        fontFamily: 'monospace',
+        fontSize: 's',
+        margin: 0,
+        overflow: 'auto',
+        padding: 'm',
+      },
+    },
+  },
+}
+```
+
+The following HTML will render with the specified styles,
+
+```js live
+<Layout align="start" direction="column" spacing="m">
+  I am a body text.  This and many examples in this guide are interactive.  Edit and play around with the code!
+  <p>I am a paragraph text</p>
+  <a href="#">I am a link.</a>
+  <blockquote>I am a blockquote.</blockquote>
+  <code>I am a code.</code>
+  <h1>I am a h1.</h1>
+  <h2>I am a h2.</h2>
+  <h3>I am a h3.</h3>
+  <pre>I am a code block.</pre>
+</Layout>
+```
+
+> **Note:** You can also define global typography styles at the parent level in `system.styles.global`.  We recommend defining and organizing typography styles explicitly in `system.styles.typography`.
+
+### `variants`
+
+You can define typography variant styles under `typography.variants`.  These variants can be easily used and applied by the [`Text`](#text) component.
+
+Say we have the following variants,
+
+```js
+const system = {
+  styles: {
+    typography: {
+      variants: {
+        brand: {
+          flex: 'none',
+          fontSize: 'l',
+          fontWeight: 'bold',
+          margin: 0,
+          paddingBottom: 's',
+          paddingTop: 's',
+        },
+        chip: {
+          backgroundColor: 'background.tones.faded',
+          border: 'bordered',
+          borderRadius: 'm',
+          color: 'text.secondary',
+          paddingLeft: 'chip',
+          paddingRight: 'chip',
+          fontSize: 'xs',
+        },
+        description: {
+          color: 'text.secondary',
+          fontSize: 's',
+        },
+        spec: {
+          color: 'text.secondary',
+          fontFamily: 'monospace',
+          fontSize: 'xs',
+        },
+      },
+    },
+  },
+};
+```
+
+We can render the variants easily with the `Text` component,
+
+```js live
+// variant property paths are defined relative to typography.variants
+<Layout align="start" direction="column" spacing="m">
+  <Text variant="brand">I am a "brand" variant.</Text>
+  <Text variant="chip">I am a "chip" variant.</Text>
+  <Text variant="description">I am a "description" variant.</Text>
+  <Text variant="spec">I am a "spec" variant.</Text>
+</Layout>
+```
+
+> **Note:** You can also define global typography variant styles at the parent level in `system.styles.variants`.  Note that, however, the [`Text`](#text) component can only access variant styles defined in `system.styles.typography.variants`.  We recommend defining and organizing typography styles explicitly in `system.styles.typography`.
+
+## `Text`
+
+`Text` is a component primitive interoperating with the [`system.styles.typography`](#systemstylestypography) spec.
+
+### `as`
+
+You can render `Text` as any HTML element with the `as` prop.  This also benefits from global styles defined in [`system.styles.typography.global`](#global).
+
+```js live
+<Layout align="start" direction="column" spacing="m">
+  <Text as="a" href="#">I am a link.</Text>
+  <Text as="blockquote">I am a blockquote.</Text>
+  <Text as="pre">I am a code block.</Text>
+</Layout>
+```
+
+### `variant`
+
+The `variant` prop allows specifying variant styles defined in [`system.styles.typography.variants`](#variants).
+
+### `Element` props
+
+`Text` is composed from `Element`, and therefore benefits from all configurations set on `Element`.  You can apply addition themed styles with the `styles` and `styleProps` props.
+
+### Typography props
+
+Lastly, as a primitive typography element, `Text` supports easy application of typography styles for common typographic CSS properties.  Wherever supported, theme values can be applied to these props.  Please refer to the <PackageLink name="uinix-ui" /> API documentation for the full list of props, but the following provides a few interactive examples.
+
+```js live
+<Layout align="start" direction="column" spacing="m">
+  <Text fontFamily="monospace">I am a monospace text.</Text>
+  <Text fontStyle="italic">I am an italicized text.</Text>
+  <Text fontWeight="bold">I am a bolded text</Text>
+  <Text letterSpacing="4">I am a letter-spaced text.</Text>
+  <Text wordSpacing="20px">I am a word-spaced text</Text>
+  <Text textAlign="center">I am a centered text</Text>
+  <Text textTransform="uppercase">I am an uppercased text</Text>
+  <Text
+    textOverflow="ellipsis"
+    whiteSpace="nowrap"
+    styles={{overflow: 'hidden', width: '200px'}}>
+    I am a truncated text. I am a truncated text.
+  </Text>
+</Layout>
+```
+
+## Conclusion
+
+In this guide, we learned how to work with typography in <PackageLink name="uinix-ui" /> .  We learned how to organize typography specs in `system.styles.typography`, define and use `typography.fontFaces`, apply `typography.global` styles to HTML elements, and use the `Text` component with `typography.variants`.
+
+<!-- defs -->
+[@font-face]: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+[HTML text fundamentals]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/HTML_text_fundamentals
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[react]: https://github.com/facebook/react
+
+
