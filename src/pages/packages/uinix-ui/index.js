@@ -10,11 +10,10 @@ const resources = [
       'System Knowledge',
       'Icons',
       'Typography',
-      'Variants',
-      'Responsive',
+      'Variant Styles',
+      'Responsive Styles',
       'Animations',
       'Build a Box',
-      'Build a Button',
     ],
   },
   {

@@ -1,0 +1,210 @@
+import {PackageLink} from '../../../system/components/index.js';
+
+# Variant Styles
+
+In this guide, we will learn how to organize and use style variants with <PackageLink name="uinix-ui" /> components.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## `system.styles.variants`
+
+Similar to [theme-ui variants], <PackageLink name="uinix-ui" /> supports variant styles by defining them in the `system.styles.variants` construct.  Variants can be arbitrarily nested for organization.  Variants may reference themed styles based on the definitions in `system.theme`, and also benefit from responsive styles.
+
+For this guide, we will assume the following variants defined in `system.styles.variants`.
+
+```js
+const system = {
+  styles: {
+    variants: {
+      button: {
+        small: {
+          backgroundColor: 'transparent',
+          border: 'bordered',
+          borderRadius: 'm',
+          color: 'text.primary',
+          fontSize: 'xs',
+          fontWeight: 'bold',
+          paddingBottom: 'xxs',
+          paddingLeft: 'xs',
+          paddingRight: 'xs',
+          paddingTop: 'xxs',
+        },
+      },
+      layout: {
+        container: {
+          margin: '0 auto',
+          maxWidth: 'width.container',
+          paddingLeft: 'l',
+          paddingRight: 'l',
+          width: '100%',
+        },
+        fullWidth: {
+          paddingLeft: 'l',
+          paddingRight: 'l',
+          width: '100%',
+        },
+      },
+      nav: {
+        list: {
+          margin: 0,
+          padding: 0,
+        },
+        item: {
+          display: 'inline',
+          fontSize: 'm',
+          listStyleType: 'none',
+        },
+      },
+    },
+  },
+};
+```
+
+## Using **uinix-ui** components
+
+All <PackageLink name="uinix-ui" /> components support accessing variants through the `variant` prop.  A valid `variant` value is the property path of the variant relative to `system.styles.variants`.
+
+> **Note:** The `Text` component is the only exception and uses a `variant` property path relative to `system.styles.typography.variants`.
+
+The following interactive example shows how to apply variants with <PackageLink name="uinix-ui" /> components.  Try removing or using a different variant to observe visual changes.
+
+```js live scope=ui
+<Layout
+  align="start"
+  b="bordered"
+  direction="column"
+  spacing="m"
+  variant="layout.container">
+  <div>
+    I am a Layout component referencing the "system.styles.variants.layout.container" variant".
+  </div>
+  <Element variant="button.small">
+    I am an Element component referencing the "system.styles.variants.button.small" variant.
+  </Element>
+  <Icon
+    icon="github.mark"
+    size="icon.m"
+    title="I am an Icon component referencing the 'system.styles.variants.button.small' variant."
+    variant="button.small"
+  />
+  <Text variant="chip">
+    I am a Text component referencing the "system.styles.typography.variants.chip" variant.
+  </Text>
+</Layout>
+```
+
+## Building components
+
+Variants in <PackageLink name="uinix-ui" /> are decoupled from how they are defined in [`system.styles.variants`](#systemstylesvariants).  This section outlines how we can build components with variant APIs similar to those found in [theme-ui variants].
+
+Let's work on building a simple `Button` with variant support.  We'll start with the expected public interface:
+
+```js live scope=ui
+() => {
+  const Button = ({
+    text,
+    onClick,
+    variant
+  }) => {
+    return (
+      <button onClick={onClick}>
+        {text}
+      </button>
+    );
+  }
+
+  return (
+    <Button
+      text="I am a button"
+      onClick={() => alert('clicked')}
+    />
+  );
+}
+```
+
+We want to style the `button` based on variants defined in `system.styles.variants`.  This can be easily implemented by using the <PackageLink name="uinix-ui" /> `Element` component:
+
+```js live scope=ui
+() => {
+  const Button = ({
+    text,
+    onClick,
+    variant
+  }) => {
+    // simple use an Element and pass the variant prop through
+    return (
+      <Element
+        as="button"
+        variant={variant}
+        onClick={onClick}>
+        {text}
+      </Element>
+    );
+  }
+
+  return (
+    <Button
+      text="I am a small button"
+      variant="button.small"
+      onClick={() => alert('clicked')}
+    />
+  );
+}
+```
+
+There is a bad API design of having to specify the full variant path (i.e. `'button.*'`) for a variant defined in `system.styles.variants.buttons`.  We are building a `Button` component after all and this feels redundant!  Ideally, users should be able to specify this without the `'button.'` prefix.  The current behavior is the default non-opinionated behavior when using <PackageLink name="uinix-ui" /> components with the `variant` prop.  Customizing this can be easily implemented with a simple string concatenation.
+
+```js live scope=ui
+() => {
+  const Button = ({
+    text,
+    onClick,
+    variant = '', // diff: set a default value
+  }) => {
+    return (
+      <Element
+        as="button"
+        variant={`button.${variant}`} // diff: concatenate variant
+        onClick={onClick}>
+        {text}
+      </Element>
+    );
+  }
+
+  return (
+    <Button
+      text="I am a small button"
+      variant="small" // usage: drop the `button.` prefix
+      onClick={() => alert('clicked')}
+    />
+  );
+}
+```
+
+That's all it takes to build components with [theme-ui variants] support!  You can now build out a collection of button variants under `system.styles.variants.button`.
+
+There is really no magic behind the scenes either.  This works in a simple way because <PackageLink name="uinix-ui" />'s variant API is based on resolving a simple property path for variants.  <PackageLink name="uinix-ui" /> does not implement formal variant support per component since it only ships with four component primitives.  Supporting variants is extremely simple, as the example above has demonstrated, and you have full control over how to name and organize variants in `system.styles.variants`.
+
+Your variants, your system, your rules 🤘.
+
+> **Note:** The <PackageLink name="uinix-ui" /> `Text` component is actually implemented this way, so feel free to check out the source code in addition to this section!
+
+## Conclusion
+
+In this short guide, we learned how to organize and use variant styles in `system.styles.variants`.  We also learned how to build components that interface with the decoupled variant definitions.
+
+<!-- defs -->
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[react]: https://github.com/facebook/react
+[theme-ui variants]: https://theme-ui.com/guides/variants
