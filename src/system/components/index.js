@@ -5,6 +5,7 @@ export {default as BrandText} from './brand-text.js';
 export {default as Button} from './button.js';
 export {default as Card} from './card.js';
 export {default as Chips} from './chips.js';
+export {default as CopyClipboard} from './copy-clipboard.js';
 export {default as Dot} from './dot.js';
 export {default as Heading} from './heading.js';
 export {default as Js} from './js.js';

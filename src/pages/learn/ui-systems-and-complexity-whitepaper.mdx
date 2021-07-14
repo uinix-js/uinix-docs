@@ -38,7 +38,7 @@ This powerful model allows us to reason about building UIs as no more than writi
 
 Here are some simple functions that we can compose:
 
-```js live
+```js live scope=fp
 () => {
   const greet = name => {
     return `Hi ${name}`;
@@ -67,7 +67,7 @@ Feel free to edit the code on the right (e.g. change the piped functions in `sho
 
 View functions, more commonly known as *components*, are simply functions!
 
-```js live
+```js live scope=ui
 () => {
   const Button = ({ text }) => {
     return <div>{text}</div>;
@@ -107,7 +107,7 @@ The above example uses the JSX syntax commonly used in [React][react], but compo
 
 To confirm this, you can update the <code><span style="color: red;">BigRedButton</span></code> in the earlier example with this vanilla JS code instead, and modify and experiment with the pipe accordingly.
 
-```js
+```js scope=fp
 // a helper to remap arguments into an object under the `children` property.
 const attachChildren = (x) => ({ children: x });
 
@@ -150,7 +150,7 @@ Let's keep an open mind and go back to basics with a simple proposition that we 
 
 Revisiting our simple functions,
 
-```js live
+```js live scope=fp
 () => {
   const greet = name => {
     return `Hi ${name}`;
@@ -178,7 +178,7 @@ Revisiting our simple functions,
 Let's now try to model style declarations as either style objects or *style functions* returning style objects.  With the help of an [`Element`][element-component] component, we will assign these style functions to the `styles` prop and specify the data for these function in the `styleProps` prop.
 
 
-```js live
+```js live scope=ui
 () => {
   const styles = {
     button: { // a simple object
@@ -230,7 +230,7 @@ Feel free to configure the `styleProps` in the editor or create new style defini
 
 Just as components, and generally functions, can be composed, we will compose styles by simply piping multiple smaller style functions to the `styles` prop.  Details on how style composition is performed by the [`Element`][element-component] component will be left as a future reading in the [`uinix-ui`][uinix-ui] docs.
 
-```js live
+```js live scope=ui
 () => {
   const styles = {
     button: {
@@ -370,7 +370,7 @@ A quick reminder again that all code examples are *interactive*, so feel free to
 
 Elliot begins his journey with a simple [`Element`][element-component] rendering some text:
 
-```js live
+```js live scope=ui
 <Element>
   The quick brown fox jumps over the lazy dog
 </Element>
@@ -378,7 +378,7 @@ Elliot begins his journey with a simple [`Element`][element-component] rendering
 
 He receives initial design requirements to style it accordingly:
 
-```js live
+```js live scope=ui
 <Element
   styles={{
     borderRadius: '4px',
@@ -391,7 +391,7 @@ He receives initial design requirements to style it accordingly:
 
 He then receives further requirements that this component should support conditional behaviors if it `isBig`.  He does so and implements it naturally in a simple way:
 
-```js live
+```js live scope=ui
 () => {
   return (
     <Element
@@ -414,7 +414,7 @@ He then receives further requirements that this component should support conditi
 
 A few days later, he receives another requirement to apply the red styles on this component:
 
-```js live
+```js live scope=ui
 () => {
   return (
     <Element
@@ -441,7 +441,7 @@ He ships his simple component, and gives it a name `Danger`.  Everyone, includin
 
 A few days later, he receives design requirements on a new component.  He's named the component `Warning` and here is the current implementation:
 
-```js live
+```js live scope=ui
 () => {
   return (
     <Element
@@ -468,7 +468,7 @@ He notices that `Danger` and `Warning` are very similar and can potentially shar
 
 Elliot goes back to the drawing board and thinks carefully how he implement the new requirements and paying careful attention to avoid duplication and reduce complexity.  Luckily, this seems easy enough:
 
-```js live
+```js live scope=ui
 () => {
   const variants = {
     'danger': {
@@ -525,7 +525,7 @@ Elliot proudly names this component `Notice` and explains its behaviors to his t
 
 A few days later, Elliot receives requirements to create a <code><span style="color: red;">BigRedButton</span></code>  component.  Here is his implementation:
 
-```js live
+```js live scope=ui
 () => {
   return (
     <Element
@@ -549,7 +549,7 @@ A few days later, Elliot receives requirements to create a <code><span style="co
 
 He notices that it shares some aspects with the `Notice` component he created earlier.  Being the diligent and responsible developer, Elliot goes back to the drawing board to see how he can decouple and organize this code into smaller parts:
 
-```js live
+```js live scope=ui
 () => {
   const danger = {
     backgroundColor: 'red',
@@ -624,7 +624,7 @@ A few days later, the Design team comes back to Elliot and raises a non-negotiab
 
 Elliot, after days of successfully refactoring code, confidently heads to the drawing board again, and studies the relevant parts of his code:
 
-```js live
+```js live scope=ui
 () => {
   const danger = {
     backgroundColor: 'red',
@@ -688,7 +688,7 @@ Note that the two points above are the inevitable precursors to complexity.
 
 It occurred to him that the current state of the *reusable and abstracted* code is actually *more complex* than the duplicated but more *composable* approach presented below:
 
-```js live
+```js live scope=ui
 () => {
   const styles = {
     big: {

@@ -42,7 +42,7 @@ Doing the above allows icons to be configured with theme values (i.e. `sizes` an
 
 Use the `Icon` component to easily render icons from the system.
 
-```js live
+```js live scope=ui
 <Layout spacing="m">
   <Icon icon="github.mark" />
   <Icon icon="up" />
@@ -73,7 +73,7 @@ const system = {
 
 You can easily apply appropriate sizes and colors to `Icon`.
 
-```js live
+```js live scope=ui
 <Layout spacing="m">
   <Icon
     color="brand.primary"
@@ -92,7 +92,7 @@ You can easily apply appropriate sizes and colors to `Icon`.
 
 It is recommended to use the `Icon` component when building components with <PackageLink name="uinix-ui" />.  If you would simply like to retrieve the rendered SVG element, you can do this with the `useIcon` system hook.
 
-```js live
+```js live scope=ui
 () => {
   const Example = () => {
     const icon = useIcon('github.mark');

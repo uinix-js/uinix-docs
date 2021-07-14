@@ -29,7 +29,6 @@ Please feel free to submit any [issues] or [pull requests][pull-requests].
 
 ## todos
 - [ ] Update homepage.
-- [ ] Update `uinix-ui` guides.
 
 <!-- project -->
 [issues]: https://github.com/uinix-js/uinix-docs/issues

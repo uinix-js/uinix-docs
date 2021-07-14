@@ -203,6 +203,16 @@ const typography = {
 };
 
 const variants = {
+  button: {
+    small: {
+      ...global.button,
+      fontSize: 'xs',
+      paddingBottom: 'xxs',
+      paddingLeft: 'xs',
+      paddingRight: 'xs',
+      paddingTop: 'xxs',
+    },
+  },
   layout: {
     container: {
       margin: '0 auto',
