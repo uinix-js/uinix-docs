@@ -13,11 +13,12 @@ const Breadcrumbs = () => {
   const crumbs = pathname
     .split('/')
     .filter(i)
-    .map((subpath, i, array) => {
-      const slash = i < array.length - 1 ? '/' : '';
-      const path = `${subpath}${slash}`;
+    .map((subpath, i) => {
+      const isFirst = i === 0;
+      const slash = isFirst > 0 ? '' : '/';
+      const path = `${slash}${subpath}`;
+      const text = isFirst ? capitalize(path) : path;
       to += path;
-      const text = i === 0 ? capitalize(path) : path;
       return {text, to};
     });
 
@@ -30,7 +31,7 @@ const Breadcrumbs = () => {
             const isOnlyCrumb = array.length === 1;
 
             const color = isOnlyCrumb ? 'text.primary' : 'text.light';
-            const fontWeight = isOnlyCrumb || !isLastCrumb ? 'bold' : 'regular';
+            const fontWeight = isOnlyCrumb || !isLastCrumb ? 'bold' : 'normal';
             const crumb = <BrandText text={text} />;
 
             return (

@@ -27,7 +27,7 @@ const PackagePageLayout = ({pkg, resources = []}) => {
         <Text variant="description">{description}</Text>
         <Chips chips={keywords} />
         <Link to="readme">
-          <h4>readme</h4>
+          <h4>Readme</h4>
         </Link>
       </Layout>
     </Card>
