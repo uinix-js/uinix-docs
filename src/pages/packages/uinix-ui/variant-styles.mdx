@@ -1,4 +1,5 @@
-import {PackageLink} from '../../../system/components/index.js';
+import {Json, PackageLink} from '../../../system/components/index.js';
+import styles from '../../../system/styles.js';
 
 # Variant Styles
 
@@ -23,53 +24,13 @@ Similar to [theme-ui variants], <PackageLink name="uinix-ui" /> supports variant
 
 For this guide, we will assume the following variants defined in `system.styles.variants`.
 
-```js
-const system = {
-  styles: {
-    variants: {
-      button: {
-        small: {
-          backgroundColor: 'transparent',
-          border: 'bordered',
-          borderRadius: 'm',
-          color: 'text.primary',
-          fontSize: 'xs',
-          fontWeight: 'bold',
-          paddingBottom: 'xxs',
-          paddingLeft: 'xs',
-          paddingRight: 'xs',
-          paddingTop: 'xxs',
-        },
-      },
-      layout: {
-        container: {
-          margin: '0 auto',
-          maxWidth: 'width.container',
-          paddingLeft: 'l',
-          paddingRight: 'l',
-          width: '100%',
-        },
-        fullWidth: {
-          paddingLeft: 'l',
-          paddingRight: 'l',
-          width: '100%',
-        },
-      },
-      nav: {
-        list: {
-          margin: 0,
-          padding: 0,
-        },
-        item: {
-          display: 'inline',
-          fontSize: 'm',
-          listStyleType: 'none',
-        },
-      },
+<Json
+  value={{
+    styles: {
+      variants: styles.variants,
     },
-  },
-};
-```
+  }}
+/>
 
 ## Using **uinix-ui** components
 

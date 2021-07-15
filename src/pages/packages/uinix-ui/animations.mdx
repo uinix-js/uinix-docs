@@ -1,4 +1,5 @@
-import {PackageLink} from '../../../system/components/index.js';
+import {Json, PackageLink} from '../../../system/components/index.js';
+import theme from '../../../system/theme.js';
 
 # Animations
 
@@ -24,42 +25,29 @@ Animations and CSS keyframes receive first-class support in <PackageLink name="u
 For more details on how animation theme properties relate with their corresponding CSS properties, please refer to the <PackageLink name="uinix-theme" /> package.
 
 
-### `theme.animations`
+### `system.theme.animations`
 
 Define the [CSS `animation` property][css-animation-property] in `theme.animations`.  You can recursively nest theme definitions as long as they eventually resolve to valid `animation` CSS values.
 
-```js
-const theme = {
-  animations: {
-    infinite: {
-      fast: '1s ease-in-out infinite',
-      default: '2s ease-in-out infinite',
-      slow: '5s ease-in-out infinite',
+<Json
+  value={{
+    theme: {
+      animations: theme.animations,
     },
-  },
-};
-```
+  }}
+/>
 
-### `theme.keyframes`
+### `system.theme.keyframes`
 
-Define the [CSS `animation-name` property][css-animation-name-property] in `theme.keyframes`.  You can recursively nest theme definitions as long as they eventually resolve to valid [`CSSKeyframesRule`][csskeyframesrule] expressed in JS notation.
+Define the [CSS `animation-name` property][css-animation-name-property] in `system.theme.keyframes`.  You can recursively nest theme definitions as long as they eventually resolve to valid [`CSSKeyframesRule`][csskeyframesrule] expressed in JS notation.
 
-```js
-const theme = {
-  keyframes: {
-    flicker: {
-      '0%': {opacity: '0'},
-      '50%': {opacity: '1'},
-      '100%': {opacity: '0'},
+<Json
+  value={{
+    theme: {
+      keyframes: theme.keyframes,
     },
-    spin: {
-      default: { // can be recursively nested and organized
-        '100%': {transform: 'rotate(360deg)'},
-      },
-    },
-  },
-};
-```
+  }}
+/>
 
 ## Using animations
 

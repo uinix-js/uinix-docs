@@ -1,4 +1,5 @@
-import {PackageLink} from '../../../system/components/index.js';
+import {Json, PackageLink} from '../../../system/components/index.js';
+import styles from '../../../system/styles.js';
 
 # Typography
 
@@ -67,71 +68,15 @@ If you would like to apply typographic styles on the global CSS stylesheet affec
 
 Say we have the following global typography styles referencing theme values:
 
-```js
-const system = {
-  styles: {
-    global: {
-      body: {
-        color: 'text.primary',
-        fontFamily: 'body',
-        fontSize: 'm',
-        lineHeight: 'body',
-        '-mozOsxFontSmoothing': 'grayscale',
-      },
-      a: {
-        color: 'text.link',
-        textDecoration: 'none',
-        transition: 'fade',
-      },
-      'a:hover': {
-        opacity: 'interactive',
-      },
-      blockquote: {
-        borderLeft: 'bordered',
-        borderWidth: 'l',
-        fontStyle: 'italic',
-        marginLeft: 0,
-        marginBottom: 'm',
-        marginRight: 0,
-        marginTop: 'm',
-        paddingLeft: 'm',
-      },
-      code: {
-        backgroundColor: 'background.tones.faded',
-        borderRadius: 's',
-        fontFamily: 'monospace',
-      },
-      h1: {
-        marginBottom: 'm',
-        fontSize: 'xxl',
-        fontWeight: 'bold',
-        marginTop: 'xl',
-      },
-      h2: {
-        marginBottom: 'm',
-        fontSize: 'xl',
-        fontWeight: 'bold',
-        marginTop: 'xl',
-      },
-      h3: {
-        marginBottom: 'm',
-        fontSize: 'l',
-        fontWeight: 'bold',
-        marginTop: 'l',
-      },
-      pre: {
-        backgroundColor: 'background.tones.faded',
-        border: 'bordered',
-        fontFamily: 'monospace',
-        fontSize: 's',
-        margin: 0,
-        overflow: 'auto',
-        padding: 'm',
+<Json
+  value={{
+    styles: {
+      typography: {
+        global: styles.typography.global,
       },
     },
-  },
-}
-```
+  }}
+/>
 
 The following HTML will render with the specified styles,
 
@@ -157,42 +102,16 @@ You can define typography variant styles under `typography.variants`.  These var
 
 Say we have the following variants,
 
-```js
-const system = {
-  styles: {
-    typography: {
-      variants: {
-        brand: {
-          flex: 'none',
-          fontSize: 'l',
-          fontWeight: 'bold',
-          margin: 0,
-          paddingBottom: 's',
-          paddingTop: 's',
-        },
-        chip: {
-          backgroundColor: 'background.tones.faded',
-          border: 'bordered',
-          borderRadius: 'm',
-          color: 'text.secondary',
-          paddingLeft: 'chip',
-          paddingRight: 'chip',
-          fontSize: 'xs',
-        },
-        description: {
-          color: 'text.secondary',
-          fontSize: 's',
-        },
-        spec: {
-          color: 'text.secondary',
-          fontFamily: 'monospace',
-          fontSize: 'xs',
-        },
+
+<Json
+  value={{
+    styles: {
+      typography: {
+        variants: styles.typography.variants,
       },
     },
-  },
-};
-```
+  }}
+/>
 
 We can render the variants easily with the `Text` component,
 
