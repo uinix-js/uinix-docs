@@ -46,14 +46,23 @@ const elementShorthandPropsMapping = {
 const elementStyles = [styles.disabled, styles.interactive, styles.truncate];
 
 const responsiveCssProperties = [
+  'backgroundColor',
+  'color',
   'display',
   'flexDirection',
+  'fontSize',
+  'fontWeight',
+  'height',
+  'justifyContent',
+  'letterSpacing',
   'margin',
   'marginBottom',
   'marginLeft',
   'marginRight',
   'marginTop',
   'padding',
+  'textAlign',
+  'width',
 ];
 
 const config = {

@@ -17,7 +17,7 @@ const scopes = {
 
 const getScope = (scope) => scopes[scope] || {};
 
-const EDITOR_MAX_HEIGHT = 1000;
+const EDITOR_MAX_HEIGHT = 2000;
 
 // https://mdxjs.com/guides/live-code
 const LiveCode = ({code, language, live, scope}) => {
@@ -50,16 +50,16 @@ const LiveCode = ({code, language, live, scope}) => {
       >
         {({tokens, getLineProps, getTokenProps}) => (
           <Element as="pre">
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({line, key: i})}>
-                {line.map(
-                  (token, j) =>
-                    j < line.length - 1 && (
+            {tokens.map(
+              (line, i) =>
+                i < tokens.length - 1 && (
+                  <div key={i} {...getLineProps({line, key: i})}>
+                    {line.map((token, j) => (
                       <span key={j} {...getTokenProps({token, key: j})} />
-                    ),
-                )}
-              </div>
-            ))}
+                    ))}
+                  </div>
+                ),
+            )}
           </Element>
         )}
       </Highlight>
