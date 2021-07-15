@@ -1,0 +1,188 @@
+import {Json, PackageLink} from '../../../system/components/index.js';
+import config from '../../../system/config.js';
+import styles from '../../../system/styles.js';
+import theme from '../../../system/theme.js';
+
+# Responsive Styles
+
+In this guide, we will learn how to setup and use responsive styles with <PackageLink name="uinix-ui" /> components.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## `config.responsiveCssProperties`
+
+By default, <PackageLink name="uinix-ui" /> is configured to be non-responsive.  To whitelist responsive CSS properties, we need to configure this in `config.responsiveCssProperties`.
+
+For example, configuring the following CSS properties will allow usage of responsive styles for these properties in [`system.styles`](#systemstyles).
+
+<Json
+  value={{
+    config: {
+      responsiveCssProperties: config.responsiveCssProperties
+    },
+  }}
+/>
+
+> **Note:** This may appear as an inconvenience for some users, but keep in mind that <PackageLink name="uinix-ui" /> is designed to be non-opinionated, and explicitly configuring this has its benefits as well!
+
+## `system.styles`
+
+### Breakpoints
+
+The next step is to define [@media] query breakpoints by specifying them conveniently in `system.styles.breakpoints` in an array of `min-width` values.
+
+For example, with the following breakpoints specified:
+
+<Json
+  value={{
+    styles: {
+      breakpoints: styles.breakpoints,
+    },
+  }}
+/>
+
+The respective `min-width`-based media query breakpoints will be created:
+```css
+@media (min-width: 468px) {}
+@media (min-width: 768px) {}
+```
+
+Once breakpoints are set up and the `system` and `config` is `load`ed, we can define responsive styles for whitelisted responsive CSS properties in array form.
+
+For example, given the following style definition,
+
+```js
+const responsiveStyle = {
+  color: ['red', 'red', 'blue'],
+  padding: ['4px', '4px', '16px'],
+},
+```
+
+It will be rendered into the following CSS based on the specified breakpoints.
+
+```css
+.rendered {
+  color: red;
+  padding: 4px;
+}
+
+@media (min-width: 468px) {
+  .rendered {
+    color: red;
+    padding: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .rendered {
+    color: blue;
+    padding: 16px;
+  }
+}
+```
+
+For more details, please refer to the <PackageLink name="uinix-ui" /> API documentation.
+
+### Styles
+
+Responsive styles are implemented by specifying theme or CSS values in array-form.  This terse and delightful API is popularized in [theme-ui], and originates from the [styled-system array-props].
+
+With the following [`config.responsiveCssProperties`](#configresponsivecssproperties) and [breakpoints](#breakpoints) configured in earlier section, and referencing an example `theme` below, we can easily apply responsive styles as detailed in the interactive example below.
+
+#### Theme
+
+<Json value={{theme}} />
+
+#### Example
+
+```js live scope=ui
+<Layout
+  as="ul"
+  direction="column"
+  // responsive component props
+  spacing={['s', 's', 'xl']}
+  // shorthand style props are responsive!
+  bg={['background.primary', 'background.primary', 'background.tones.faded']}
+  color={['text.light', 'text.light', 'text.primary']}
+  p={['s', 's', 'xl']}>
+  <Element as="li">
+    This is an example demonstrating responsive styles with uinix-ui components.  Most component props are conveniently responsive.  Feel free to resize the window to test responsive styles!
+  </Element>
+  <Element as="li">
+    This example is interactive, so feel free to edit the code and explore in more detail.  Remember that only whitelisted CSS properties are responsive, so you maybe limited with your explorations in this example.
+  </Element>
+  <hr />
+  <Element
+    as="li"
+    styleProps={{
+      isActive: true,
+    }}
+    styles={[
+      ({isActive}) => ({
+        backgroundColor: isActive ? 'brand.primary' : undefined,
+        color: isActive ? 'white' : 'text.primary',
+      }),
+      {
+        fontSize: ['s', 's', 'xl'],
+        fontWeight: ['light', 'light', 'bold'],
+        padding: ['s', 's', 'l'],
+      },
+    ]}>
+    This is a responsive Element component using styles and styleProps.
+  </Element>
+  <Text
+    as="li"
+    color={['text.primary', 'text.primary', 'text.link']}
+    fontSize={['s', 's', 'xl']}
+    fontWeight={['light', 'light', 'bold']}>
+    This is a responsive Text component.
+  </Text>
+  <Element as="li">
+    Icons in this layout will be arranged, spaced, sized responsively.
+    <Layout
+      // simple but powerful way to switch layout directions
+      direction={['column', 'column', 'row']}
+      justify={['flex-start', 'flex-start', 'space-between']}
+      py="m"
+      spacing={['s', 's', 'l']}>
+      {Array.from({length: 5}).map((_, i) => (
+        <Icon
+          key={i}
+          color={['brand.light', 'brand.light', 'brand.primary']}
+          icon="github.mark"
+          size={['icon.s', 'icon.s', 'icon.l']}
+        />
+      ))}
+    </Layout>
+  </Element>
+  <Element
+    // simple but powerful way to hide elements
+    display={['none', 'none', 'block']}>
+    This Element will disappear in a small viewport.
+  </Element>
+</Layout>
+```
+
+Responsive styles work for any CSS property whitelisted in [`config.responsiveCssProperties`](#configresponsivecssproperties).  This includes `animation`, `animationName`, `transform`, `filter` CSS properties, providing you with full control and creative ways to author responsive styles with <PackageLink name="uinix-ui" />!
+
+## Conclusion
+
+We learned how to setup <PackageLink name="uinix-ui" /> to whitelist responsive CSS properties, define responsive style breakpoints, and create and use responsive styles in components through various props (native, shorthand styles props, `styles`).
+
+<!-- defs -->
+[@media]: https://developer.mozilla.org/en-US/docs/Web/CSS/@media
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[react]: https://github.com/facebook/react
+[styled-system array-props]: https://styled-system.com/guides/array-props/
+[theme-ui]: https://github.com/system-ui/theme-ui
