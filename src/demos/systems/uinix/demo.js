@@ -1,5 +1,5 @@
 import React, {createElement as h, useState} from 'react';
-import {Layout, Text, load, merge} from 'uinix-ui';
+import {Layout, Text, createSystem, load, merge} from 'uinix-ui';
 
 import {
   PackageLink,
@@ -48,7 +48,7 @@ const Demo = () => {
     setSystem('');
     try {
       const text = await event.target.files[0].text();
-      setSystem(JSON.parse(text));
+      setSystem(createSystem(JSON.parse(text)));
     } catch (error) {
       setError(error);
     }

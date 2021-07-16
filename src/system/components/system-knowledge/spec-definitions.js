@@ -5,7 +5,7 @@ import Spec from './spec.js';
 import {testIsEveryValueNonPlainObject, testIsNestedValue} from './utils.js';
 
 const SpecDefinitions = ({
-  definitions,
+  definitions = {},
   disableNest = false,
   enableEarlyTerminate = false,
   level = 0,

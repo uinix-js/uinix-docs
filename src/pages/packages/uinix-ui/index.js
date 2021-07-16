@@ -7,13 +7,13 @@ const resources = [
   {
     name: 'Guides',
     links: [
-      'System Knowledge',
+      'Build a Box',
       'Icons',
       'Typography',
       'Variant Styles',
       'Responsive Styles',
       'Animations',
-      'Build a Box',
+      'System Knowledge',
     ],
   },
   {

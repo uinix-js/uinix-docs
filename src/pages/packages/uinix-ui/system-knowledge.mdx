@@ -1,0 +1,381 @@
+import {Link} from 'gatsby';
+import {Element} from 'uinix-ui';
+
+import {
+  Json,
+  PackageLink,
+  SystemKnowledge,
+  Window,
+} from '../../../system/components/index.js';
+import system from '../../../system/index.js';
+
+# System Knowledge
+
+In this guide, we will learn more about system knowledge, and ways to define, organize, manage, and explore system specs in <PackageLink name="uinix-ui" />.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Overview
+
+System knowledge refers to our knowledge and understanding of systems. As software systems grow, complexity inevitably grows with the independent ways components in a system can interact with each other
+
+In <PackageLink name="uinix-ui" />, you have full control on how to organize system specs in a centralized `system` object.  These can be defined with arbitrary nesting to suit your organizational needs.  You have ways to retrieve and use it in interoperable components.
+
+The `system` is roughly comprised of three specs:
+- `icons`: SVG icons used in the system.
+- `theme`: theme value definitions for constraint-based UI development.
+- `styles`: style definitions that can reference theme values.
+
+This guide will provide recommendations on organizing system knowledge.  For more details on `system` APIs, please refer to the official <PackageLink name="uinix-ui" /> documentation.
+
+## Define the `system`
+
+In this section, we provide recommendations on how to define your `system`.  We will cover simple and complex system examples.
+
+### Bare
+
+You can create a bare system by passing an empty object to the `createSystem` utility.  Not practically useful, but supported nevertheless.
+
+```js
+import {createSystem} from 'uinix-ui';
+
+const system = createSystem({});
+```
+
+### Simple
+
+To create a simple system, you can define a partial `system` object of `icons`, `theme`, `styles` and create it with `createSystem`.
+
+```js
+import {createSystem} from 'uinix-ui';
+
+// Note: you can arbitrarily nest most system specs for organization
+const system = createSystem({
+  icons: { // SVG icons
+    github: {
+      mark: '<svg viewBox="0 0 16 16" width="24" height="24"><path d="M8 0C3.58 0 0 3.58 0 8C0 11.54 2.29 14.53 5.47 15.59C5.87 15.66 6.02 15.42 6.02 15.21C6.02 15.02 6.01 14.39 6.01 13.72C4 14.09 3.48 13.23 3.32 12.78C3.23 12.55 2.84 11.84 2.5 11.65C2.22 11.5 1.82 11.13 2.49 11.12C3.12 11.11 3.57 11.7 3.72 11.94C4.44 13.15 5.59 12.81 6.05 12.6C6.12 12.08 6.33 11.73 6.56 11.53C4.78 11.33 2.92 10.64 2.92 7.58C2.92 6.71 3.23 5.99 3.74 5.43C3.66 5.23 3.38 4.41 3.82 3.31C3.82 3.31 4.49 3.1 6.02 4.13C6.66 3.95 7.34 3.86 8.02 3.86C8.7 3.86 9.38 3.95 10.02 4.13C11.55 3.09 12.22 3.31 12.22 3.31C12.66 4.41 12.38 5.23 12.3 5.43C12.81 5.99 13.12 6.7 13.12 7.58C13.12 10.65 11.25 11.33 9.47 11.53C9.76 11.78 10.01 12.26 10.01 13.01C10.01 14.08 10 14.94 10 15.21C10 15.42 10.15 15.67 10.55 15.59C13.71 14.53 16 11.53 16 8C16 3.58 12.42 0 8 0Z" fill="currentcolor" fill-rule="evenodd" clip-rule="evenodd"></path></svg>',
+    },
+  },
+  theme: { // define theme values for use in styles
+    animations: { // animations supported
+      infinite: {
+      fast: '1s ease-in-out infinite',
+      default: '2s ease-in-out infinite',
+      slow: '5s ease-in-out infinite',
+    },
+    colors: {
+      background: {
+        primary: 'white',
+      },
+      brand: {
+        primary: 'pink'
+      },
+      text: {
+        link: 'blue',
+      },
+    },
+    keyframes: { // keyframes supported
+      flicker: {
+        '0%': {opacity: '0'},
+        '50%': {opacity: '1'},
+        '100%': {opacity: '0'},
+      },
+      spin: {
+        default: {
+          '100%': {transform: 'rotate(360deg)'},
+        },
+      },
+    },
+    sizes: {
+      icon: {
+        s: '16px',
+        m: '20px',
+        l: '24px',
+      },
+      width: {
+        container: '768px',
+      },
+    },
+    spacings: {
+      xs: '4px',
+      s: '8px',
+      m: '16px',
+      l: '32px',
+      xl: '64px',
+    },
+    transitions: { // transitions supported
+      fade: 'opacity 0.2s ease-in-out',
+    },
+    transforms: { // transforms supported
+      rotate90: 'rotate(90deg)',
+      translateXHalf: 'translateX(-50%)',
+      translateYHalf: 'translateY(-50%)',
+    },
+  },
+  styles: { // styles can reference theme values
+    global: { // set the global CSS styles
+      '*': {
+        boxSizing: 'border-box',
+      },
+      body: {
+        backgroundColor: 'background.primary',
+        margin: 0,
+        padding: 0,
+      },
+    },
+    variants: { // style variants are useful to enforce reusable styles
+      button: {
+        primary: {
+          color: 'brand.primary',
+          fontSize: 'xs',
+          paddingBottom: 'xxs',
+          paddingLeft: 'xs',
+          paddingRight: 'xs',
+          paddingTop: 'xxs',
+        },
+      },
+    },
+    typography: { // dedicated section to organize typography styles
+      fontFaces: { // font face imports formally supported
+        Consolas: {
+          src: 'https://fonts.com/consolas.woff',
+        },
+      },
+      global: { // global CSS styles
+        a: {
+          color: 'text.link',
+          textDecoration: 'none',
+          transition: 'fade',
+        },
+      },
+      variants: { // typography variants usable by the Text component
+        brand: {
+          color: 'brand.primary',
+          fontWeight: 'bold',
+          margin: 0,
+          paddingBottom: 's',
+          paddingTop: 's',
+        },
+      },
+    },
+  },
+});
+```
+
+### Complex
+
+It is not uncommon for system specs to be defined in a dedicated module where code can be better shared and organized.
+
+The following example shows how one might organize a complex system with separate files that are re-exported to `index.js` entry points.
+
+```bash
+system/
+  icons/ # organize by icon size/domain/etc
+    brand.js
+    16x16.js
+    24x24.js
+    ...
+    index.js # system.icons
+  theme/ # organize by theme properties
+    colors/ # colors could be more involved with utilities and palettes
+      palette.js
+      util.js
+      index.js
+    spacings/ # spacings could be more involved with utilities and scales
+      scales.js
+      util.js
+      index.js
+    animations.js
+    shadows.js
+    sizes.js
+    spacings.js
+    ...
+    index.js # system.theme
+  styles/
+    ...
+    breakpoints.js
+    rules/ # custom style objects/rules can be organized and composed in a folder
+      disabled.js
+      interactive.js
+      ...
+    variants/ # variant styles can be organized by component/domain
+      button.js
+      layout.js
+      ...
+      index.js
+    typography/ # typography styles can be organized in a dedicated module
+      font-faces/ # you can store font assets and import them relatively
+        consolas.woff
+        open-sans.woff
+        ...
+        index.js
+      global.js
+      variants.js
+      index.js
+    index.js # system.styles
+  index.js # create the system with createSystem
+```
+
+If a system is complex, you can indefinitely compose it with this approach and eventually create a valid system with the `createSystem` utility.
+
+> **Note:** <PackageLink name="uinix-ui" /> is non-opinionated on how you organize your `system`, but we hope the above examples demonstrate how easy it is to organize system specs through composition.  It is also helpful to note that system specs are decoupled from how they are used, and it is easy to write tests for the `system`.  <PackageLink name="uinix-ui" /> is one of the few UI system libraries that promotes style as a function of state, allowing you to define, test, and reuse styles from a centralized source of truth.
+
+## Use the `system`
+
+The `system` specs can be retrieved using any <PackageLink name="uinix-ui" /> system hooks or components:
+- `useSystem()`: retrieves the entire `system`.
+- `useIcon(icon)`: retrieves a rendered icon element from `system.icons` based on an icon property path.
+- `useTheme()`: retrieves `system.theme`
+- `useStyles()`: retrieves `system.styles`
+- `useVariant(variant)`: retrieves a style definition from `system.styles.variants` based on a variant property path.
+- `Element`: component primitive interoperable with `system` via the `styles` and `variant` props.
+- `Icon`: component primitive composed from `Element` that is additionally interoperable with `system.icons`.
+- `Text`: component primitive composed from `Element` that is additionally interoperable with `system.styles.typography`.
+- `Layout`: component primitive composed from `Element` that is additionally interoperable with `system.theme.spacings`.
+
+It is helpful to think about how the `system` is intended to be used, which affects how we will [define the system](#define-the-system) as outlined in the earlier section.  For example, thinking through how we might access theme values, style variants, icons via meaningful property paths will help inform how we would nest and define them when creating the `system`.
+
+The following example demonstrates usage through two distinct approaches.
+
+### Nested property paths
+
+System specs can be accessed via nested property paths,
+
+```js
+<Layout spacing="scale.2" variant="layout.container">
+  <Icon color="brand.primary" icon="brand.small" />
+  <Element
+    styles={{
+      animation: 'infinite.slow',
+      animationName: 'spin.default',
+    }}>
+    Element
+  </Element>
+</Layout>
+```
+
+which requires that the `system` be defined as below:
+
+```js
+import {createSystem} from 'uinix-ui';
+
+const system = createSystem({
+  icons: {
+    brand: {
+      small: '...',
+    },
+  },
+  theme: {
+    animations: {
+      infinite: {
+        slow: '...',
+      },
+    },
+    colors: {
+      brand: {
+        primary: '...'
+      },
+    },
+    keyframes: {
+      spin: {
+        default: {...},
+      },
+    },
+    spacings: {
+      scale: {
+        2: '...',
+      },
+    },
+  },
+  styles: {
+    variants: {
+      layout: {
+        container: {...},
+      },
+    },
+  },
+});
+```
+
+### Flat keys
+
+The nested property path example in the earlier section can be equivalently accessed via flat keys:
+
+```js
+<Layout spacing="x2" variant="layoutContainer">
+  <Icon color="primaryBrand" icon="smallBrand" />
+  <Element
+    styles={{
+      animation: 'infiniteSlow',
+      animationName: 'spinDefault',
+    }}>
+    Element
+  </Element>
+</Layout>
+```
+
+which requires that the `system` be defined as below:
+
+```js
+import {createSystem} from 'uinix-ui';
+
+const system = createSystem({
+  icons: {
+    smallBrand: '...',
+  },
+  theme: {
+    animations: {
+      infiniteSlow: '...',
+    },
+    colors: {
+      primaryBrand: '...',
+    },
+    keyframes: {
+      spinDefault: {...},
+    },
+    spacings: {
+      x2: '...',
+    },
+  },
+  styles: {
+    variants: {
+      layoutContainer: {...},
+    },
+  },
+});
+```
+
+Note that <PackageLink name="uinix-ui" /> is non-opinionated on how you organize the `system`.  Some users may prefer nesting while others may prefer flat structures with explicit names, and others may prefer a mixed approach.  You have full control to organize this based on your requirements and needs.
+
+Your system knowledge, your system, your rules 🤘.
+
+## Exploring system knowledge
+
+One of the main goals of <PackageLink name="uinix-ui" /> is to elevate the importance of system knowledge, to make it easy to define, retrieve, and explore system knowledge.
+
+The `system` is an object that can be statically analyzed.  It is usually JSON-serializable (excluding style functions that are defined in `system.style`).  The following example renders the website's `system` as a JSON string:
+
+<Json value={system} />
+
+More expressive ways to visualize and explore system knowledge can be built using the `system` object.  The <Link to="/demos/systems">UI system demos</Link> include system knowledge previews implemented using a `SystemKnowledge` component.  The same `system` object that was previously rendered in JSON can be easily rendered more expressively with the `SystemKnowledge` component, as shown below:
+
+<Window>
+  <Element overflow="auto" p="m">
+    <SystemKnowledge system={system} />
+  </Element>
+</Window>
+
+## Further Reading
+
+We recommend a reading on the <Link to="/learn/ui-systems-and-complexity-whitepaper">UI System and Complexity</Link> whitepaper for an interactive exploration of complexity and system knowledge in UI systems.
+
+## Conclusion
+
+In this guide, we learned about the importance of system knowledge, and how <PackageLink name="uinix-ui" /> provides an easy way to define, organize, retrieve and explore system specs.  We learned specifically how <PackageLink name="uinix-ui" /> improves organization and reuse of style definitions in the `system.styles` construct.  We also learned various approaches to organizing and using system specs.  Lastly, we observed how it is easy to render and visualize the static `system` object, further enhancing ways that help us improve our understanding of system knowledge.
