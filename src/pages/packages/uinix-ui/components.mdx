@@ -1,0 +1,769 @@
+import {Json, PackageLink} from '../../../system/components/index.js';
+import config from '../../../system/config.js';
+import theme from '../../../system/theme.js';
+
+# Components
+
+Common component recipes using <PackageLink name="uinix-ui" />.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Overview
+
+Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code.  There are many ways to implementing components, which are highlighted in some examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
+
+All examples are interactive, so please feel free to edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component to be added to the list!
+
+The examples assume a preset `config` (enabling shorthand style props) and `theme`, so make sure to adjust these appropriately in your implementation.
+
+<Json
+  value={{
+    config: {
+      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
+    },
+ }}
+/>
+
+<Json value={{theme}} />
+
+## `Box`
+
+```js live scope=ui
+() => {
+  const Box = (props) => {
+    return <Element {...props} />
+  };
+
+  return (
+    <Box
+      as="p"
+      bg="brand.primary"
+      color="white"
+      p="m"
+      styles={{
+        ':hover': {
+          background: 'white',
+          color: 'brand.primary',
+        },
+      }}>
+      A Box is simply a configured Element.
+    </Box>
+  );
+}
+```
+
+Note that the `Element` component can be used as a `Box`.
+
+```js live scope=ui
+<Element
+  as="p"
+  bg="brand.primary"
+  color="white"
+  p="m"
+  styles={{
+    ':hover': {
+      background: 'white',
+      color: 'brand.primary',
+    },
+  }}>
+  The same Box rendered with Element.
+</Element>
+```
+
+## `Flex`
+
+```js live scope=ui
+() => {
+  const Flex = (props) => {
+    const styles = [
+      {display: 'flex'},
+      props.styles,
+    ];
+
+    return (
+      <Element
+        {...props}
+        styles={styles}
+      />
+    );
+  };
+
+  return (
+    <Flex
+      as="p"
+      bg="brand.primary"
+      color="white"
+      p="m"
+      styles={{
+        ':hover': {
+          background: 'white',
+          color: 'brand.primary',
+        },
+      }}>
+      A Flex is simply a Box with "display: flex" set.
+    </Flex>
+  );
+}
+```
+
+Note that the `Layout` component can be used `Flex`.
+
+```js live scope=ui
+<Layout
+  as="p"
+  bg="brand.primary"
+  color="white"
+  p="m"
+  styles={{
+    ':hover': {
+      background: 'white',
+      color: 'brand.primary',
+    },
+  }}>
+  The same Flex rendered with Layout.
+</Layout>
+```
+
+Or even an `Element` with appropriately configured shorthand style props can be a `Flex`.
+
+```js live scope=ui
+<Element
+  as="p"
+  bg="brand.primary"
+  color="white"
+  display="flex"
+  p="m"
+  styles={{
+    ':hover': {
+      background: 'white',
+      color: 'brand.primary',
+    },
+  }}>
+  The same Flex rendered with Layout.
+</Element>
+```
+
+## `Button`
+
+```js live scope=ui
+() => {
+  const Button = ({variant, ...rest}) => {
+    const variant = `button.${variant}`;
+
+    return (
+      <Element
+        {...rest}
+        as="button"
+        variant={variant}
+      />
+    );
+  };
+
+  return (
+    <Layout align="center" spacing="s">
+      <Button onClick={() => alert('beep')}>
+        Beep
+      </Button>
+      <Button
+        variant="small"
+        onClick={() => alert('boop')}>
+        Boop
+      </Button>
+      <Button
+        hidden
+        onClick={() => alert('hidden')}>
+        Hidden
+      </Button>
+    </Layout>
+  );
+}
+```
+
+## `Text`
+
+```js live scope=ui
+<div>
+  <Text
+    as="p"
+    bg="brand.primary"
+    color="white"
+    fontFamily="monospace"
+    px="m"
+    py="xs">
+    I am a styled monospace text.
+  </Text>
+  <Text
+    as="p"
+    variant="chip">
+    I am a "chip" text variant.
+  </Text>
+</div>
+```
+
+## `Heading`
+
+```js live scope=ui
+() => {
+  const Heading = ({level, ...rest}) => {
+    return <Text {...rest} as={`h${level}`} />
+  };
+
+  return (
+    <Heading
+      bg="brand.primary"
+      color="white"
+      level={1}
+      px="s"
+      py="m">
+      A Heading is simply a wrapped Text.
+    </Heading>
+  );
+}
+```
+
+## `Link`
+
+```js live scope=ui
+() => {
+  const Link = (props) => {
+    return <Text {...props} as="a" />
+  };
+
+  return (
+    <Link
+      fontSize="l"
+      fontWeight="bold"
+      href="https://uinix.dev"
+      target="_blank">
+      A Link is simply a wrapped Text.
+    </Link>
+  );
+}
+```
+
+## `Paragraph`
+
+```js live scope=ui
+() => {
+  const Paragraph = (props) => {
+    return <Text {...props} as="p" />
+  };
+
+  return (
+    <div>
+      <Paragraph>
+        A paragraph is simply a wrapped Text.
+      </Paragraph>
+      <Paragraph color="text.light" fontSize="s">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc elit, feugiat ut velit eget, pellentesque accumsan libero. Duis interdum ante sed ipsum imperdiet congue nec non mauris. Quisque ac ultricies nunc. Sed nisi diam, suscipit eu laoreet a, bibendum nec mauris. Aliquam tristique rhoncus ipsum scelerisque egestas. Maecenas rhoncus malesuada mauris, vel porta ex tincidunt non. Duis ac sapien in felis fermentum tristique. Nam a erat faucibus, varius magna ac, interdum tortor. Aenean quis varius mi, nec molestie neque. In dignissim diam in velit pharetra cursus. Integer gravida, arcu non sagittis iaculis, justo leo facilisis augue, consequat mollis risus erat quis velit. In turpis nibh, ornare ut facilisis id, dignissim non enim. Fusce maximus elit sit amet dolor aliquet, et tristique elit eleifend. Aenean ornare tortor sem, at sollicitudin ipsum scelerisque a.
+      </Paragraph>
+    </div>
+  );
+}
+```
+
+## `Image`
+
+```js live scope=ui
+() => {
+  const Image = (props) => {
+    return <Element {...props} as="img" />
+  };
+
+  return (
+    <Image
+      h="100"
+      src="https://placekitten.com/300/300"
+      styles={{
+        borderRadius: 'round',
+      }}
+      w="auto"
+    />
+  );
+}
+```
+
+## `Card`
+
+```js live scope=ui
+() => {
+  const Card = (props) => {
+    return (
+      <Element
+        {...props}
+        b="bordered"
+        borderRadius="m"
+        px="m"
+        py="s"
+      />
+    );
+  };
+
+  return (
+    <Card>
+      <Text
+        as="div"
+        fontSize="l"
+        fontWeight="bold">
+        Title
+      </Text>
+      <Text
+        as="p"
+        color="text.secondary">
+        This is a primitive card.  You can create more advanced cards with built-in header, footer and content using the Layout component.
+      </Text>
+    </Card>
+  );
+}
+```
+
+## `Label`
+
+```js live scope=ui
+() => {
+  const Label = ({
+    variant = 'default',
+    ...rest
+  }) => {
+    return (
+      <Element
+        {...rest}
+        as="label"
+        variant={`form.label.${variant}`}
+      />
+    );
+  };
+
+  return (
+    <Label>
+      A Label is simply a wrapped Text.
+    </Label>
+  );
+}
+```
+
+## `Input`
+
+```js live scope=ui
+() => {
+  const Input = ({
+    variant = 'default',
+    ...rest
+  }) => {
+    return (
+      <Element
+        {...rest}
+        as="input"
+        variant={`form.input.${variant}`}
+      />
+    );
+  };
+
+  return (
+    <Layout direction="column" spacing="m">
+      <Input
+        type="text"
+        placeholder="Search"
+        w="100%"
+      />
+      <Input
+        size="2"
+        type="number"
+        w="fit-content"
+      />
+    </Layout>
+  );
+}
+```
+
+## `Select`
+
+```js live scope=ui
+() => {
+  const Select = ({
+    options,
+    variant = 'default',
+    ...rest
+  }) => {
+    return (
+      <Element
+        {...rest}
+        as="select"
+        variant={`form.select.${variant}`}>
+        {options.map(({label, value}) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </Element>
+    );
+  };
+
+  return (
+    <Select
+      options={[
+        {label: 'Option A', value: 'a'},
+        {label: 'Option B', value: 'b'},
+        {label: 'Option C', value: 'c'},
+      ]}
+      w="100%"
+    />
+  );
+}
+```
+
+## `Textarea`
+
+```js live scope=ui
+() => {
+  const Textarea = ({
+    variant = 'default',
+    ...rest
+  }) => {
+    return (
+      <Element
+        {...rest}
+        as="textarea"
+        variant={`form.textarea.${variant}`}
+      />
+    );
+  };
+
+  return (
+    <Textarea
+      placeholder="Type something"
+      rows={10}
+      w="100%"
+    />
+  );
+}
+```
+
+## `Radio`
+
+```js live scope=ui
+() => {
+  const Radio = ({
+    checked,
+    defaultChecked,
+    label,
+    variant = 'default',
+    ...rest
+  }) => {
+    const isChecked = checked || defaultChecked;
+
+    const styles = {
+      '> input ~ .checked': {
+        display: 'none',
+      },
+      '> input ~ .unchecked': {
+        display: 'flex',
+      },
+      '> input:checked ~ .checked': {
+        display: 'flex'
+      },
+      '> input:checked ~ .unchecked': {
+        display: 'none'
+      },
+    };
+
+    const RadioIcon = ({isChecked}) => {
+      const status = isChecked ? 'checked' : 'unchecked';
+      return (
+        <Icon
+          className={status}
+          color={isChecked ? 'brand.primary' : undefined}
+          icon={`form.radio.${status}`}
+          size="icon.s"
+        />
+      );
+    }
+
+    return (
+      <Layout
+        as="label"
+        align="center"
+        styles={styles}
+        spacing="s">
+        <Element
+          {...rest}
+          hidden
+          as="input"
+          checked={checked}
+          defaultChecked={defaultChecked}
+          type="radio"
+        />
+        <RadioIcon isChecked />
+        <RadioIcon />
+        <Element variant="form.input.label">
+          {label}
+        </Element>
+      </Layout>
+    );
+  };
+
+  return (
+    <Layout direction="column" spacing="s">
+      <Radio
+        name="radio"
+        label="Option A"
+        value="a"
+      />
+      <Radio
+        defaultChecked
+        name="radio"
+        label="Option B"
+        value="b"
+      />
+    </Layout>
+  );
+}
+```
+
+## `Checkbox`
+
+```js live scope=ui
+() => {
+  const Checkbox = ({
+    checked,
+    defaultChecked,
+    label,
+    variant = 'default',
+    ...rest
+  }) => {
+    const isChecked = checked || defaultChecked;
+
+    const styles = {
+      '> input ~ .checked': {
+        display: 'none',
+      },
+      '> input ~ .unchecked': {
+        display: 'flex',
+      },
+      '> input:checked ~ .checked': {
+        display: 'flex'
+      },
+      '> input:checked ~ .unchecked': {
+        display: 'none'
+      },
+    };
+
+    const CheckboxIcon = ({isChecked}) => {
+      const status = isChecked ? 'checked' : 'unchecked';
+      return (
+        <Icon
+          className={status}
+          color={isChecked ? 'brand.primary' : undefined}
+          icon={`form.checkbox.${status}`}
+          size="icon.s"
+        />
+      );
+    }
+
+    return (
+      <Layout
+        as="label"
+        align="center"
+        styles={styles}
+        spacing="s">
+        <Element
+          {...rest}
+          hidden
+          as="input"
+          checked={checked}
+          defaultChecked={defaultChecked}
+          type="checkbox"
+        />
+        <CheckboxIcon isChecked />
+        <CheckboxIcon />
+        <Element variant="form.input.label">
+          {label}
+        </Element>
+      </Layout>
+    );
+  };
+
+  return (
+    <Layout direction="column" spacing="s">
+      <Checkbox
+        name="checkbox"
+        label="Option A"
+        value="a"
+      />
+      <Checkbox
+        defaultChecked
+        name="checkbox"
+        label="Option B"
+        value="b"
+      />
+    </Layout>
+  );
+}
+```
+
+## `Switch`
+
+## `Slider`
+
+## `Field`
+
+## `Progress`
+
+## `Donut`
+
+## `Spinner`
+
+```js live scope=ui
+() => {
+  const Spinner = ({size}) => {
+    const styles = {
+      '> svg': {
+        animation: 'infinite.fast',
+        animationName: 'spin.default',
+      }
+    };
+
+    return (
+      <Icon
+        color="brand.primary"
+        icon="spinner"
+        size={size}
+        styles={styles}
+      />
+    );
+  }
+
+  return (
+    <Spinner size="icon.l" />
+  );
+}
+```
+
+## `Avatar`
+
+## `Badge`
+
+## `Close`
+
+```js live scope=ui
+() => {
+  const Close = (props) => {
+    return <Icon {...props} icon="x" />;
+  }
+
+  return (
+    <Close
+      size="icon.l"
+      onClick={() => alert('closed')}
+    />
+  );
+}
+```
+
+## `Alert`
+
+## `Divider`
+
+```js live scope=ui
+() => {
+  const Divider = () => {
+    const styles = {
+      border: 'none',
+      borderBottom: 'bordered',
+    };
+
+    return <Element as="hr" styles={styles} />;
+  }
+
+  return <Divider />
+}
+```
+
+## `Embed`
+
+## `AspectRatio`
+
+## `AspectImage`
+
+## `Container`
+
+```js live scope=ui
+() => {
+  const Container = (props) => {
+    return (
+      <Element
+        {...props}
+        maxW="400px"
+        mx="auto"
+        px="l"
+        py="m"
+        w="100%"
+      />
+    );
+  };
+
+  return (
+    <Container
+      bg="brand.primary"
+      color="white">
+      A container is simply an Element with container styles specified (maxWidth, centered, padded).
+    </Container>
+  );
+}
+```
+
+## `NavLink`
+
+## `Message`
+
+## `IconButton`
+
+```js live scope=ui
+() => {
+  // an IconButton is simply an Icon, which renders as a
+  // HTMLButtonElement if an onClick callback is provided.
+  const IconButton = Icon;
+
+  return (
+    <IconButton
+      icon="up"
+      size="icon.l"
+      onClick={() => alert('go up')}
+    />
+  );
+}
+```
+
+## `MenuButton`
+
+```js live scope=ui
+() => {
+  const MenuButton = (props) => {
+    return <Icon {...props} icon="menu" />;
+  }
+
+  return (
+    <MenuButton
+      size="icon.l"
+      onClick={() => alert('open menu')}
+    />
+  );
+}
+```
+
+<!-- defs -->
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[issue]: https://github.com/uinix-js/uinix-docs/issues
+[react]: https://github.com/facebook/react
+[theme-ui components]: https://theme-ui.com/components/
