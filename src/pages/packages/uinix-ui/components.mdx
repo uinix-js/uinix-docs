@@ -41,19 +41,18 @@ The examples assume a preset `config` (enabling shorthand style props) and `them
 
 ```js live scope=ui
 () => {
-  const Box = (props) => {
-    return <Element {...props} />
-  };
+  // a Box is simply an Element.
+  const Box = Element;
 
   return (
     <Box
       as="p"
       bg="brand.primary"
-      color="white"
+      color="text.inverse"
       p="m"
       styles={{
         ':hover': {
-          background: 'white',
+          backgroundColor: 'background.primary',
           color: 'brand.primary',
         },
       }}>
@@ -61,24 +60,6 @@ The examples assume a preset `config` (enabling shorthand style props) and `them
     </Box>
   );
 }
-```
-
-Note that the `Element` component can be used as a `Box`.
-
-```js live scope=ui
-<Element
-  as="p"
-  bg="brand.primary"
-  color="white"
-  p="m"
-  styles={{
-    ':hover': {
-      background: 'white',
-      color: 'brand.primary',
-    },
-  }}>
-  The same Box rendered with Element.
-</Element>
 ```
 
 ## `Flex`
@@ -90,24 +71,18 @@ Note that the `Element` component can be used as a `Box`.
       {display: 'flex'},
       props.styles,
     ];
-
-    return (
-      <Element
-        {...props}
-        styles={styles}
-      />
-    );
+    return <Element {...props} styles={styles} />;
   };
 
   return (
     <Flex
       as="p"
       bg="brand.primary"
-      color="white"
+      color="text.inverse"
       p="m"
       styles={{
         ':hover': {
-          background: 'white',
+          backgroundColor: 'background.primary',
           color: 'brand.primary',
         },
       }}>
@@ -123,11 +98,11 @@ Note that the `Layout` component can be used `Flex`.
 <Layout
   as="p"
   bg="brand.primary"
-  color="white"
+  color="text.inverse"
   p="m"
   styles={{
     ':hover': {
-      background: 'white',
+      backgroundColor: 'background.primary',
       color: 'brand.primary',
     },
   }}>
@@ -141,16 +116,16 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 <Element
   as="p"
   bg="brand.primary"
-  color="white"
+  color="text.inverse"
   display="flex"
   p="m"
   styles={{
     ':hover': {
-      background: 'white',
+      backgroundColor: 'background.primary',
       color: 'brand.primary',
     },
   }}>
-  The same Flex rendered with Layout.
+  The same Flex rendered with a configured Element.
 </Element>
 ```
 
@@ -158,16 +133,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ```js live scope=ui
 () => {
-  const Button = ({variant, ...rest}) => {
-    const variant = `button.${variant}`;
-
-    return (
-      <Element
-        {...rest}
-        as="button"
-        variant={variant}
-      />
-    );
+  const Button = (props) => {
+    const variant = `button.${props.variant || 'default'}`;
+    return <Element {...props} as="button" variant={variant} />;
   };
 
   return (
@@ -193,11 +161,11 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 ## `Text`
 
 ```js live scope=ui
-<div>
+<Layout align="flex-start" direction="column">
   <Text
     as="p"
     bg="brand.primary"
-    color="white"
+    color="text.inverse"
     fontFamily="monospace"
     px="m"
     py="xs">
@@ -205,24 +173,29 @@ Or even an `Element` with appropriately configured shorthand style props can be 
   </Text>
   <Text
     as="p"
-    variant="chip">
-    I am a "chip" text variant.
+    variant="chip.primary">
+    I am a "chip.primary" text variant.
   </Text>
-</div>
+  <Text
+    as="p"
+    variant="chip.accent">
+    I am a "chip.accent" text variant.
+  </Text>
+</Layout>
 ```
 
 ## `Heading`
 
 ```js live scope=ui
 () => {
-  const Heading = ({level, ...rest}) => {
-    return <Text {...rest} as={`h${level}`} />
+  const Heading = (props) => {
+    return <Text {...props} as={`h${props.level}`} />
   };
 
   return (
     <Heading
       bg="brand.primary"
-      color="white"
+      color="text.inverse"
       level={1}
       px="s"
       py="m">
@@ -332,17 +305,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ```js live scope=ui
 () => {
-  const Label = ({
-    variant = 'default',
-    ...rest
-  }) => {
-    return (
-      <Element
-        {...rest}
-        as="label"
-        variant={`form.label.${variant}`}
-      />
-    );
+  const Label = (props) => {
+    const variant = `form.label.${props.variant || 'default'}`;
+    return <Element {...props} as="label" variant={variant} />;
   };
 
   return (
@@ -357,17 +322,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ```js live scope=ui
 () => {
-  const Input = ({
-    variant = 'default',
-    ...rest
-  }) => {
-    return (
-      <Element
-        {...rest}
-        as="input"
-        variant={`form.input.${variant}`}
-      />
-    );
+  const Input = (props) => {
+    const variant = `form.input.${props.variant || 'default'}`;
+    return <Element {...props} as="input" variant={variant} />;
   };
 
   return (
@@ -427,17 +384,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ```js live scope=ui
 () => {
-  const Textarea = ({
-    variant = 'default',
-    ...rest
-  }) => {
-    return (
-      <Element
-        {...rest}
-        as="textarea"
-        variant={`form.textarea.${variant}`}
-      />
-    );
+  const Textarea = (props) => {
+    const variant = `form.textarea.${props.variant || 'default'}`;
+    return <Element {...props} as="textarea" variant={variant} />;
   };
 
   return (
@@ -506,9 +455,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
         />
         <RadioIcon isChecked />
         <RadioIcon />
-        <Element variant="form.input.label">
+        <div>
           {label}
-        </Element>
+        </div>
       </Layout>
     );
   };
@@ -587,9 +536,9 @@ Or even an `Element` with appropriately configured shorthand style props can be 
         />
         <CheckboxIcon isChecked />
         <CheckboxIcon />
-        <Element variant="form.input.label">
+        <div>
           {label}
-        </Element>
+        </div>
       </Layout>
     );
   };
@@ -618,9 +567,92 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ## `Field`
 
+```js live scope=ui
+() => {
+  const Input = (props) => {
+    const variant = `form.input.${props.variant || 'default'}`;
+    return <Element {...props} as="input" variant={variant} />;
+  };
+
+  const Field = ({
+    as: Control,
+    label,
+    name,
+    ...rest
+  }) => {
+    return (
+      <Layout
+        direction="column"
+        spacing="s">
+        <Element
+          as="label"
+          htmlFor={name}
+          variant="form.label">
+          {label}
+        </Element>
+        <Control id={name} {...rest} />
+      </Layout>
+    )
+  }
+
+  return (
+    <Layout direction="column" spacing="m">
+      <Field
+        as="input"
+        name="HTML input element"
+        placeholder="Search"
+      />
+      <Field
+        as={Input}
+        name="Custom Input"
+        placeholder="Search"
+      />
+    </Layout>
+  );
+}
+```
+
 ## `Progress`
 
-## `Donut`
+```js live scope=ui
+() => {
+  const Progress = ({
+    bg,
+    color,
+    max,
+    value,
+    ...rest
+  }) => {
+    const styles = {
+      appearance: 'none',
+      backgroundColor: bg,
+      '::-moz-progress-bar, ::-webkit-progress-value': {
+        backgroundColor: color,
+      },
+    };
+    return (
+      <Element
+        {...rest}
+        as="progress"
+        max={max}
+        styles={styles}
+        value={value}
+      />
+    );
+  }
+
+  return (
+    <Progress
+      bg="tones.light.error"
+      color="tones.error"
+      h="12px"
+      max={160}
+      value={42}
+      w="100%"
+    />
+  );
+}
+```
 
 ## `Spinner`
 
@@ -634,7 +666,7 @@ Or even an `Element` with appropriately configured shorthand style props can be 
       }
     };
 
-    return (
+  return (
       <Icon
         color="brand.primary"
         icon="spinner"
@@ -652,7 +684,43 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ## `Avatar`
 
+```js live scope=ui
+() => {
+  const Avatar = ({size, src}) => {
+    return (
+      <Element
+        as="img"
+        borderRadius="round"
+        h={size}
+        src={src}
+        w={size}
+      />
+    );
+  };
+
+  return <Avatar size="40px" src="https://placekitten.com/300/300" />
+}
+```
+
 ## `Badge`
+
+```js live scope=ui
+() => {
+  const Badge = (props) => {
+    // Badges/chips/labels are interchangeably used in different design systems.
+    // You can organize this under "variants.badge" if you prefer
+    const variant = `chip.${props.variant || 'primary'}`;
+    return <Text {...props} variant={variant} />
+  }
+
+  return (
+    <Layout align="flex-start" direction="column" spacing="m">
+      <Badge>Badge</Badge>
+      <Badge variant="accent">Badge</Badge>
+    </Layout>
+  );
+}
+```
 
 ## `Close`
 
@@ -673,6 +741,32 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ## `Alert`
 
+```js live scope=ui
+() => {
+  const Alert = (props) => {
+    // Hijacking the chip variants for demo purposes.
+    // You can organize this in `variants.alerts` if you prefer
+    const variant = `chip.${props.variant || 'primary'}`;
+    return (
+      <Text
+        {...props}
+        fontSize="m"
+        px="m"
+        py="s"
+        variant={variant}
+      />
+    );
+  }
+
+  return (
+    <Layout direction="column" spacing="m">
+      <Alert>An alert</Alert>
+      <Alert variant="accent">An accented alert</Alert>
+    </Layout>
+  );
+}
+```
+
 ## `Divider`
 
 ```js live scope=ui
@@ -692,9 +786,131 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ## `Embed`
 
+```js live scope=ui
+() => {
+  const Embed = ({
+    frameBorder = 0,
+    ratio = 16 / 9,
+    ...rest
+  }) => {
+    return (
+      <Element
+        h={0}
+        overflow="hidden"
+        pb={100 / ratio + '%'}
+        position="relative"
+        w="100%">
+        <Element
+          {...rest}
+          as="iframe"
+          border="none"
+          bottom={0}
+          frameBorder={frameBorder}
+          h="100%"
+          left={0}
+          position="absolute"
+          ratio={ratio}
+          top={0}
+          w="100%"
+        />
+      </Element>
+    );
+  }
+
+  return <Embed src="https://www.youtube.com/embed/dQw4w9WgXcQ" />;
+}
+```
+
 ## `AspectRatio`
 
+```js live scope=ui
+() => {
+  const AspectRatio = ({ratio, ...rest}) => {
+    return (
+      <Element
+        overflow="hidden"
+        position="relative">
+        <Element
+          h={0}
+          pb={100 / ratio + '%'}
+          w="100%"
+        />
+        <Layout
+          {...rest}
+          bottom={0}
+          left={0}
+          position="absolute"
+          right={0}
+          top={0}
+        />
+      </Element>
+    );
+  }
+
+  return (
+    <AspectRatio
+      align="center"
+      bg="brand.primary"
+      color="text.inverse"
+      justify="center"
+      ratio={16 / 9}>
+      <div>16:9 Aspect ratio</div>
+    </AspectRatio>
+  );
+}
+```
+
 ## `AspectImage`
+
+```js live scope=ui
+() => {
+  const AspectRatio = ({ratio, ...rest}) => {
+    return (
+      <Element
+        overflow="hidden"
+        position="relative">
+        <Element
+          h={0}
+          pb={100 / ratio + '%'}
+          w="100%"
+        />
+        <Layout
+          {...rest}
+          bottom={0}
+          left={0}
+          position="absolute"
+          right={0}
+          top={0}
+        />
+      </Element>
+    );
+  }
+
+  const AspectImage = ({ratio, ...rest}) => {
+    return (
+      <AspectRatio ratio={ratio}>
+        <Element {...rest} as="img" />
+      </AspectRatio>
+    );
+  }
+
+  const styles = {
+    image: {
+      height: '100%',
+      objectFit: 'cover',
+      width: '100%',
+    },
+  };
+
+  return (
+    <AspectImage
+      ratio={16 / 9}
+      src="https://placekitten.com/300/300"
+      styles={styles.image}
+    />
+  );
+}
+```
 
 ## `Container`
 
@@ -716,7 +932,7 @@ Or even an `Element` with appropriately configured shorthand style props can be 
   return (
     <Container
       bg="brand.primary"
-      color="white">
+      color="text.inverse">
       A container is simply an Element with container styles specified (maxWidth, centered, padded).
     </Container>
   );
