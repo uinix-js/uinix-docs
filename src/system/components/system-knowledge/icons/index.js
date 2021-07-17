@@ -8,7 +8,7 @@ const renderIcon = (icon) => (
     align="center"
     direction="column"
     spacing="s"
-    w="spec.icon"
+    w="width.spec"
   >
     <Icon icon={icon} size="icon.l" />
     <Text variant="chip">{icon}</Text>

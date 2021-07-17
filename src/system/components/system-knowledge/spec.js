@@ -19,7 +19,7 @@ const Spec = ({name, value, render}) => {
 
   return (
     <Layout align="center" spacing="l">
-      <Element flex="none" minW="spec.name">
+      <Element flex="none" minW="width.spec">
         <Text variant="chip">{name}</Text>
       </Element>
       <Element flex="none">{render(value, name)}</Element>

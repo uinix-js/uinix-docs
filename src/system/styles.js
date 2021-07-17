@@ -69,7 +69,8 @@ const global = {
     paddingTop: 's',
   },
   hr: {
-    border: 'bordered',
+    border: 'none',
+    borderBottom: 'bordered',
     width: '100%',
   },
   table: {
@@ -121,7 +122,7 @@ const typography = {
       paddingLeft: 'm',
     },
     code: {
-      backgroundColor: 'background.tones.faded',
+      backgroundColor: 'tones.light.faded',
       borderRadius: 's',
       fontFamily: 'monospace',
     },
@@ -150,7 +151,7 @@ const typography = {
       marginTop: 'm',
     },
     pre: {
-      backgroundColor: 'background.tones.faded',
+      backgroundColor: 'tones.light.faded',
       border: 'bordered',
       fontFamily: 'monospace',
       fontSize: 's',
@@ -177,7 +178,7 @@ const typography = {
       paddingTop: 's',
     },
     chip: {
-      backgroundColor: 'background.tones.faded',
+      backgroundColor: 'tones.light.faded',
       border: 'bordered',
       borderRadius: 'm',
       color: 'text.secondary',
@@ -202,6 +203,30 @@ const typography = {
   },
 };
 
+const defaultInputVariant = {
+  height: 'height.input',
+  border: 'bordered',
+  borderRadius: 'm',
+  outline: 'none',
+  paddingLeft: 'm',
+  paddingright: 'm',
+  ':focus': {
+    borderColor: 'brand.primary',
+  },
+  ':invalid': {
+    borderColor: 'tones.error',
+  },
+  '::placeholder': {
+    color: 'text.light',
+  },
+};
+
+const defaultTextareaVariant = {
+  ...defaultInputVariant,
+  height: undefined,
+  padding: 'm',
+};
+
 const variants = {
   button: {
     small: {
@@ -211,6 +236,25 @@ const variants = {
       paddingLeft: 'xs',
       paddingRight: 'xs',
       paddingTop: 'xxs',
+    },
+  },
+  form: {
+    input: {
+      default: defaultInputVariant,
+    },
+    label: {
+      default: {
+        color: 'text.secondary',
+        fontSize: 's',
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+      },
+    },
+    select: {
+      default: defaultInputVariant,
+    },
+    textarea: {
+      default: defaultTextareaVariant,
     },
   },
   layout: {

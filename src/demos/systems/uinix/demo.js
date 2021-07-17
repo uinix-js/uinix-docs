@@ -82,7 +82,7 @@ const Demo = () => {
       {system && <SystemKnowledge system={system} />}
       <p>
         {error && (
-          <Text color="text.tones.error">
+          <Text color="tones.error">
             Unable to parse system. Please ensure that a valid system is
             provided. Refer to the <PackageLink name="uinix-ui" /> documentation
             for details.

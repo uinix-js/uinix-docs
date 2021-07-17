@@ -27,14 +27,14 @@ const LiveCode = ({code, language, live, scope}) => {
       <LiveProvider code={code} scope={getScope(scope)} theme={theme}>
         <Window>
           <Layout direction="column">
-            <Layout align="flex-start" direction="column" p="m">
+            <Element p="m">
               <LivePreview />
-            </Layout>
+            </Element>
             <Text fontSize="s" maxH={EDITOR_MAX_HEIGHT} overflow="auto">
               <LiveEditor />
             </Text>
           </Layout>
-          <Text color="text.tones.error" fontSize="s">
+          <Text color="tones.error" fontSize="s">
             <LiveError />
           </Text>
         </Window>

@@ -4,9 +4,9 @@ const palette = palx('#0366d6');
 
 const animations = {
   infinite: {
-    fast: '1s ease-in-out infinite',
-    default: '2s ease-in-out infinite',
-    slow: '5s ease-in-out infinite',
+    fast: '1s linear infinite',
+    default: '2s linear infinite',
+    slow: '5s linear infinite',
   },
 };
 
@@ -31,10 +31,6 @@ const borders = {
 const colors = {
   background: {
     primary: '#fff',
-    tones: {
-      error: palette.red[1],
-      faded: palette.gray[0],
-    },
   },
   brand: {
     primary: palette.base,
@@ -50,9 +46,13 @@ const colors = {
     primary: palette.black,
     secondary: palette.gray[7],
     light: palette.gray[5],
-    tones: {
-      error: palette.red[7],
-      faded: palette.gray[2],
+  },
+  tones: {
+    error: palette.red[7],
+    faded: palette.gray[2],
+    light: {
+      error: palette.red[1],
+      faded: palette.gray[0],
     },
   },
 };
@@ -84,7 +84,12 @@ const keyframes = {
   },
   spin: {
     default: {
-      '100%': {transform: 'rotate(360deg)'},
+      from: {
+        transform: 'rotate(0deg)',
+      },
+      to: {
+        transform: 'rotate(360deg)',
+      },
     },
   },
 };
@@ -118,17 +123,17 @@ const shadows = {
 
 const sizes = {
   anchor: '12px',
+  height: {
+    input: '40px',
+  },
   icon: {
     s: '16px',
     m: '20px',
     l: '24px',
   },
-  spec: {
-    icon: '100px',
-    name: '160px',
-  },
   width: {
     container: '768px',
+    spec: '160px',
     toc: '300px',
   },
 };
