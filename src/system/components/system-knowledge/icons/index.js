@@ -11,7 +11,7 @@ const renderIcon = (icon) => (
     w="width.spec"
   >
     <Icon icon={icon} size="icon.l" />
-    <Text variant="chip">{icon}</Text>
+    <Text variant="chip.primary">{icon}</Text>
   </Layout>
 );
 

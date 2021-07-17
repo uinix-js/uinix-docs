@@ -94,6 +94,15 @@ const global = {
   ...classes,
 };
 
+const defaultChip = {
+  backgroundColor: 'tones.light.faded',
+  borderRadius: 'm',
+  color: 'text.secondary',
+  paddingLeft: 'chip',
+  paddingRight: 'chip',
+  fontSize: 'xs',
+};
+
 const typography = {
   global: {
     body: {
@@ -178,13 +187,15 @@ const typography = {
       paddingTop: 's',
     },
     chip: {
-      backgroundColor: 'tones.light.faded',
-      border: 'bordered',
-      borderRadius: 'm',
-      color: 'text.secondary',
-      paddingLeft: 'chip',
-      paddingRight: 'chip',
-      fontSize: 'xs',
+      accent: {
+        ...defaultChip,
+        backgroundColor: 'brand.primary',
+        color: 'text.inverse',
+      },
+      primary: {
+        ...defaultChip,
+        border: 'bordered',
+      },
     },
     description: {
       color: 'text.secondary',

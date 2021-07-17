@@ -20,7 +20,7 @@ const Spec = ({name, value, render}) => {
   return (
     <Layout align="center" spacing="l">
       <Element flex="none" minW="width.spec">
-        <Text variant="chip">{name}</Text>
+        <Text variant="chip.primary">{name}</Text>
       </Element>
       <Element flex="none">{render(value, name)}</Element>
       <Text variant="spec">{previewValue}</Text>

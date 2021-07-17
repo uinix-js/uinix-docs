@@ -30,7 +30,7 @@ const borders = {
 
 const colors = {
   background: {
-    primary: '#fff',
+    primary: 'white',
   },
   brand: {
     primary: palette.base,
@@ -46,6 +46,7 @@ const colors = {
     primary: palette.black,
     secondary: palette.gray[7],
     light: palette.gray[5],
+    inverse: 'white',
   },
   tones: {
     error: palette.red[7],

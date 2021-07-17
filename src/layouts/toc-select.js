@@ -110,7 +110,7 @@ const OptionText = ({enableIndent, label: overrideLabel, option}) => {
   const pl = enableIndent ? (keys.length - 1) * 24 : undefined;
   return (
     <Layout align="center" pl={pl} spacing="xs">
-      <Text variant="chip">{keys.join('.')}</Text>
+      <Text variant="chip.primary">{keys.join('.')}</Text>
       <Text fontSize="s">{overrideLabel || label}</Text>
     </Layout>
   );
