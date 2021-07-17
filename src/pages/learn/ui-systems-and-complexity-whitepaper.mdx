@@ -69,27 +69,27 @@ View functions, more commonly known as *components*, are simply functions!
 
 ```js live scope=ui
 () => {
-  const Button = ({ text }) => {
+  const Button = ({text}) => {
     return <div>{text}</div>;
   };
 
-  const Big = ({ children }) => {
+  const Big = ({children}) => {
     return (
-      <div style={{ fontSize: '32px', padding: '16px' }}>
+      <div style={{fontSize: '32px', padding: '16px'}}>
         {children}
       </div>
     );
   };
 
-  const Red = ({ children }) => {
+  const Red = ({children}) => {
     return (
-      <div style={{ backgroundColor: 'red', color: 'white' }}>
+      <div style={{backgroundColor: 'red', color: 'white'}}>
         {children}
       </div>
     );
   };
 
-  const BigRedButton = ({ text }) => {
+  const BigRedButton = ({text}) => {
     return (
       <Big>
         <Red>
@@ -109,16 +109,16 @@ To confirm this, you can update the <code><span style="color: red;">BigRedButton
 
 ```js scope=fp
 // a helper to remap arguments into an object under the `children` property.
-const attachChildren = (x) => ({ children: x });
+const attachChildren = (x) => ({children: x});
 
-const BigRedButton = ({ text }) => {
+const BigRedButton = ({text}) => {
   return pipe([
     Button,
     attachChildren,
     Red,
     attachChildren,
     Big,
-  ])({ text });
+  ])({text});
 }
 ```
 
@@ -189,7 +189,7 @@ Let's now try to model style declarations as either style objects or *style func
       paddingRight: '16px',
       paddingTop: '4px',
     },
-    big: ({ isBig }) => { // a simple function
+    big: ({isBig}) => { // a simple function
       return {
         fontSize: isBig ? '32px' : undefined,
         padding: isBig ? '32px 16px': undefined
@@ -241,7 +241,7 @@ Just as components, and generally functions, can be composed, we will compose st
       paddingRight: '16px',
       paddingTop: '4px',
     },
-    big: ({ isBig }) => {
+    big: ({isBig}) => {
       return {
         fontSize: isBig ? '32px' : undefined,
         padding: isBig ? '32px 16px': undefined
@@ -398,7 +398,7 @@ He then receives further requirements that this component should support conditi
       styleProps={{
         isBig: true,
       }}
-      styles={({ isBig }) => ({
+      styles={({isBig}) => ({
         borderRadius: '4px',
         border: '1px solid rgb(222, 225, 228)',
         fontSize: isBig ? '32px' : '14px',
@@ -421,7 +421,7 @@ A few days later, he receives another requirement to apply the red styles on thi
       styleProps={{
         isBig: true,
       }}
-      styles={({ isBig }) => ({
+      styles={({isBig}) => ({
         backgroundColor: 'red',
         borderRadius: '4px',
         border: '1px solid rgb(222, 225, 228)',
@@ -482,7 +482,7 @@ Elliot goes back to the drawing board and thinks carefully how he implement the 
   };
 
   const styles = {
-    notice: ({ isBig, variant }) => ({
+    notice: ({isBig, variant}) => ({
       borderRadius: '6px',
       border: '1px solid rgb(222, 225, 228)',
       fontSize: isBig ? '32px' : '14px',
@@ -533,7 +533,7 @@ A few days later, Elliot receives requirements to create a <code><span style="co
       styleProps={{
         isBig: true
       }}
-      styles={({ isBig }) => ({
+      styles={({isBig}) => ({
         backgroundColor: 'red',
         borderRadius: '6px',
         border: '1px solid rgb(222, 225, 228)',
@@ -561,7 +561,7 @@ He notices that it shares some aspects with the `Notice` component he created ea
     color: '#ff7a45',
   }
 
-  const big = ({ isBig }) => ({
+  const big = ({isBig}) => ({
     fontSize: isBig ? '32px' : '14px',
     padding: isBig ? '16px 32px': '4px 16px',
   });
@@ -574,11 +574,11 @@ He notices that it shares some aspects with the `Notice` component he created ea
   const styles = {
     big,
     danger,
-    notice: ({ isBig, variant }) => ({
+    notice: ({isBig, variant}) => ({
       borderRadius: '6px',
       border: '1px solid rgb(222, 225, 228)',
       ...variants[variant],
-      ...big({ isBig }),
+      ...big({isBig}),
     }),
   };
 
@@ -631,7 +631,7 @@ Elliot, after days of successfully refactoring code, confidently heads to the dr
     color: 'white',
   };
 
-  const warning = ({ isBig }) => ({
+  const warning = ({isBig}) => ({
     fontSize: isBig ? '32px' : '14px',
     padding: isBig ? '16px 32px': '4px 16px',
   });
@@ -641,7 +641,7 @@ Elliot, after days of successfully refactoring code, confidently heads to the dr
     color: 'white',
   };
 
-  const big = ({ isBig }) => ({
+  const big = ({isBig}) => ({
     fontSize: isBig ? '32px' : '14px',
     padding: isBig ? '16px 32px': '4px 16px',
   });
