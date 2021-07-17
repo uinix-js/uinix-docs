@@ -1,0 +1,102 @@
+import {PackageLink} from '../../../system/components/index.js';
+
+# FP Recipes
+
+Common FP recipes and patterns when using <PackageLink name="uinix-fp" />  to author JS code in functional form.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 2
+```
+
+## Use composition
+
+Methods in <PackageLink name="uinix-fp" />  are conveniently curried to support composition.
+
+### Bad
+```js
+import {merge, prop} from 'uinix-fp';
+
+const m1 = merge(y)(x1);
+const m2 = merge(y)(x2);
+const m3 = merge(y)(x3);
+const v1 = prop(p)(x1);
+const v2 = prop(p)(x2);
+const v3 = prop(p)(x3);
+```
+
+### Good
+```js
+import {merge, prop} from 'uinix-fp';
+
+const mergeWithY = merge(y);
+const propByP = prop(p);
+const m1 = mergeWithY(x1);
+const m2 = mergeWithY(x2);
+const m3 = mergeWithY(x3);
+const v1 = propByP(x1);
+const v2 = propByP(x2);
+const v3 = propByP(x3);
+```
+
+## Use pointfree notation
+
+Methods in <PackageLink name="uinix-fp" />  are designed to faciliate [pointfree] notation.
+
+### Bad
+```js
+const addOne = x => x + 1;
+const result = arr
+  .map(x => x.a.b.c)
+  .filter(x => !!x)
+  .map(x => addOne(x));
+```
+
+### Good
+```js
+import {i, props} from 'uinix-fp';
+
+const result = arr
+  .map(props('a.b.c'))
+  .filter(i)
+  .map(addOne);
+```
+
+Pointfree notation plays nice with `pipe`, and the above can expressed as:
+
+### Better
+```js
+import {filter, i, map, pipe, props} from 'uinix-fp';
+
+const result = pipe([
+  map(props('a.b.c')),
+  filter(i),
+  map(addOne),
+])(arr);
+```
+
+## Use `pipe`
+
+Use `pipe` to organize sequential operations on an input.
+
+Debug a `pipe` by simply `tap`ping it.
+
+```js
+import {pipe, tap} from 'uinix-fp';
+
+const result = pipe([
+  step1,
+  step2,
+  tap('after step 2'),
+  step3,
+  step4,
+]);
+```
+
+
+<!-- defs -->
+[pointfree]: https://en.wikipedia.org/wiki/Tacit_programming

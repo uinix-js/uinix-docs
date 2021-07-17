@@ -5,8 +5,8 @@ import PackagePageLayout from '../../../layouts/package-page-layout.js';
 
 const resources = [
   {
-    name: 'Resources',
-    links: ['Recipes'],
+    name: 'Recipes',
+    links: ['API', 'FP'],
   },
 ];
 

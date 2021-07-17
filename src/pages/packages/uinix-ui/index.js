@@ -5,6 +5,10 @@ import PackagePageLayout from '../../../layouts/package-page-layout.js';
 
 const resources = [
   {
+    name: 'Recipes',
+    links: ['Components', 'Layouts', 'Styles', 'Theme'],
+  },
+  {
     name: 'Guides',
     links: [
       'Build a Box',
@@ -15,10 +19,6 @@ const resources = [
       'Animations',
       'System Knowledge',
     ],
-  },
-  {
-    name: 'Recipes',
-    links: ['Components', 'Layouts', 'Styles', 'Theme'],
   },
   {
     name: 'Resources',
