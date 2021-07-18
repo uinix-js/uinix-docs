@@ -6,7 +6,7 @@ import PackagePageLayout from '../../../layouts/package-page-layout.js';
 const resources = [
   {
     name: 'Recipes',
-    links: ['Components', 'Layouts', 'Styles', 'Theme'],
+    links: ['Components', 'Layouts', 'Theme', 'Styles'],
   },
   {
     name: 'Guides',

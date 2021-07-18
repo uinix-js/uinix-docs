@@ -35,14 +35,14 @@
     "remark-highlight.js": "^6.0.0",
     "remark-react": "^8.0.0",
     "remark-slug": "^6.0.0",
-    "slugify": "^1.5.3",
-    "uinix-ui": "^0.1.10-beta.1"
+    "slugify": "^1.6.0",
+    "uinix-ui": "^0.1.11-beta.1"
   },
   "devDependencies": {
     "eslint-config-xo-react": "^0.25.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "xo": "^0.41.0"
+    "xo": "^0.42.0"
   },
   "scripts": {
     "develop": "gatsby develop",

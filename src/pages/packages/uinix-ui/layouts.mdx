@@ -1,0 +1,534 @@
+import {Json, PackageLink} from '../../../system/components/index.js';
+import config from '../../../system/config.js';
+import theme from '../../../system/theme.js';
+
+# `Layout`s Recipes
+
+Common layout recipes when using the <PackageLink name="uinix-ui" /> `Layout` component.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Overview
+
+The <PackageLink name="uinix-ui" /> `Layout` component makes it extremely easy to build common UI layouts with a meaningful and expressive flex-based API.  This documentation provides a few common layout recipes.  Please refer to the API documentation for `Layout` for more details.
+
+All examples are interactive, so please feel free to edit the code.  Feel free to open an [issue] if you want to suggest a component to be added to the list!
+
+The examples assume a preset `config` (enabling shorthand style props) and `theme`, so make sure to adjust these appropriately in your implementation.
+
+<Json
+  value={{
+    config: {
+      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
+    },
+ }}
+/>
+
+<Json value={{theme}} />
+
+## `Layout`
+
+The `Layout` component primitive interoperates with the `theme.spacings` spec, providing a very simple way to evenly space any child elements in either specified direction.
+
+```js live scope=ui
+<Layout direction="column" spacing="m">
+  <Layout spacing="s">
+    <button>Button</button>
+    <Text>Text</Text>
+    <Icon icon="x" size="icon.l" />
+  </Layout>
+  <Layout spacing="m">
+    <button>Button</button>
+    <Text>Text</Text>
+    <Icon icon="x" size="icon.l" />
+  </Layout>
+  <Layout spacing="l">
+    <button>Button</button>
+    <Text>Text</Text>
+    <Icon icon="x" size="icon.l" />
+  </Layout>
+</Layout>
+```
+
+`Layout` supports flex properties (e.g. `align`, `flex`, `justify`, `justify`) to easily configure flex-based layouts.
+
+```js live scope=ui
+<Layout direction="column" spacing="m">
+  <Layout align="flex-start" spacing="l">
+    <Text fontSize="xl">Text</Text>
+    <Text fontSize="m">Text</Text>
+    <Text fontSize="xs">Text</Text>
+  </Layout>
+  <Layout align="center" spacing="l">
+    <Text fontSize="xl">Text</Text>
+    <Text fontSize="m">Text</Text>
+    <Text fontSize="xs">Text</Text>
+  </Layout>
+  <Layout align="flex-end" spacing="l">
+    <Text fontSize="xl">Text</Text>
+    <Text fontSize="m">Text</Text>
+    <Text fontSize="xs">Text</Text>
+  </Layout>
+</Layout>
+```
+
+`Layout` supports a props that allow easy ways to flex-wrap children.
+
+```js live scope=ui
+<Layout wrap spacing="l" w="200px" wrapSpacing="xs">
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+  <Icon icon="x" size="icon.l" />
+</Layout>
+```
+
+
+`Layout` is composed from `Element`, and therefore supports all `Element` props (e.g. `as`, `styles`) and configuration (e.g. shorthand style props).
+
+```js live scope=ui
+<Layout
+  as="ul"
+  bg="brand.primary"
+  color="text.inverse"
+  direction="column"
+  spacing="l"
+  styles={{
+    ':hover': {
+      backgroundColor: 'background.primary',
+      color: 'text.primary',
+    }
+  }}>
+  <li>One</li>
+  <li>Two</li>
+  <li>Three</li>
+</Layout>
+```
+
+## `Container`
+
+```js live scope=ui
+() => {
+  const Container = (props) => {
+    return (
+      <Layout
+        {...props}
+        mx="auto"
+        maxW="400px" // for demo
+        p="m"
+      />
+    );
+  }
+
+  return (
+    <Container
+      bg="brand.primary"
+      color="text.inverse">
+      Container centered with max-width.
+    </Container>
+  );
+}
+```
+
+## `Centered`
+
+```js live scope=ui
+() => {
+  const Centered = (props) => {
+    return (
+      <Layout
+        {...props}
+        align="center"
+        justify="center"
+      />
+    );
+  }
+
+  return (
+    <Centered
+      bg="brand.primary"
+      color="text.inverse"
+      p="xl">
+      Centered
+    </Centered>
+  );
+}
+```
+
+## `List`
+
+```js live scope=ui
+() => {
+  const List = ({items}) => {
+    // You can style this accordingly
+    return (
+      <Layout as="ul" direction="column" spacing="s">
+        {items.map(item => <li key={item}>{item}</li>)}
+      </Layout>
+    );
+  }
+
+  return (
+    <List
+      items={[
+        'One',
+        'Two',
+        'Three',
+      ]}>
+    </List>
+  );
+}
+```
+
+## `Nav`
+
+```js live scope=ui
+() => {
+  const Nav = ({items}) => {
+    // You can style this accordingly with your own variants
+    return (
+      <nav>
+        <Layout
+          as="ol"
+          align="center"
+          spacing="m"
+          variant="nav.list">
+          {items.map(({text, to}) => (
+            <Element key={to} as="li" variant="nav.item">
+              <a href={to}>{text}</a>
+            </Element>
+          ))}
+        </Layout>
+      </nav>
+    );
+  }
+
+  return (
+    <Nav
+      items={[
+        {text: 'One', to: '#one'},
+        {text: 'Two', to: '#two'},
+        {text: 'Three', to: '#three'},
+      ]}>
+    </Nav>
+  );
+}
+```
+
+## `Icons`
+
+```js live scope=ui
+() => {
+  const Icons = ({icons, ...rest}) => {
+    return (
+      <Layout
+        {...rest}
+        spacing="m"
+        wrap
+        wrapSpacing="m">
+        {icons.map(({icon, onClick}) => (
+          <Icon
+            key={icon}
+            icon={icon}
+            size="icon.l"
+            onClick={onClick}
+          />
+        ))}
+      </Layout>
+    )
+  }
+
+  const mapIcon = icon => ({
+    icon,
+    onClick: () => alert(icon),
+  });
+
+  return (
+    <Element>
+      <Icons
+        color="brand.primary"
+        icons={[
+          'anchor',
+          'form.radio.checked',
+          'form.radio.unchecked',
+          'form.checkbox.checked',
+          'form.checkbox.unchecked',
+          'github.mark',
+          'menu',
+          'spinner',
+          'up',
+          'x',
+        ].map(mapIcon)}
+        p="m"
+        w="200px"
+      />
+    </Element>
+  );
+}
+```
+
+## `Chips`
+
+```js live scope=ui
+() => {
+  const Chips = ({chips, ...rest}) => (
+    <Layout
+      {...rest}
+      wrap
+      spacing="s"
+      wrapSpacing="xs">
+      {chips.map((chip) => (
+        <Text key={chip} variant="chip.primary">
+          {chip}
+        </Text>
+      ))}
+    </Layout>
+  );
+
+  return (
+    <Chips
+      chips={[
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine',
+      ]}
+      p="m"
+      w="300px"
+    />
+  );
+}
+```
+
+## Header 1
+
+```js live scope=ui
+<Layout
+  as="header"
+  align="center"
+  bg="tones.light.faded"
+  justify="space-between"
+  px="l"
+  py="m"
+  spacing="m">
+  <Text as="h1" m={0}>Brand</Text>
+  <nav>
+    <Layout
+      as="ol"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Blog
+      </Element>
+      <Element as="li" variant="nav.item">
+        About
+      </Element>
+      <Element as="li" variant="nav.item">
+        Contact
+      </Element>
+      <Element as="li" variant="nav.item">
+        <Icon icon="github.mark" size="icon.l" />
+      </Element>
+    </Layout>
+  </nav>
+</Layout>
+```
+
+## Header 2
+
+```js live scope=ui
+<Layout
+  as="header"
+  align="center"
+  bg="tones.light.faded"
+  px="l"
+  py="m"
+  direction="column"
+  spacing="m">
+  <Text as="h1" m={0}>Brand</Text>
+  <nav>
+    <Layout
+      as="ol"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Blog
+      </Element>
+      <Element as="li" variant="nav.item">
+        About
+      </Element>
+      <Element as="li" variant="nav.item">
+        Contact
+      </Element>
+      <Element as="li" variant="nav.item">
+        <Icon icon="github.mark" size="icon.l" />
+      </Element>
+    </Layout>
+  </nav>
+</Layout>
+```
+
+## Footer 1
+
+```js live scope=ui
+<Layout
+  as="footer"
+  align="center"
+  bg="tones.light.faded"
+  justify="space-between"
+  px="l"
+  py="m"
+  spacing="m">
+  <nav>
+    <Layout
+      as="ol"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Home
+      </Element>
+      <Element as="li" variant="nav.item">
+        Blog
+      </Element>
+      <Element as="li" variant="nav.item">
+        About
+      </Element>
+      <Element as="li" variant="nav.item">
+        <Icon icon="github.mark" size="icon.l" />
+      </Element>
+    </Layout>
+  </nav>
+  <small>
+    © {new Date().getFullYear()}
+  </small>
+</Layout>
+```
+
+## Footer 2
+
+
+```js live scope=ui
+<footer>
+  <Layout
+    as="nav"
+    bg="tones.light.faded"
+    justify="space-between"
+    px="l"
+    py="m"
+    spacing="m">
+    <Layout
+      as="ol"
+      direction="column"
+      flex="auto"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Link 1.1
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 1.2
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 1.3
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 1.4
+      </Element>
+    </Layout>
+    <Layout
+      as="ol"
+      direction="column"
+      flex="auto"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Link 2.1
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 2.2
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 2.3
+      </Element>
+    </Layout>
+    <Layout
+      as="ol"
+      direction="column"
+      flex="auto"
+      spacing="m"
+      variant="nav.list">
+      <Element as="li" variant="nav.item">
+        Link 3.1
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 3.2
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 3.3
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 3.4
+      </Element>
+      <Element as="li" variant="nav.item">
+        Link 3.5
+      </Element>
+    </Layout>
+  </Layout>
+</footer>
+```
+
+## Page Layout
+
+```js live scope=ui
+<Layout
+  bg="tones.light.faded"
+  direction="column"
+  h="100vh"
+  maxW="400px" // for demo
+  mx="auto"
+  px="l"
+  py="m"
+  spacing="l"
+  w="100%">
+  <Layout as="header" b="bordered">
+    See Header examples
+  </Layout>
+  <Layout
+    as="main"
+    b="bordered"
+    direction="column"
+    flex="auto"
+    pb="xxl">
+    Main content
+  </Layout>
+  <Layout as="footer" b="bordered">
+    See Footer examples
+  </Layout>
+</Layout>
+```
+
+<!-- defs -->
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[issue]: https://github.com/uinix-js/uinix-docs/issues
+[react]: https://github.com/facebook/react

@@ -24,7 +24,7 @@ const PageLayout = ({children, isFullWidth}) => {
       >
         <Header />
         <Breadcrumbs />
-        <Layout as="main" flex="auto" direction="column" pb="xxl">
+        <Layout as="main" direction="column" flex="auto" pb="xxl">
           {children}
         </Layout>
         <Footer />
