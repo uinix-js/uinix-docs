@@ -1,0 +1,477 @@
+import {Link} from 'gatsby';
+
+import {Json, PackageLink} from '../../../system/components/index.js';
+import config from '../../../system/config.js';
+import styles from '../../../system/styles.js';
+import theme from '../../../system/theme.js';
+
+# Styles Recipes
+
+Common style recipes when using <PackageLink name="uinix-ui" />.
+
+> **Notes:**
+- This document provides examples written in [React].  The examples can be similarly implemented with any [hyperscript]-based view library.  For further reading, please refer to the <PackageLink name="uinix-ui" /> package for API documentation.
+- This guide contains interactive examples.  Feel free to edit the code!
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 2
+```
+
+## Overview
+
+While it is common practice to organize components, state, and utilities in UI development as composable programs and modules, we seldom apply this principle to styles and CSS.  This is evident in the fact that styles and CSS are usually an afterthought in code organization.  Many UI systems do not provide the infrastructure to help with such organization.
+
+In <PackageLink name="uinix-ui" />, styles receive first-class support and can be organized in the `system.styles` spec.  This allows a centralized place to define, manage, and access shareable styles.  In addition, <PackageLink name="uinix-ui" /> components can apply styles with simple but powerful behaviors (see [§ Style Behaviors](#style-behaviors)).
+
+The examples assume a preset `config` and `theme` detailed in [§ Appendix](#appendix).  You can adjust the examples appropriately for your configuration.  All examples are interactive and you can edit the code.  Feel free to open an [issue] if you want to suggest a style recipe to be added to the list!
+
+## Style Behaviors
+
+All styles defined in `system.styles` share the following behaviors and features:
+- Can be themed by referencing valid theme property paths defined in `system.theme` when assigning to relating CSS properties.
+- Can be made responsive by specifying values in array-form (after defining `system.styles.breakpoints` and whitelisting responsive CSS properties in `config.responsiveCssProperties`).
+- Can be arbitrarily nested for organization in `system.styles`.
+- Custom styles (any non-reserved keys specified on `system.styles`) can be expressed either as style objects or style functions.
+- Style functions are simple functions returning style objects given style props.  They are decoupled from usage, and are easily testable.
+- Styles can be accessed and applied in <PackageLink name="uinix-ui" /> components through the `styles` and `variant` prop.
+- Styles can be composed and merged when specified as an array in the `styles` prop.
+
+## Responsive Styles
+
+To use responsive styles, first ensure the intended CSS properties are whitelisted in `config.responsiveCssProperties`.  A whitelisting model is used to keep system specs simple and explicit.
+
+<Json
+  value={{
+    config: {
+      responsiveCssProperties: config.responsiveCssProperties
+    },
+  }}
+/>
+
+Next, define the responsive breakpoints in `system.styles.breakpoints` to apply `min-width`-based media query breakpoints.
+
+<Json
+  value={{
+    styles: {
+      breakpoints: styles.breakpoints,
+    },
+  }}
+/>
+
+We can now apply responsive styles on whitelisted responsive CSS properties by simply specifying styles in array-form.
+
+```js live scope=ui
+<Layout
+  as="ul"
+  direction="column"
+  // responsive component props
+  spacing={['s', 's', 'xl']}
+  // shorthand style props are responsive!
+  bg={['background.primary', 'background.primary', 'tones.light.faded']}
+  color={['text.light', 'text.light', 'text.primary']}
+  p={['s', 's', 'xl']}>
+  <Element as="li">
+    This is an example demonstrating responsive styles with uinix-ui components.  Most component props are conveniently responsive.  Feel free to resize the window to test responsive styles!
+  </Element>
+  <Element as="li">
+    This example is interactive, so feel free to edit the code and explore in more detail.  Remember that only whitelisted CSS properties are responsive, so you maybe limited with your explorations in this example.
+  </Element>
+  <hr />
+  <Element
+    as="li"
+    styleProps={{
+      isActive: true,
+    }}
+    styles={[
+      ({isActive}) => ({
+        backgroundColor: isActive ? 'brand.primary' : undefined,
+        color: isActive ? 'text.inverse' : 'text.primary',
+      }),
+      {
+        fontSize: ['s', 's', 'xl'],
+        fontWeight: ['light', 'light', 'bold'],
+        padding: ['s', 's', 'l'],
+      },
+    ]}>
+    This is a responsive Element component using styles and styleProps.
+  </Element>
+  <Text
+    as="li"
+    color={['text.primary', 'text.primary', 'text.link']}
+    fontSize={['s', 's', 'xl']}
+    fontWeight={['light', 'light', 'bold']}>
+    This is a responsive Text component.
+  </Text>
+  <Element as="li">
+    Icons in this layout will be arranged, spaced, sized responsively.
+    <Layout
+      // simple but powerful way to switch layout directions
+      direction={['column', 'column', 'row']}
+      justify={['flex-start', 'flex-start', 'space-between']}
+      py="m"
+      spacing={['s', 's', 'l']}>
+      {Array.from({length: 5}).map((_, i) => (
+        <Icon
+          key={i}
+          color={['brand.light', 'brand.light', 'brand.primary']}
+          icon="github.mark"
+          size={['icon.s', 'icon.s', 'icon.l']}
+        />
+      ))}
+    </Layout>
+  </Element>
+  <Element
+    // simple but powerful way to hide elements
+    display={['none', 'none', 'block']}>
+    This Element will disappear in a small viewport.
+  </Element>
+</Layout>
+```
+
+> **Note:** Please refer to the <Link to="../responsive-styles">Responsive Styles</Link> guide for more details.
+
+## Shorthand Style Props
+
+If `config.elementShorthandPropsMapping` is configured appropriately, you may use shorthand style props with any <PackageLink name="uinix-ui" /> component, providing an easy way to style components through props.
+
+```js live scope=ui
+<Text
+  as="div"
+  bg={['background.primary', 'background.primary', 'brand.primary']}
+  color={['text.light', 'text.light', 'text.inverse']}
+  fontSize={['s', 's', 'xl']}
+  fontWeight="bold"
+  px="l"
+  py="m">
+  <p>
+    A Text component styled through shorthand props.
+  </p>
+  <p>
+    Responsive styles are supported too.  Try resizing the browser!
+  </p>
+</Text>
+```
+
+## Global Styles
+
+You can define styles for the global stylesheet affecting the document in `system.styles.global`.  This provides a convenient way, while benefiting from all [style behaviors](#style-behaviors) and features, to:
+- Style semantic HTML elements in the document.
+- Define custom CSS classes.
+- Override vendor CSS.
+
+```js
+const system = {
+  styles: {
+    global: {
+      /** HTML elements */
+      '*': {
+        boxSizing: 'border-box',
+      },
+      body: {
+        backgroundColor: 'background.primary',
+        margin: 0,
+        padding: 0,
+      },
+      button: {
+        backgroundColor: 'transparent',
+        border: 'bordered',
+        borderRadius: 'm',
+        color: 'text.primary',
+        fontSize: 's',
+        fontWeight: 'bold',
+        paddingBottom: 's',
+        paddingLeft: 'm',
+        paddingRight: 'm',
+        paddingTop: 's',
+      },
+      /** CSS classes */
+      '.anchor': {
+        alignItems: 'center',
+        display: 'flex',
+        height: '100%',
+        left: '-anchor',
+        opacity: 'invisible',
+        position: 'absolute',
+      },
+      /** Vendor overrides */
+      '.tippy-content': {
+        backgroundColor: 'background.inverse',
+        color: 'text.inverse',
+        margin: '-m', // Negative theme values work
+        padding: ['xxs', 'xxs', 'xs'], // Responsive styles work
+        fontSize: 'xs',
+      },
+    },
+  },
+},
+```
+
+Use global styles if you wish to enforce baseline styling requirements for semantic HTML elements and implement styles through CSS classes.  For all other purposes, we recommend defining and using styles more explicitly with [variant styles](#variant-styles) and [custom styles](#custom-styles).
+
+```js live scope=ui
+<Layout align="flex-start" direction="column" spacing="l">
+  <p>
+    The following components are all styled by the global stylesheet.
+  </p>
+  <h3>
+    I am a heading.
+  </h3>
+  <button>
+    I am a button.
+  </button>
+  <a href="#">
+    I am a link.
+  </a>
+  <blockquote>
+    I am a blockquote.
+  </blockquote>
+  <pre>
+    I am a code block.
+  </pre>
+  <div style={{position: 'relative'}}>
+    <div class="anchor">
+      <Icon icon="anchor" />
+    </div>
+    I am applying the custom CSS class ".anchor".  Hover over me!
+  </div>
+</Layout>
+```
+
+## Variant Styles
+
+Define variant styles in `system.styles.variants`.  Use this approach if you wish to access styles through a variant property path.
+
+```js live scope=ui
+<Layout align="flex-start" direction="column" spacing="l">
+  <Element as="button" variant="button.small">
+    Small button
+  </Element>
+  <Text variant="chip.primary">
+    This is a "chip.primary" text variant.
+  </Text>
+  <Element
+    as="input"
+    placeholder="Search"
+    variant="form.input.default"
+    w="400px"
+  />
+</Layout>
+```
+
+Variant styles allows you to easily build components supporting the `variant` prop.  This is done by organizing variants in `system.styles.variants` in a meaningful way (e.g. by component/domain), and to simply concatenate the `variant` property path with the relevant component/domain prefix.
+
+```js live scope=ui
+() => {
+  const Button = ({
+    text,
+    onClick,
+    variant = '',
+  }) => {
+    return (
+      <Element
+        as="button"
+        variant={`button.${variant}`} // concatenate with 'button' prefix
+        onClick={onClick}>
+        {text}
+      </Element>
+    );
+  }
+
+  return (
+    <Button
+      text="I am a small button"
+      variant="small" // i.e. system.variants.button.small
+      onClick={() => alert('clicked')}
+    />
+  );
+}
+```
+
+> **Note:** Please refer to the <Link to="../variant-styles">Variant Styles</Link> guide for more details.
+
+## Typography Styles
+
+Typography styles can be explicitly organized in `system.styles.typography`.  It organizes typographic global and variant styles in a similar way detailed in the [§ Global Styles](#global-styles) and [§ Variant Styles](#variant-styles) section.
+
+While typography styles can technically be organized in `system.styles`, it is recommended to define these in `system.styles.typography`, allowing explicit organization and maintainence of typography specs.  This is also recommend because the <PackageLink name="uinix-ui" /> `Text` component interoperates closely with the `system.styles.typography` spec and supports typographic variants.
+
+```js live scope=ui
+<Layout align="flex-start" direction="column" spacing="l">
+  I am a body text.
+  <p>I am a paragraph text</p>
+  <a href="#">I am a link.</a>
+  <blockquote>I am a blockquote.</blockquote>
+  <code>I am a code.</code>
+  <h1>I am a h1.</h1>
+  <h2>I am a h2.</h2>
+  <h3>I am a h3.</h3>
+  <pre>I am a code block.</pre>
+  <Text variant="brand">I am a "brand" Text variant.</Text>
+  <Text variant="description">I am a "description" Text variant.</Text>
+  <Text variant="spec">I am a "spec" Text variant.</Text>
+  <Text variant="chip.primary">I am a "chip.primary" Text variant.</Text>
+</Layout>
+```
+
+
+> **Note:** Please refer to the <Link to="../typography">Typography</Link> guide for more details.
+
+## Custom Styles
+
+Aside from the `global`, `typography`, `variants` reserved keys used in `system.styles`, anything else defined on `system.styles` will be treated as a custom styles.  Custom styles can be aribtrarily nested for organization, and can be defined as simple style objects or style functions.
+
+```js
+const system = {
+  styles: {
+    /** Reserved */
+    global: {...},
+    typography: {...},
+    variants: {...},
+    /** Custom styles */
+    layout: { // nested for organization
+      container: { // a style object
+        margin: '0 auto',
+        maxWidth: 'width.container',
+        paddingLeft: 'l',
+        paddingRight: 'l',
+        width: '100%',
+      },
+    },
+    // style function returning configurable dot styles.
+    dot: ({ color, size }) => ({
+      backgroundColor: color,
+      borderRadius: 'round',
+      height: size,
+      width: size,
+    }),
+    interaction: { // nested for organization
+      // style function returning disabled styles if props.disabled === true
+      disabled: ({disabled}) =>
+        disabled
+          ? {
+              opacity: 'disabled',
+              pointerEvents: 'none',
+            }
+          : null,
+    },
+    // style function returning truncated styles if props.truncate === true
+    truncate: ({truncate}) =>
+    truncate
+      ? {
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        }
+      : null,
+  },
+};
+```
+
+Custom styles are usually applied on <PackageLink name="uinix-ui" /> components with the `styles` and `styleProps` props, and accessed with the `useStyles` system hook.
+
+```js live scope=ui
+() => {
+  // access system.styles with this system hook
+  const styles = useStyles();
+
+  return (
+    <Element
+      // compose styles
+      styles={[
+        styles.disabled,
+        styles.dot,
+      ]}
+      // provide prop values for all style functions
+      styleProps={{
+        color: 'brand.primary',
+        disabled: true,
+        size: 'icon.l'
+      }}
+      onClick={() => alert('cannot be clicked')}
+    />
+  );
+}
+```
+
+## Styling Components
+
+Through a combination of [shorthand style props](#shorthand-style-props), [global styles](#global-styles), [variant styles](#variant-styles), [typography styles](#typography-styles) and [custom styles](#custom-styles), we have many ways of styling components, all achievable through a central organization of styling logic in the `system.styles` spec.  The choice of approach depends on your needs and requirements, and the example below provides a few common use cases.
+
+```js live scope=ui
+() => {
+  const styles = useStyles();
+
+  return (
+    <Layout align="flex-start" direction="column" spacing="l">
+      <Text
+        bg="brand.primary"
+        color="text.inverse"
+        p="m">
+        Styled through shorthand style props.
+      </Text>
+      <Text variant="chip.primary">
+        Styled through variant styles on the uinix Text component.
+      </Text>
+      <Element>
+        Styled through custom styles and styleProps via the <code>useStyles</code> system hook.
+        <Element
+          styleProps={{
+            color: 'brand.primary',
+            disabled: true,
+            size: 'icon.l'
+          }}
+          styles={[
+            styles.disabled,
+            styles.dot,
+          ]}
+          onClick={() => alert('cannot be clicked')}
+        />
+      </Element>
+      <blockquote>
+        Styled through global styles on semantic HTML elements.
+      </blockquote>
+      <Text
+        as="blockquote"
+        fontSize="l"
+        variant="chip.primary"
+        styleProps={{disabled: true}}
+        styles={styles.disabled}>
+        <p>
+          Styled through a mix of global styles, shorthand style props, variant styles, and custom styles.
+        </p>
+        <p>
+          We strongly recommend <strong>avoiding</strong> doing this, and instead, define and organize new styles in <code>system.styles</code>.
+        </p>
+      </Text>
+    </Layout>
+  );
+}
+```
+
+## Appendix
+
+The following `config` and `system.theme` is used for the examples in this documentation.
+
+### `config`
+
+<Json
+  value={{
+    config: {
+      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
+    },
+ }}
+/>
+
+### `system.theme`
+<Json value={{theme}} />
+
+<!-- defs -->
+
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[issue]: https://github.com/uinix-js/uinix-docs/issues
+[react]: https://github.com/facebook/react

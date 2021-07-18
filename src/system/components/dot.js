@@ -1,8 +1,10 @@
 import React from 'react';
-import {Element} from 'uinix-ui';
+import {Element, useStyles} from 'uinix-ui';
 
 const Dot = ({color, isBordered, size}) => {
-  const dot = <Element bg={color} borderRadius="round" h={size} w={size} />;
+  const styles = useStyles();
+
+  const dot = <Element styleProps={{color, size}} styles={styles.dot} />;
 
   if (isBordered) {
     return (

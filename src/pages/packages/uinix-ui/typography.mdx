@@ -81,7 +81,7 @@ Say we have the following global typography styles referencing theme values:
 The following HTML will render with the specified styles,
 
 ```js live scope=ui
-<Layout align="start" direction="column" spacing="m">
+<Layout align="flex-start" direction="column" spacing="l">
   I am a body text.  This and many examples in this guide are interactive.  Edit and play around with the code!
   <p>I am a paragraph text</p>
   <a href="#">I am a link.</a>
@@ -117,7 +117,7 @@ We can render the variants easily with the `Text` component,
 
 ```js live scope=ui
 // variant property paths are defined relative to typography.variants
-<Layout align="start" direction="column" spacing="m">
+<Layout align="flex-start" direction="column" spacing="l">
   <Text variant="brand">I am a "brand" variant.</Text>
   <Text variant="description">I am a "description" variant.</Text>
   <Text variant="spec">I am a "spec" variant.</Text>
@@ -136,7 +136,7 @@ We can render the variants easily with the `Text` component,
 You can render `Text` as any HTML element with the `as` prop.  This also benefits from global styles defined in [`system.styles.typography.global`](#global).
 
 ```js live scope=ui
-<Layout align="start" direction="column" spacing="m">
+<Layout align="flex-start" direction="column" spacing="l">
   <Text as="a" href="#">I am a link.</Text>
   <Text as="blockquote">I am a blockquote.</Text>
   <Text as="pre">I am a code block.</Text>
@@ -156,7 +156,7 @@ The `variant` prop allows specifying variant styles defined in [`system.styles.t
 Lastly, as a primitive typography element, `Text` supports easy application of typography styles for common typographic CSS properties.  Wherever supported, theme values can be applied to these props.  Please refer to the <PackageLink name="uinix-ui" /> API documentation for the full list of props, but the following provides a few interactive examples.
 
 ```js live scope=ui
-<Layout align="start" direction="column" spacing="m">
+<Layout align="flex-start" direction="column" spacing="l">
   <Text fontFamily="monospace">I am a monospace text.</Text>
   <Text fontStyle="italic">I am an italicized text.</Text>
   <Text fontWeight="bold">I am a bolded text</Text>

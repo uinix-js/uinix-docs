@@ -8,6 +8,12 @@ const rules = {
           pointerEvents: 'none',
         }
       : null,
+  dot: ({color, size}) => ({
+    backgroundColor: color,
+    borderRadius: 'round',
+    height: size,
+    width: size,
+  }),
   interactive: ({onClick}) => ({
     cursor: onClick ? 'pointer' : undefined,
     transition: 'fade',

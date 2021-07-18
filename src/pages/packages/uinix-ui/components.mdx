@@ -23,7 +23,7 @@ to-heading: 2
 
 Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code as shown in the examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
 
-The examples assume a preset `config` and `theme` detailed in [§ Appendix](#appendix).  You can adjust the examples appropriately with your configuration.  All examples are interactive and you can edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component recipe to be added to the list!
+The examples assume a preset `config` and `theme` detailed in [§ Appendix](#appendix).  You can adjust the examples appropriately for your configuration.  All examples are interactive and you can edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component recipe to be added to the list!
 
 ## `Box`
 
@@ -316,7 +316,7 @@ An `Element` appropriately configured shorthand style props can also be used ove
   };
 
   return (
-    <Layout direction="column" spacing="m">
+    <Layout direction="column" spacing="l">
       <Input
         type="text"
         placeholder="Search"
@@ -618,7 +618,7 @@ An `Element` appropriately configured shorthand style props can also be used ove
   }
 
   return (
-    <Layout direction="column" spacing="m">
+    <Layout direction="column" spacing="l">
       <Field
         as="input"
         label="HTML input element"
@@ -739,7 +739,7 @@ An `Element` appropriately configured shorthand style props can also be used ove
   }
 
   return (
-    <Layout align="flex-start" direction="column" spacing="m">
+    <Layout align="flex-start" direction="column" spacing="l">
       <Badge>Badge</Badge>
       <Badge variant="accent">Badge</Badge>
     </Layout>
@@ -784,7 +784,7 @@ An `Element` appropriately configured shorthand style props can also be used ove
   }
 
   return (
-    <Layout direction="column" spacing="m">
+    <Layout direction="column" spacing="l">
       <Alert>An alert</Alert>
       <Alert variant="accent">An accented alert</Alert>
     </Layout>
