@@ -16,26 +16,14 @@ Common layout recipes when using the <PackageLink name="uinix-ui" /> `Layout` co
 ```toc
 exclude: Contents
 from-heading: 2
-to-heading: 3
+to-heading: 2
 ```
 
 ## Overview
 
 The <PackageLink name="uinix-ui" /> `Layout` component makes it extremely easy to build common UI layouts with a meaningful and expressive flex-based API.  This documentation provides a few common layout recipes.  Please refer to the API documentation for `Layout` for more details.
 
-All examples are interactive, so please feel free to edit the code.  Feel free to open an [issue] if you want to suggest a component to be added to the list!
-
-The examples assume a preset `config` (enabling shorthand style props) and `theme`, so make sure to adjust these appropriately in your implementation.
-
-<Json
-  value={{
-    config: {
-      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
-    },
- }}
-/>
-
-<Json value={{theme}} />
+The examples assume a preset `config` and `theme` detailed in [§ Appendix](#appendix).  You can adjust the examples appropriately with your configuration.  All examples are interactive and you can edit the code.  Feel free to open an [issue] if you want to suggest a layout recipe to be added to the list!
 
 ## `Layout`
 
@@ -527,6 +515,23 @@ The `Layout` component primitive interoperates with the `theme.spacings` spec, p
   </Layout>
 </Layout>
 ```
+
+## Appendix
+
+The following `config` and `system.theme` is used for the examples in this documentation.
+
+### `config`
+
+<Json
+  value={{
+    config: {
+      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
+    },
+ }}
+/>
+
+### `system.theme`
+<Json value={{theme}} />
 
 <!-- defs -->
 [hyperscript]: https://github.com/hyperhype/hyperscript

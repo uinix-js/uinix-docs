@@ -16,26 +16,14 @@ Common component recipes when using <PackageLink name="uinix-ui" />.
 ```toc
 exclude: Contents
 from-heading: 2
-to-heading: 3
+to-heading: 2
 ```
 
 ## Overview
 
-Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code components as shown in the examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
+Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code as shown in the examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
 
-All examples are interactive, so please feel free to edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component to be added to the list!
-
-The examples assume a preset `config` (enabling shorthand style props) and `theme`, so make sure to adjust these appropriately in your implementation.
-
-<Json
-  value={{
-    config: {
-      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
-    },
- }}
-/>
-
-<Json value={{theme}} />
+The examples assume a preset `config` and `theme` detailed in [§ Appendix](#appendix).  You can adjust the examples appropriately with your configuration.  All examples are interactive and you can edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component recipe to be added to the list!
 
 ## `Box`
 
@@ -1072,6 +1060,23 @@ An `Element` appropriately configured shorthand style props can also be used ove
   );
 }
 ```
+
+## Appendix
+
+The following `config` and `system.theme` is used for the examples in this documentation.
+
+### `config`
+
+<Json
+  value={{
+    config: {
+      elementShorthandPropsMapping: config.elementShorthandPropsMapping,
+    },
+ }}
+/>
+
+### `system.theme`
+<Json value={{theme}} />
 
 <!-- defs -->
 [hyperscript]: https://github.com/hyperhype/hyperscript
