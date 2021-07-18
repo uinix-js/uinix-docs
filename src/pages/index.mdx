@@ -1,0 +1,33 @@
+import {Link} from 'gatsby';
+import {Element, Text} from 'uinix-ui';
+
+import {BrandLink, PackageLink} from '../system/components/index.js'
+
+Rapid UI development with [Unix-like] UI programs.
+
+---
+
+Programs in <BrandLink /> are:
+
+- **Simple** <Text variant="description">- Do one thing and do it well.</Text>
+- **Composable** <Text variant="description">- Simple programs facilitate building higher order programs.</Text>
+- **Interoperable** <Text variant="description">- Programs in the ecosystem are designed to work with each other.</Text>
+- **Minimal** <Text variant="description">- Batteries-excluded APIs.</Text>
+- **Extensible** <Text variant="description">- Framework-agnostic built only on core JS standards.</Text>
+- **Economic** <Text variant="description">- Build-free, dependency-free, and aims to be update-free.</Text>
+
+The <BrandLink /> ecosystem provides building blocks for UI development in the following areas:
+- UI systems <Text variant="description">- via <PackageLink name="uinix-ui" /></Text>
+- FP utilities <Text variant="description">- via <PackageLink name="uinix-fp" /></Text>
+<Element as="li" disabled>
+  [Coming soon]: Form utilites <Text variant="description">- via <PackageLink name="uinix-form" /></Text>
+</Element>
+<Element as="li" disabled>
+  [Coming soon]: Unified search interfaces <Text variant="description">- via <PackageLink name="uinix-form" /></Text>
+</Element>
+
+Visit the <Link to="/packages">packages</Link> or <Link to="/demos">demos</Link> to continue exploring the <BrandLink /> ecosystem.
+
+
+<!-- defs -->
+[unix-like]: https://en.wikipedia.org/wiki/Unix_philosophy
