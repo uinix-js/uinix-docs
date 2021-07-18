@@ -258,7 +258,6 @@ const variants = {
         color: 'text.secondary',
         fontSize: 's',
         fontWeight: 'bold',
-        textTransform: 'uppercase',
       },
     },
     select: {

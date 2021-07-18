@@ -21,7 +21,7 @@ to-heading: 3
 
 ## Overview
 
-Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code.  There are many ways to implementing components, which are highlighted in some examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
+Implementing UI components with <PackageLink name="uinix-ui" /> is easy and usually involves fairly simple and terse code components as shown in the examples below.  All components can support variants through appropriate string concatenation of the `variant` prop in relation to how variants are defined in `system.styles` (see [§ `Button`](#button) for an example).
 
 All examples are interactive, so please feel free to edit the code.  The examples outlined in this document are based on the list of [theme-ui components].  Feel free to open an [issue] if you want to suggest a component to be added to the list!
 
@@ -92,7 +92,7 @@ The examples assume a preset `config` (enabling shorthand style props) and `them
 }
 ```
 
-Note that the `Layout` component can be used `Flex`.
+Note `Flex` can also be expressed with the `Layout` component.
 
 ```js live scope=ui
 <Layout
@@ -110,7 +110,7 @@ Note that the `Layout` component can be used `Flex`.
 </Layout>
 ```
 
-Or even an `Element` with appropriately configured shorthand style props can be a `Flex`.
+An `Element` appropriately configured shorthand style props can also be used over `Flex`.
 
 ```js live scope=ui
 <Element
@@ -215,7 +215,7 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
   return (
     <Link
-      fontSize="l"
+      fontSize="s"
       fontWeight="bold"
       href="https://uinix.dev"
       target="_blank">
@@ -392,7 +392,7 @@ Or even an `Element` with appropriately configured shorthand style props can be 
   return (
     <Textarea
       placeholder="Type something"
-      rows={10}
+      rows={4}
       w="100%"
     />
   );
@@ -561,9 +561,43 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 }
 ```
 
-## `Switch`
-
 ## `Slider`
+
+```js live scope=ui
+() => {
+  const Slider = (props) => {
+    const styles = {
+      appearance: 'none',
+      backgroundColor: 'tones.faded',
+      height: '4px',
+      '::-webkit-slider-thumb, ::-moz-range-thumb': {
+        appearance: 'none',
+        backgroundColor: 'currentColor',
+        width: '16px',
+        height: '16px',
+        borderRadius: 'round',
+      },
+    };
+
+    return (
+      <Element
+        {...props}
+        as="input"
+        styles={styles}
+        type="range"
+      />
+    );
+  }
+
+  return (
+    <Slider
+      color="brand.primary"
+      defaultValue={10}
+      max={42}
+    />
+  );
+}
+```
 
 ## `Field`
 
@@ -583,11 +617,11 @@ Or even an `Element` with appropriately configured shorthand style props can be 
     return (
       <Layout
         direction="column"
-        spacing="s">
+        spacing="xs">
         <Element
           as="label"
           htmlFor={name}
-          variant="form.label">
+          variant="form.label.default">
           {label}
         </Element>
         <Control id={name} {...rest} />
@@ -599,12 +633,14 @@ Or even an `Element` with appropriately configured shorthand style props can be 
     <Layout direction="column" spacing="m">
       <Field
         as="input"
-        name="HTML input element"
+        label="HTML input element"
+        name="html-input"
         placeholder="Search"
       />
       <Field
         as={Input}
-        name="Custom Input"
+        label="Custom input element"
+        name="custom-input"
         placeholder="Search"
       />
     </Layout>
@@ -626,6 +662,7 @@ Or even an `Element` with appropriately configured shorthand style props can be 
     const styles = {
       appearance: 'none',
       backgroundColor: bg,
+      border: 'none',
       '::-moz-progress-bar, ::-webkit-progress-value': {
         backgroundColor: color,
       },
@@ -941,7 +978,65 @@ Or even an `Element` with appropriately configured shorthand style props can be 
 
 ## `NavLink`
 
+```js live scope=ui
+() => {
+  const NavLink = (props) => {
+    // You can organize with variants of your choice if you prefer.
+    return (
+      <Element as="li" variant="nav.item">
+        <Element {...props} as="a" />
+      </Element>
+    );
+  }
+
+  return (
+    <Layout as="nav" spacing="l">
+      <NavLink href="#">Home</NavLink>
+      <NavLink href="#github">Github</NavLink>
+    </Layout>
+  )
+}
+```
+
 ## `Message`
+
+```js live scope=ui
+() => {
+  // You can organize styles in variants.messages if you prefer.
+  const styles = {
+    container: {
+      backgroundColor: 'tones.light.error',
+      borderRadius: 'm',
+    },
+    status: {
+      alignSelf: 'stretch',
+      backgroundColor: 'tones.error',
+      borderBottomLeftRadius: 'm',
+      borderTopLeftRadius: 'm',
+      padding: 'xxs',
+    },
+  };
+
+  const Message = ({children}) => {
+    return (
+      <Layout
+        align="center"
+        styles={styles.container}>
+        <Element styles={styles.status} />
+        <Element p="m">
+          {children}
+        </Element>
+      </Layout>
+    );
+  }
+
+  return (
+    <Message>
+      You can configure messages with appropriate variants.
+    </Message>
+  );
+}
+```
 
 ## `IconButton`
 
