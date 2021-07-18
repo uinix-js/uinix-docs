@@ -1,0 +1,315 @@
+import {themeMapping} from 'uinix-theme';
+
+import {Json, PackageLink} from '../../../system/components/index.js';
+import theme from '../../../system/theme.js';
+
+# Theme Recipes
+
+Common theme recipes when using <PackageLink name="uinix-ui" />.
+
+---
+
+## Contents
+```toc
+exclude: Contents
+from-heading: 2
+to-heading: 3
+```
+
+## Overview
+
+Proper organization of theme definitions in the <PackageLink name="uinix-ui" /> `theme` construct improves subsequent organization of styles and UI components.  This guide will provide a few basic recipes and patterns when working with the `theme` spec.
+
+## Theme and CSS Properties
+
+Theme properties (i.e. keys of `theme`) relate to CSS properties through a simple `themeMapping` shown below:
+
+<Json value={themeMapping} />
+
+This means that any value defined in a theme property is accessible in the relating CSS properties when assigned a theme value.
+
+## Nesting and Organization
+
+Theme values defined in the `theme` follow a fixed object-based definition.  For each theme property, we can assign arbitrarily nested theme definitions, which eventually resolve to CSS values.
+
+The following example demonstrates defining and accessing the `spacings` theme property with a flat definition.
+
+```js
+const theme = {
+  spacings: {
+    'xs': '4px',
+    's': '8px',
+    'm': '16px',
+    'l': '32px',
+    'xl': '64px',
+  },
+};
+
+const themedStyle = {
+  margin: 'xs',
+  padding: 'l',
+};
+```
+
+If you wish to define and access theme values with a hierarchal organization, nesting theme values in theme definitions becomes a useful approach, as shown in the example below.
+
+```js
+const theme = {
+  sizes: {
+    anchor: '12px',
+    height: {
+      input: '40px',
+    },
+    icon: {
+      s: '16px',
+      m: '20px',
+      l: '24px',
+    },
+    width: {
+      container: '768px',
+    },
+  },
+};
+
+const themedStyle = {
+  height: 'height.input', // access via theme property paths
+  width: 'width.container',
+};
+```
+
+Note that **all** theme properties follow this structure, including the `keyframes` properties.
+
+```js
+const theme = {
+  animations: {
+    infinite: { // nested
+      fast: '1s linear infinite',
+      default: '2s linear infinite',
+      slow: '5s linear infinite',
+    },
+  },
+  keyframes: {
+    flicker: { // resolves to a CSS keyframes rule
+      '0%': {opacity: '0'},
+      '50%': {opacity: '1'},
+      '100%': {opacity: '0'},
+    },
+    spin: {
+      default: { // nested
+        from: {
+          transform: 'rotate(0deg)',
+        },
+        to: {
+          transform: 'rotate(360deg)',
+        },
+      },
+    },
+  }
+};
+
+const themedStyle = {
+  animation: 'infinite.default',
+  animationName: 'spin.default', // keyframe name accessed via nested property path
+};
+```
+
+A consistent pattern for defining theme properties and definitions promotes a reliable and scalable way to maintain the `theme` spec.
+
+## Redundancy is Okay
+
+Sharing code through abstraction is a good way to reduce complexity but this is not always the case.  In some situations, redundancy is preferred to promote more meaningful access patterns.
+
+Say we have the following `colors` spec and components accessing color values,
+
+```js
+const theme = {
+  colors: {
+    brand: {
+      primary: '#0366d6',
+      secondary: '#808a95',
+      light: '#adb4bb',
+    },
+  },
+};
+
+const Brand = () => <Text as="h1" color="brand.primary">uinix-ui</Text>
+const Link = (props) => <Text {...props} as="a" color="brand.primary" />
+const H1 = (props) => <Text {...props} as="h1" color="brand.secondary" />
+```
+
+While we avoided duplication of color values, our subsequent code was authored in a less meaningful way.  Instead, had we favored duplication, our components would have been authored in a more meaningful and semantic way.
+
+```js
+const theme = {
+  colors: {
+    brand: {
+      primary: '#0366d6',
+      secondary: '#808a95',
+      light: '#adb4bb',
+    },
+    text: {
+      link: '#0366d6',
+      primary: '#808a95',
+    },
+  },
+};
+
+const Brand = () => <Text as="h1" color="brand.primary">uinix-ui</Text>
+const Link = (props) => <Text {...props} as="a" color="text.link" />
+const H1 = (props) => <Text {...props} as="h1" color="text.primary" />
+```
+
+Note that while the `colors` spec itself has redundancy, the code that generates the spec can be authored in a reusable way.  In general, find a balance between abstraction and intended usage.  There is no golden rule!
+
+## `theme !== styles`
+
+The `theme` only deals with defining theme values.  Unlike [theme-ui]'s `theme`, it does not deal with concepts of styles, variants, typography, color modes etc.  These are deferred to other constructs in <PackageLink name="uinix-ui" />, such as `styles`.  This ensures that the responsibility of `theme` is well-defined and can be used in a simple and consistent way to develop UIs.
+
+## Examples
+
+The following provides common patterns for theme definitions of notable theme properties.  Feel free to adapt and configure them accordingly to your needs.
+
+### `animations`
+
+The following organizes animations based on their `animation-iteration-count` (e.g. `infinite`) and `animation-duration`.  Note that the `animation-name` is not defined, since it is common to use `animations` with [`keyframes`](#keyframes) (with the latter providing theme definitions exactly for the `animation-name` CSS property).
+
+<Json
+  value={{
+    animations: theme.animations,
+  }}
+/>
+
+### `borders`
+
+Most UIs should only be using a few border definitions.
+
+<Json
+  value={{
+    borders: theme.borders,
+  }}
+/>
+
+### `colors`
+
+Example of [redundant](#redundancy-is-okay) color organization to improve access patterns when using colors.  The following example models color access based on the `background`, `brand`, `text`, `tones` groups.
+
+<Json
+  value={{
+    colors: theme.colors,
+  }}
+/>
+
+### `fontFamilies`
+
+Most UIs should only be using a few font family definitions.
+
+<Json
+  value={{
+    fontFamilies: theme.fontFamilies,
+  }}
+/>
+
+### `fontSizes`
+
+This example models font sizes as t-shirt sizes.  You may employ a different approach.
+
+<Json
+  value={{
+    fontSizes: theme.fontSizes,
+  }}
+/>
+
+### `keyframes`
+
+Keyframes are formally supported in <PackageLink name="uinix-ui" />.  They are related to the `animationName` CSS property as mentioned in [§ Theme and CSS Properties](#theme-and-css-properties).  The values for `keyframes` should be valid CSS keyframes rules expressed in JS notation.
+
+<Json
+  value={{
+    keyframes: theme.keyframes,
+  }}
+/>
+
+### `opacities`
+
+A good way to organize and keep track of a finite set of opacities.
+
+<Json
+  value={{
+    opacities: theme.opacities,
+  }}
+/>
+
+### `radii`
+
+A good way to organize and keep track of a finite set of border radii.
+
+<Json
+  value={{
+    radii: theme.radii,
+  }}
+/>
+
+### `shadows`
+
+This example models shadows as t-shirt sizes.  You may employ a different approach.
+
+<Json
+  value={{
+    shadows: theme.shadows,
+  }}
+/>
+
+### `sizes`
+
+This example tracks sizes in two major groups: `height` and `width`, and also include component/domain groups.
+
+<Json
+  value={{
+    sizes: theme.sizes,
+  }}
+/>
+
+### `spacings`
+
+This example models spacings as t-shirt sizes, with some component/domain spacing definitions.  You may employ a different approach.
+
+<Json
+  value={{
+    spacings: theme.spacings,
+  }}
+/>
+
+### `transforms`
+
+A good way to organize and keep track of a finite set of transform rules.
+
+<Json
+  value={{
+    transforms: theme.transforms,
+  }}
+/>
+
+### `transitions`
+
+A good way to organize and keep track of a finite set of transition rules.
+
+<Json
+  value={{
+    transitions: theme.transitions,
+  }}
+/>
+
+### `zIndices`
+
+A good way to organize and keep track of a finite set of zIndices.  This is a good way to compare and make sense of [z-index hell]!
+
+<Json
+  value={{
+    zIndices: theme.zIndices,
+  }}
+/>
+
+<!-- defs -->
+[hyperscript]: https://github.com/hyperhype/hyperscript
+[theme-ui]: https://github.com/system-ui/theme-ui
+[z-index hell]: https://csshell.dev/posts/z-index-hell/

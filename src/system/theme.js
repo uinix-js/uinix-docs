@@ -114,6 +114,7 @@ const opacities = {
 const radii = {
   s: '2px',
   m: '4px',
+  pill: '100vh',
   round: '100%',
 };
 
@@ -151,18 +152,19 @@ const spacings = {
   xxl: '128px',
 };
 
-const transitions = {
-  fade: 'opacity 0.2s ease-in-out',
-};
-
 const transforms = {
   rotate90: 'rotate(90deg)',
   translateXHalf: 'translateX(-50%)',
   translateYHalf: 'translateY(-50%)',
 };
 
+const transitions = {
+  fade: 'opacity 0.2s ease-in-out',
+};
+
 const zIndices = {
   forward: '1',
+  max: '2147483647',
 };
 
 const theme = {
@@ -183,8 +185,8 @@ const theme = {
   shadows,
   sizes,
   spacings,
-  transitions,
   transforms,
+  transitions,
   zIndices,
 };
 
